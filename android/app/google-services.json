@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "87642094253",
+    "project_id": "mobilappmercedes",
+    "storage_bucket": "mobilappmercedes.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:87642094253:android:1b5706c1aa7803803c6424",
+        "android_client_info": {
+          "package_name": "com.example.mobilappmercedes"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "87642094253-ko14pl4j68ec93a88ngr0ovuu4qehuj0.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDhatg_Vs4SQAHgZm_4DE5r6GmjSfQNAfY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "87642094253-ko14pl4j68ec93a88ngr0ovuu4qehuj0.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
