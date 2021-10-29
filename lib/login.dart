@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:mobilappmercedes/homepage.dart';
 
 FirebaseAuth _auth = FirebaseAuth.instance;
 
@@ -94,10 +95,35 @@ class _LoginIslemleriState extends State<LoginIslemleri> {
               onPressed: _emailSifreKullaniciolustur,
             ),
             RaisedButton(
-              child: Text("Email/Sifre User Login"),
-              color: Colors.blueAccent,
-              onPressed: _emailSifreKullaniciGirisYap,
-            ),
+                child: Text("Email/Sifre User Login"),
+                color: Colors.blueAccent,
+                onPressed: () async {
+                  try {
+                    if (_auth.currentUser == null) {
+                      User? _oturumAcanUser =
+                          (await _auth.signInWithEmailAndPassword(
+                                  email: email, password: password))
+                              .user;
+                      if (_oturumAcanUser!.emailVerified) {
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => const homepage()));
+
+                        debugPrint("Mail onaylı ana sayfaya gidilebilir");
+                      } else {
+                        debugPrint(
+                            "Lütfen mailinizi onaylayıp tekrar giriş yapınız");
+                        _auth.signOut();
+                      }
+                    } else {
+                      debugPrint("Oturum açmış kullanıcı zaten var");
+                    }
+                  } catch (e) {
+                    debugPrint("*******HATA VAR***");
+                    debugPrint(e.toString());
+                  }
+                }),
             RaisedButton(
               child: Text("Şifremi Unuttum"),
               color: Colors.blueAccent,
@@ -141,29 +167,6 @@ class _LoginIslemleriState extends State<LoginIslemleri> {
       }
 
       debugPrint(_yeniUser.toString());
-    } catch (e) {
-      debugPrint("*******HATA VAR***");
-      debugPrint(e.toString());
-    }
-  }
-
-  void _emailSifreKullaniciGirisYap() async {
-    // String _email = "e160503138@stud.tau.edu.tr";
-    // String _password = "abc456";
-    try {
-      if (_auth.currentUser == null) {
-        User? _oturumAcanUser = (await _auth.signInWithEmailAndPassword(
-                email: email, password: password))
-            .user;
-        if (_oturumAcanUser!.emailVerified) {
-          debugPrint("Mail onaylı ana sayfaya gidilebilir");
-        } else {
-          debugPrint("Lütfen mailinizi onaylayıp tekrar giriş yapınız");
-          _auth.signOut();
-        }
-      } else {
-        debugPrint("Oturum açmış kullanıcı zaten var");
-      }
     } catch (e) {
       debugPrint("*******HATA VAR***");
       debugPrint(e.toString());
