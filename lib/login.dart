@@ -182,7 +182,7 @@ class _LoginIslemleriState extends State<LoginIslemleri> {
   }
 
   void _resetPassword() async {
-    String _email = "e160503138@stud.tau.edu.tr";
+    String _email = email;
 
     try {
       await _auth.sendPasswordResetEmail(email: _email);
