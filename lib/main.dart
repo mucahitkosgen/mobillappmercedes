@@ -2,6 +2,8 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:mobilappmercedes/login.dart';
 
+import 'editProfile.dart';
+
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
@@ -16,11 +18,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
         title: 'Flutter Demo',
-        themeMode: ThemeMode.dark,
-        darkTheme: ThemeData.dark().copyWith(
-          scaffoldBackgroundColor: Colors.black38,
-          accentColor: Colors.white,
-        ),
+        debugShowCheckedModeBanner: false,
         theme: ThemeData(
           // This is the theme of your application.
           //
@@ -31,7 +29,6 @@ class MyApp extends StatelessWidget {
           // or simply save your changes to "hot reload" in a Flutter IDE).
           // Notice that the counter didn't reset back to zero; the application
           // is not restarted.
-
           primarySwatch: Colors.blue,
         ),
         home: App());
@@ -54,7 +51,6 @@ class _AppState extends State<App> {
     return FutureBuilder(
       // Initialize FlutterFire:
       future: _initialization,
-
       builder: (context, snapshot) {
         // Check for errors
         if (snapshot.hasError) {
