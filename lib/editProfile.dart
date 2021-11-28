@@ -1,8 +1,13 @@
 // ignore: file_names
-// ignore: file_names
-// ignore_for_file: camel_case_types
+import 'dart:io';
 
+import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:image_picker/image_picker.dart';
+
+FirebaseAuth _auth = FirebaseAuth.instance;
 
 class editProfile extends StatefulWidget {
   @override
@@ -10,14 +15,32 @@ class editProfile extends StatefulWidget {
 }
 
 class _editProfileState extends State<editProfile> {
+  late String kullaniciAdi, email, password;
+
+  get profile => null;
+
+  get veriYoluu => null;
+
+  kullaniciAdiAl(kullaniciAdiTutucu) {
+    kullaniciAdi = kullaniciAdiTutucu;
+  }
+
+  emailAl(emailTutucu) {
+    email = emailTutucu;
+  }
+
+  passwordAl(passwordTutucu) {
+    password = passwordTutucu;
+  }
+
   bool isObscurePassword = true;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Edit Profile"),
+        title: const Text("Edit Profile"),
         leading: IconButton(
-          icon: Icon(
+          icon: const Icon(
             Icons.arrow_back,
             color: Colors.white,
           ),
@@ -35,96 +58,134 @@ class _editProfileState extends State<editProfile> {
       body: Container(
         padding: EdgeInsets.only(left: 15, top: 20, right: 15),
         child: GestureDetector(
-          onTap: () {
-            FocusScope.of(context).unfocus();
-          },
-          child: ListView(
-            children: [
-              Center(
-                child: Stack(
-                  children: [
-                    Container(
-                      width: 130,
-                      height: 130,
-                      decoration: BoxDecoration(
-                          border: Border.all(width: 4, color: Colors.white),
-                          boxShadow: [
-                            BoxShadow(
-                                spreadRadius: 2,
-                                blurRadius: 10,
-                                color: Colors.black.withOpacity(0.1))
-                          ],
-                          shape: BoxShape.circle,
-                          image: DecorationImage(
-                              fit: BoxFit.cover,
-                              image: NetworkImage(
-                                  'https://upload.wikimedia.org/wikipedia/commons/thumb/c/cd/Black_flag.svg/750px-Black_flag.svg.png'))),
-                    ),
-                    Positioned(
-                      bottom: 0,
-                      right: 0,
-                      child: Container(
-                        height: 40,
-                        width: 40,
+            onTap: () {
+              FocusScope.of(context).unfocus();
+            },
+            child: ListView(
+              children: [
+                Center(
+                  child: Stack(
+                    children: [
+                      Container(
+                        width: 130,
+                        height: 130,
                         decoration: BoxDecoration(
-                            shape: BoxShape.circle,
                             border: Border.all(width: 4, color: Colors.white),
-                            color: Colors.blue),
-                        child: Icon(
-                          Icons.edit,
-                          color: Colors.white,
-                        ),
+                            boxShadow: [
+                              BoxShadow(
+                                  spreadRadius: 2,
+                                  blurRadius: 10,
+                                  color: Colors.black.withOpacity(0.1))
+                            ],
+                            shape: BoxShape.circle,
+                            image: DecorationImage(
+                                fit: BoxFit.cover,
+                                image: NetworkImage(
+                                    'https://upload.wikimedia.org/wikipedia/commons/thumb/c/cd/Black_flag.svg/750px-Black_flag.svg.png'))),
                       ),
-                    )
-                  ],
-                ),
-              ),
-              SizedBox(height: 30),
-              buildTextField("Name", "Mücahit", false),
-              buildTextField("Email", "e160503138@stud.tau.edu.tr", false),
-              buildTextField("Password", "*****", false),
-              SizedBox(height: 30),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  OutlinedButton(
-                    onPressed: () {},
-                    child: Text("Cancel",
-                        style: TextStyle(
-                            fontSize: 15,
-                            letterSpacing: 2,
-                            color: Colors.black)),
-                    style: OutlinedButton.styleFrom(
-                        padding: EdgeInsets.symmetric(horizontal: 50),
-                        shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(20))),
+                      Positioned(
+                        bottom: 0,
+                        right: 0,
+                        child: Container(
+                          height: 40,
+                          width: 40,
+                          decoration: BoxDecoration(
+                              shape: BoxShape.circle,
+                              border: Border.all(width: 4, color: Colors.white),
+                              color: Colors.blue),
+                          child: Icon(
+                            Icons.edit,
+                            color: Colors.white,
+                          ),
+                        ),
+                      )
+                    ],
                   ),
-                  ElevatedButton(
-                    onPressed: () {},
-                    child: Text("Save",
-                        style: TextStyle(
-                            fontSize: 15,
-                            letterSpacing: 2,
-                            color: Colors.white)),
-                    style: ElevatedButton.styleFrom(
-                        primary: Colors.blue,
-                        padding: EdgeInsets.symmetric(horizontal: 50),
-                        shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(20))),
-                  )
-                ],
-              )
-            ],
-          ),
-        ),
+                ),
+                Padding(
+                  padding: const EdgeInsets.all(12.0),
+                  child: TextFormField(
+                    onChanged: (String kullaniciAdiTutucu) {
+                      kullaniciAdiAl(kullaniciAdiTutucu);
+                    },
+                    decoration: InputDecoration(
+                        labelText: "Kullanıcı Adı",
+                        focusedBorder: OutlineInputBorder(
+                            borderSide:
+                                BorderSide(color: Colors.black54, width: 2))),
+                  ),
+                ),
+                Padding(
+                  padding: const EdgeInsets.all(12.0),
+                  child: TextFormField(
+                    onChanged: (String emailTutucu) {
+                      emailAl(emailTutucu);
+                    },
+                    decoration: InputDecoration(
+                        labelText: "Email",
+                        focusedBorder: OutlineInputBorder(
+                            borderSide:
+                                BorderSide(color: Colors.black54, width: 2))),
+                  ),
+                ),
+                Padding(
+                  padding: const EdgeInsets.all(12.0),
+                  child: TextFormField(
+                    onChanged: (String passwordTutucu) {
+                      passwordAl(passwordTutucu);
+                    },
+                    obscureText: true,
+                    decoration: InputDecoration(
+                      labelText: "Şifre",
+                    ),
+                  ),
+                ),
+                RaisedButton(
+                  child: Text("Save"),
+                  color: Colors.blueAccent,
+                  onPressed: _Save,
+                ),
+              ],
+            )),
       ),
     );
+  }
+
+  void _Save() async {
+    DocumentReference veriYoluu =
+        FirebaseFirestore.instance.collection("profile").doc(kullaniciAdi);
+
+    Map<String, dynamic> profile = {
+      "KullaniciAdi": kullaniciAdi,
+      "Email": email,
+      "Sifre": password,
+    };
+
+    veriYoluu.set(profile).whenComplete(() {});
+
+    try {
+      UserCredential _credential = await _auth.createUserWithEmailAndPassword(
+          email: email, password: password);
+
+      User? _yeniUser = _credential.user;
+      await _yeniUser!.sendEmailVerification();
+      if (_auth.currentUser != null) {
+        debugPrint("Size bir mail attık lütfen onaylayın");
+        await _auth.signOut();
+        debugPrint("Kullanıcıyı sistemden attık");
+      }
+
+      debugPrint(_yeniUser.toString());
+    } catch (e) {
+      debugPrint("*******HATA VAR***");
+      debugPrint(e.toString());
+    }
   }
 
   Widget buildTextField(
       String labelText, String placeholder, bool isPasswordTextField) {
     return Padding(
-      padding: EdgeInsets.only(bottom: 30),
+      padding: const EdgeInsets.only(bottom: 30),
       child: TextField(
         obscureText: isPasswordTextField ? isObscurePassword : false,
         decoration: InputDecoration(
