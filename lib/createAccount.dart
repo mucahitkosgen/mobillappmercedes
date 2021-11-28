@@ -1,16 +1,16 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:mobilappmercedes/homepage.dart';
+import 'package:mobilappmercedes/createAccount.dart';
 
 FirebaseAuth _auth = FirebaseAuth.instance;
 
-class LoginIslemleri extends StatefulWidget {
+class AccountIslemleri extends StatefulWidget {
   @override
-  _LoginIslemleriState createState() => _LoginIslemleriState();
+  _AccountIslemleriState createState() => _AccountIslemleriState();
 }
 
-class _LoginIslemleriState extends State<LoginIslemleri> {
+class _AccountIslemleriState extends State<AccountIslemleri> {
   late String kullaniciAdi, email, password;
 
   get users => null;
@@ -46,11 +46,24 @@ class _LoginIslemleriState extends State<LoginIslemleri> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Login işlemleri"),
+        title: Text("Create Account"),
       ),
       body: Center(
         child: Column(
           children: [
+            Padding(
+              padding: const EdgeInsets.all(12.0),
+              child: TextFormField(
+                onChanged: (String kullaniciAdiTutucu) {
+                  kullaniciAdiAl(kullaniciAdiTutucu);
+                },
+                decoration: InputDecoration(
+                    labelText: "Kullanıcı Adı",
+                    focusedBorder: OutlineInputBorder(
+                        borderSide:
+                            BorderSide(color: Colors.black54, width: 2))),
+              ),
+            ),
             Padding(
               padding: const EdgeInsets.all(12.0),
               child: TextFormField(
@@ -77,39 +90,14 @@ class _LoginIslemleriState extends State<LoginIslemleri> {
               ),
             ),
             RaisedButton(
-                child: Text("Giriş"),
-                color: Colors.blueAccent,
-                onPressed: () async {
-                  try {
-                    if (_auth.currentUser == null) {
-                      User? _oturumAcanUser =
-                          (await _auth.signInWithEmailAndPassword(
-                                  email: email, password: password))
-                              .user;
-                      if (_oturumAcanUser!.emailVerified) {
-                        Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => const homepage()));
-
-                        debugPrint("Mail onaylı ana sayfaya gidilebilir");
-                      } else {
-                        debugPrint(
-                            "Lütfen mailinizi onaylayıp tekrar giriş yapınız");
-                        _auth.signOut();
-                      }
-                    } else {
-                      debugPrint("Oturum açmış kullanıcı zaten var");
-                    }
-                  } catch (e) {
-                    debugPrint("*******HATA VAR***");
-                    debugPrint(e.toString());
-                  }
-                }),
-            RaisedButton(
-              child: Text("Çıkış Yap"),
+              child: Text("Hesap Oluştur"),
               color: Colors.blueAccent,
-              onPressed: _cikisYap,
+              onPressed: _emailSifreKullaniciolustur,
+            ),
+            RaisedButton(
+              child: Text("Şifremi Unuttum"),
+              color: Colors.blueAccent,
+              onPressed: _resetPassword,
             ),
           ],
         ),
@@ -147,14 +135,6 @@ class _LoginIslemleriState extends State<LoginIslemleri> {
     } catch (e) {
       debugPrint("*******HATA VAR***");
       debugPrint(e.toString());
-    }
-  }
-
-  void _cikisYap() async {
-    if (_auth.currentUser != null) {
-      await _auth.signOut();
-    } else {
-      debugPrint("Zaten oturum açmış bir kullanıcı yok");
     }
   }
 
