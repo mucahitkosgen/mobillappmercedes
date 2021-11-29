@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:mobilappmercedes/calendar.dart';
+import 'package:mobilappmercedes/editProfile.dart';
 
 class homepage extends StatefulWidget {
   const homepage({Key? key}) : super(key: key);
@@ -9,9 +10,13 @@ class homepage extends StatefulWidget {
 }
 
 class _homepageState extends State<homepage> {
-  void createEvent() {
-    openDialog();
-    debugPrint("tusa basildii");
+  void editprofile() {
+    /*openDialog();
+    debugPrint("tusa basildii");*/
+    Navigator.push(
+      context,
+      MaterialPageRoute(builder: (context) => editProfile()),
+    );
   }
 
   calendar() {
@@ -65,8 +70,8 @@ class _homepageState extends State<homepage> {
                   primary: Colors.blueGrey,
                   textStyle:
                       const TextStyle(fontSize: 20, color: Colors.black)),
-              onPressed: createEvent,
-              child: const Text("Create Event"),
+              onPressed: editprofile,
+              child: const Text("Profile Edit"),
             ),
             TextButton(onPressed: calendar, child: const Text("Calendar"))
           ],

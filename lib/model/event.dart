@@ -8,7 +8,7 @@ class Event {
   final Color backgroundColor;
   final bool isAllDay;
   final bool limitedParticipation;
-  final bool numberOfPeople;
+  final int numberOfPeople;
 
   const Event({
     required this.title,
