@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:mobilappmercedes/provider/event_provider.dart';
 
 import 'model/event.dart';
 import 'utils.dart';
@@ -20,6 +21,8 @@ class Event_EditingState extends State<Event_Editing> {
   late DateTime fromDate;
   late DateTime toDate;
 
+  get Provider => null;
+
   @override
   void initState() {
     super.initState();
@@ -38,7 +41,7 @@ class Event_EditingState extends State<Event_Editing> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.black,
+      backgroundColor: Colors.white,
       appBar: AppBar(
         leading: const CloseButton(),
         actions: buildEditingActions(),
@@ -67,7 +70,7 @@ class Event_EditingState extends State<Event_Editing> {
             primary: Colors.transparent,
             shadowColor: Colors.transparent,
           ),
-          onPressed: () {},
+          onPressed: saveForm,
           icon: const Icon(Icons.done),
           label: const Text("Save"),
         )
@@ -77,7 +80,7 @@ class Event_EditingState extends State<Event_Editing> {
         style: const TextStyle(fontSize: 24),
         decoration: const InputDecoration(
             border: UnderlineInputBorder(), hintText: 'Add Title'),
-        onFieldSubmitted: (_) {},
+        onFieldSubmitted: (_) => saveForm(),
         validator: (title) =>
             title != null && title.isEmpty ? 'Title cannot be empty' : null,
         controller: titleController,
@@ -215,14 +218,16 @@ class Event_EditingState extends State<Event_Editing> {
     if (isValid) {
       final event = Event(
         title: titleController.text,
-        description:'Description',
-        from:fromDate,
-        to:toDate,
-        isAllDay:false,
-        limitedParticipation:false,
-        numberOfPeople:20,
+        description: 'Description',
+        from: fromDate,
+        to: toDate,
+        isAllDay: false,
+        limitedParticipation: false,
+        numberOfPeople: 20,
       );
-      final provider = Provider.of<EventProvider>(context,)
+      final provider = Provider.of<EventProvider>(context, listener: true);
+      provider.addEvent(event);
+      Navigator.of(context).pop();
     }
   }
 }

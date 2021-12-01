@@ -46,7 +46,7 @@ class _LoginIslemleriState extends State<LoginIslemleri> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Login işlemleri"),
+        title: const Text("Login işlemleri"),
       ),
       body: Center(
         child: Column(
@@ -57,7 +57,7 @@ class _LoginIslemleriState extends State<LoginIslemleri> {
                 onChanged: (String emailTutucu) {
                   emailAl(emailTutucu);
                 },
-                decoration: InputDecoration(
+                decoration: const InputDecoration(
                     labelText: "Email",
                     focusedBorder: OutlineInputBorder(
                         borderSide:
@@ -71,13 +71,13 @@ class _LoginIslemleriState extends State<LoginIslemleri> {
                   passwordAl(passwordTutucu);
                 },
                 obscureText: true,
-                decoration: InputDecoration(
+                decoration: const InputDecoration(
                   labelText: "Şifre",
                 ),
               ),
             ),
             RaisedButton(
-                child: Text("Giriş"),
+                child: const Text("Giriş"),
                 color: Colors.blueAccent,
                 onPressed: () async {
                   try {
@@ -107,7 +107,7 @@ class _LoginIslemleriState extends State<LoginIslemleri> {
                   }
                 }),
             RaisedButton(
-              child: Text("Çıkış Yap"),
+              child: const Text("Çıkış Yap"),
               color: Colors.blueAccent,
               onPressed: _cikisYap,
             ),
