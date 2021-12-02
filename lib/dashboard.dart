@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:mobilappmercedes/calendar.dart';
 import 'package:mobilappmercedes/dashboard.dart';
 import 'package:mobilappmercedes/event_editing.dart';
+import 'package:mobilappmercedes/screens/main_screen.dart';
 
 class Dashboard extends StatefulWidget {
   @override
@@ -23,7 +24,7 @@ class _DashboardState extends State<Dashboard> {
               decoration: const BoxDecoration(
                 image: DecorationImage(
                     alignment: Alignment.topCenter,
-                    image: AssetImage("assets/images/ust_sablon.png")),
+                    image: AssetImage("assets/dashboard/ust_sablon.png")),
               ),
             ),
             Padding(
@@ -133,7 +134,7 @@ class _DashboardState extends State<Dashboard> {
                         child: Stack(
                           children: [
                             Image.asset(
-                              'assets/images/Second_Hand_Sale_Button.png',
+                              'assets/dashboard/Second_Hand_Sale_Button.png',
                               width: 100,
                               height: 100,
                               fit: BoxFit.cover,
@@ -161,7 +162,7 @@ class _DashboardState extends State<Dashboard> {
                           child: Stack(
                             children: [
                               Image.asset(
-                                'assets/images/Suggested_Location_Button.png',
+                                'assets/dashboard/Suggested_Location_Button.png',
                                 width: 100,
                                 height: 100,
                                 fit: BoxFit.cover,
@@ -196,7 +197,7 @@ class _DashboardState extends State<Dashboard> {
                         child: Stack(
                           children: [
                             Image.asset(
-                              'assets/images/Limited_Participation_Button.png',
+                              'assets/dashboard/Limited_Participation_Button.png',
                               width: 100,
                               height: 100,
                               fit: BoxFit.cover,
@@ -215,14 +216,14 @@ class _DashboardState extends State<Dashboard> {
                         Navigator.push(
                             context,
                             MaterialPageRoute(
-                                builder: (context) => Dashboard()));
+                                builder: (context) => MainScreen()));
                       },
                       child: Card(
                         clipBehavior: Clip.antiAliasWithSaveLayer,
                         child: Stack(
                           children: [
                             Image.asset(
-                              'assets/images/Events_Button.png',
+                              'assets/dashboard/Events_Button.png',
                               width: 100,
                               height: 100,
                               fit: BoxFit.cover,
