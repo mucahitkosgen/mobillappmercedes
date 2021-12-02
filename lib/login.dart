@@ -1,7 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:mobilappmercedes/homepage.dart';
+import 'package:mobilappmercedes/dashboard.dart';
 
 FirebaseAuth _auth = FirebaseAuth.instance;
 
@@ -90,7 +90,7 @@ class _LoginIslemleriState extends State<LoginIslemleri> {
                         Navigator.push(
                             context,
                             MaterialPageRoute(
-                                builder: (context) => const homepage()));
+                                builder: (context) => Dashboard()));
 
                         debugPrint("Mail onaylı ana sayfaya gidilebilir");
                       } else {

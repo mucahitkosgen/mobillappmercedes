@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:mobilappmercedes/provider/event_provider.dart';
+import 'package:provider/provider.dart';
 
 import 'model/event.dart';
 import 'utils.dart';
@@ -21,8 +22,6 @@ class Event_EditingState extends State<Event_Editing> {
   late DateTime fromDate;
   late DateTime toDate;
 
-  get Provider => null;
-
   @override
   void initState() {
     super.initState();
@@ -43,6 +42,7 @@ class Event_EditingState extends State<Event_Editing> {
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
+        backgroundColor: Colors.black,
         leading: const CloseButton(),
         actions: buildEditingActions(),
         title: const Text("Create a Event"),
@@ -77,7 +77,7 @@ class Event_EditingState extends State<Event_Editing> {
       ];
 
   Widget buildTitle() => TextFormField(
-        style: const TextStyle(fontSize: 24),
+        style: const TextStyle(fontSize: 24, color: Colors.white),
         decoration: const InputDecoration(
             border: UnderlineInputBorder(), hintText: 'Add Title'),
         onFieldSubmitted: (_) => saveForm(),
@@ -176,12 +176,12 @@ class Event_EditingState extends State<Event_Editing> {
                 flex: 2,
                 child: buildDropdownField(
                   text: Utils.toDate(toDate),
-                  onClicked: () {},
+                  onClicked: () => pickToDateTime(pickDate: true),
                 )),
             Expanded(
               child: buildDropdownField(
                 text: Utils.toTime(toDate),
-                onClicked: () {},
+                onClicked: () => pickToDateTime(pickDate: false),
               ),
             ),
           ],
@@ -225,7 +225,7 @@ class Event_EditingState extends State<Event_Editing> {
         limitedParticipation: false,
         numberOfPeople: 20,
       );
-      final provider = Provider.of<EventProvider>(context, listener: true);
+      final provider = Provider.of<EventProvider>(context);
       provider.addEvent(event);
       Navigator.of(context).pop();
     }
