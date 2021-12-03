@@ -1,7 +1,11 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:mobilappmercedes/createAccount.dart';
+import 'package:mobilappmercedes/login.dart';
+
+import 'components/rounded_button.dart';
 
 FirebaseAuth _auth = FirebaseAuth.instance;
 
@@ -44,60 +48,77 @@ class _AccountIslemleriState extends State<AccountIslemleri> {
 
   @override
   Widget build(BuildContext context) {
+    Size size = MediaQuery.of(context).size;
     return Scaffold(
-      appBar: AppBar(
-        title: Text("Create Account"),
-      ),
+      backgroundColor: Colors.black,
       body: Center(
         child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
           children: [
+            SizedBox(
+              height: size.height * 0.0010,
+            ),
+            SvgPicture.asset(
+              "assets/icons/Discover theMercedesMedia.svg",
+              height: size.height * 0.25,
+            ),
             Padding(
               padding: const EdgeInsets.all(12.0),
               child: TextFormField(
+                style: const TextStyle(color: Colors.white),
                 onChanged: (String kullaniciAdiTutucu) {
                   kullaniciAdiAl(kullaniciAdiTutucu);
                 },
-                decoration: InputDecoration(
-                    labelText: "Kullanıcı Adı",
+                decoration: const InputDecoration(
+                    labelText: "User Name",
+                    labelStyle: TextStyle(
+                      color: Colors.white,
+                    ),
                     focusedBorder: OutlineInputBorder(
-                        borderSide:
-                            BorderSide(color: Colors.black54, width: 2))),
+                        borderSide: BorderSide(color: Colors.white, width: 2))),
               ),
             ),
             Padding(
               padding: const EdgeInsets.all(12.0),
               child: TextFormField(
+                style: const TextStyle(color: Colors.white),
                 onChanged: (String emailTutucu) {
                   emailAl(emailTutucu);
                 },
                 decoration: InputDecoration(
                     labelText: "Email",
+                    labelStyle: TextStyle(
+                      color: Colors.white,
+                    ),
                     focusedBorder: OutlineInputBorder(
-                        borderSide:
-                            BorderSide(color: Colors.black54, width: 2))),
+                        borderSide: BorderSide(color: Colors.white, width: 2))),
               ),
             ),
             Padding(
               padding: const EdgeInsets.all(12.0),
               child: TextFormField(
+                style: const TextStyle(color: Colors.white),
                 onChanged: (String passwordTutucu) {
                   passwordAl(passwordTutucu);
                 },
                 obscureText: true,
                 decoration: InputDecoration(
-                  labelText: "Şifre",
+                  labelStyle: TextStyle(
+                    color: Colors.white,
+                  ),
+                  labelText: "Password",
                 ),
               ),
             ),
-            RaisedButton(
-              child: Text("Hesap Oluştur"),
-              color: Colors.blueAccent,
-              onPressed: _emailSifreKullaniciolustur,
+            RoundedButton(
+              text: "Create Account",
+              color: Colors.purple,
+              press: _emailSifreKullaniciolustur,
             ),
-            RaisedButton(
-              child: Text("Şifremi Unuttum"),
+            RoundedButton(
+              text: "Forgot Password",
               color: Colors.blueAccent,
-              onPressed: _resetPassword,
+              press: _resetPassword,
             ),
           ],
         ),
@@ -136,6 +157,9 @@ class _AccountIslemleriState extends State<AccountIslemleri> {
       debugPrint("*******HATA VAR***");
       debugPrint(e.toString());
     }
+
+    Navigator.push(
+        context, MaterialPageRoute(builder: (context) => LoginIslemleri()));
   }
 
   void _resetPassword() async {

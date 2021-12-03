@@ -1,7 +1,10 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:mobilappmercedes/dashboard.dart';
+
+import 'components/rounded_button.dart';
 
 FirebaseAuth _auth = FirebaseAuth.instance;
 
@@ -44,42 +47,57 @@ class _LoginIslemleriState extends State<LoginIslemleri> {
 
   @override
   Widget build(BuildContext context) {
+    Size size = MediaQuery.of(context).size;
     return Scaffold(
-      appBar: AppBar(
-        title: const Text("Login işlemleri"),
-      ),
+      backgroundColor: Colors.black,
       body: Center(
         child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
           children: [
+            SizedBox(
+              height: size.height * 0.0010,
+            ),
+            SvgPicture.asset(
+              "assets/icons/Discover theMercedesMedia.svg",
+              height: size.height * 0.25,
+            ),
             Padding(
               padding: const EdgeInsets.all(12.0),
               child: TextFormField(
+                style: const TextStyle(color: Colors.white),
                 onChanged: (String emailTutucu) {
                   emailAl(emailTutucu);
                 },
                 decoration: const InputDecoration(
                     labelText: "Email",
+                    labelStyle: TextStyle(
+                      color: Colors.white,
+                    ),
                     focusedBorder: OutlineInputBorder(
-                        borderSide:
-                            BorderSide(color: Colors.black54, width: 2))),
+                        borderSide: BorderSide(color: Colors.white, width: 2))),
               ),
             ),
             Padding(
               padding: const EdgeInsets.all(12.0),
               child: TextFormField(
+                style: const TextStyle(color: Colors.white),
                 onChanged: (String passwordTutucu) {
                   passwordAl(passwordTutucu);
                 },
                 obscureText: true,
                 decoration: const InputDecoration(
-                  labelText: "Şifre",
-                ),
+                    labelText: "Password",
+                    labelStyle: TextStyle(
+                      color: Colors.white,
+                    ),
+                    focusedBorder: OutlineInputBorder(
+                        borderSide: BorderSide(color: Colors.white, width: 2))),
               ),
             ),
-            RaisedButton(
-                child: const Text("Giriş"),
-                color: Colors.blueAccent,
-                onPressed: () async {
+            RoundedButton(
+                text: "LOGIN",
+                color: Colors.purple,
+                press: () async {
                   try {
                     if (_auth.currentUser == null) {
                       User? _oturumAcanUser =
@@ -106,10 +124,11 @@ class _LoginIslemleriState extends State<LoginIslemleri> {
                     debugPrint(e.toString());
                   }
                 }),
-            RaisedButton(
-              child: const Text("Çıkış Yap"),
-              color: Colors.blueAccent,
-              onPressed: _cikisYap,
+            RoundedButton(
+              text: "LOG OUT",
+              color: Colors.blue,
+              textColor: Colors.black,
+              press: _cikisYap,
             ),
           ],
         ),
