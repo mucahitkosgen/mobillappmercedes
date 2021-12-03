@@ -45,6 +45,7 @@ dependencies:
   date_format: ^2.0.4
   intl: ^0.17.0
   provider: ^6.0.1
+  flutter_svg: ^1.0.0
   
 
 

@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:mobilappmercedes/login.dart';
 import 'package:mobilappmercedes/provider/event_provider.dart';
 import 'package:provider/provider.dart';
-
+import 'package:mobilappmercedes/welcome/components/body.dart';
 import 'createAccount.dart';
 import 'editProfile.dart';
 
@@ -68,7 +68,7 @@ class _AppState extends State<App> {
 
         // Once complete, show your application
         if (snapshot.connectionState == ConnectionState.done) {
-          return LoginIslemleri();
+          return Body();
         }
 
         // Otherwise, show something whilst waiting for initialization to complete
