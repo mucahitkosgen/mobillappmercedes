@@ -5,7 +5,7 @@ import 'package:mobilappmercedes/provider/event_provider.dart';
 import 'package:provider/provider.dart';
 import 'package:mobilappmercedes/welcome/components/body.dart';
 import 'createAccount.dart';
-import 'editProfile.dart';
+import 'edit_profile.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();

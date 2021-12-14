@@ -6,6 +6,11 @@ import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:image_picker/image_picker.dart';
+import 'dart:io';
+import 'package:firebase_storage/firebase_storage.dart'; // For File Upload To Firestore
+import 'package:flutter/material.dart';
+import 'package:image_picker/image_picker.dart'; // For Image Picker
+import 'package:path/path.dart' as Path;
 
 FirebaseAuth _auth = FirebaseAuth.instance;
 
@@ -140,6 +145,7 @@ class _editProfileState extends State<editProfile> {
                     ),
                   ),
                 ),
+                // ignore: deprecated_member_use
                 RaisedButton(
                   child: Text("Save"),
                   color: Colors.blueAccent,
