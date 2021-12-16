@@ -77,7 +77,7 @@ class Event_EditingState extends State<Event_Editing> {
       ];
 
   Widget buildTitle() => TextFormField(
-        style: const TextStyle(fontSize: 24, color: Colors.white),
+        style: const TextStyle(fontSize: 24, color: Colors.black),
         decoration: const InputDecoration(
             border: UnderlineInputBorder(), hintText: 'Add Title'),
         onFieldSubmitted: (_) => saveForm(),
