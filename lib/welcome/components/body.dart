@@ -9,6 +9,8 @@ import 'package:mobilappmercedes/components/rounded_button.dart';
 import 'package:flutter_auth/constants.dart';*/
 
 import 'package:mobilappmercedes/createAccount.dart';
+import 'package:mobilappmercedes/dashboard.dart';
+import 'package:mobilappmercedes/edit_profile.dart';
 import 'package:mobilappmercedes/login.dart';
 import 'package:mobilappmercedes/welcome/components/background.dart';
 
@@ -42,7 +44,8 @@ class Body extends StatelessWidget {
                   context,
                   MaterialPageRoute(
                     builder: (context) {
-                      return LoginIslemleri();
+                      // return LoginIslemleri();
+                      return Dashboard();
                     },
                   ),
                 );
