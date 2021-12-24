@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:mobilappmercedes/event_editing.dart';
-import 'package:mobilappmercedes/task_widget.dart';
+import 'package:mobilappmercedes/model/event_data_source.dart';
+import 'package:mobilappmercedes/services/firestore_services.dart';
+import 'package:mobilappmercedes/widgets/calendar_widget/task_widget.dart';
 import 'package:provider/provider.dart';
 
 import 'package:syncfusion_flutter_calendar/calendar.dart';
 
-import 'provider/event_provider.dart';
+import '../../provider/event_provider.dart';
 
 /*class Calendar extends StatefulWidget {
   const Calendar({Key? key}) : super(key: key);
@@ -16,12 +18,13 @@ import 'provider/event_provider.dart';
 class CalendarState extends State<Calendar>
 
 */
+final service = FireStoreService();
 
 class Calendar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final events = Provider.of<EventProvider>(context).events;
-
+    final provider = Provider.of<EventProvider>(context, listen: false);
     return Scaffold(
       backgroundColor: Colors.black,
       appBar: AppBar(
@@ -37,6 +40,7 @@ class Calendar extends StatelessWidget {
         todayTextStyle: const TextStyle(color: Colors.black),
         initialSelectedDate: DateTime.now(),
         cellBorderColor: Colors.transparent,
+        //dataSource: event.creservice.getEvents(). //_getCalendarDataSource(),
         onLongPress: (details) {
           final provider = Provider.of<EventProvider>(context, listen: false);
           provider.setDate(details.date!);
@@ -59,5 +63,23 @@ class Calendar extends StatelessWidget {
         },
       ),
     );
+  }
+}
+
+_AppointmentDataSource _getCalendarDataSource() {
+  List<Appointment> appointments = <Appointment>[];
+  appointments.add(Appointment(
+    startTime: DateTime.now(),
+    endTime: DateTime.now().add(Duration(minutes: 10)),
+    subject: 'Meeting',
+    color: Colors.blue,
+  ));
+
+  return _AppointmentDataSource(appointments);
+}
+
+class _AppointmentDataSource extends CalendarDataSource {
+  _AppointmentDataSource(List<Appointment> source) {
+    appointments = source;
   }
 }

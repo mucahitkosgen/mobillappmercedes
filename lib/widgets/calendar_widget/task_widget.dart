@@ -2,8 +2,15 @@ import 'package:syncfusion_flutter_calendar/calendar.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:mobilappmercedes/model/event_data_source.dart';
+import 'package:mobilappmercedes/event_viewing_page.dart';
 import 'package:mobilappmercedes/provider/event_provider.dart';
 import 'package:provider/provider.dart';
+import 'package:syncfusion_flutter_core/theme.dart';
+import 'package:mobilappmercedes/utils.dart';
+import 'package:flutter/cupertino.dart';
+import 'package:mobilappmercedes/model/event.dart';
+import 'package:flutter/widgets.dart';
+import 'package:syncfusion_flutter_core/theme.dart';
 
 class TasksWidget extends StatefulWidget {
   @override
@@ -25,24 +32,27 @@ class _TasksWidgetState extends State<TasksWidget> {
       );
     }
 
-    return SfCalendar(
-      view: CalendarView.timelineDay,
-      dataSource: EventDataSource(provider.events),
-      initialDisplayDate: provider.selecteDate,
-      appointmentBuilder: appointmentBuilder,
-      headerHeight: 0,
-      todayHighlightColor: Colors.black,
-      selectionDecoration: BoxDecoration(color: Colors.red.withOpacity(0.3)),
-      onTap: (details) {
-        if (details.appointments == null) return;
-        final event = details.appointments!.first;
+    return SfCalendarTheme(
+      data: SfCalendarThemeData(),
+      child: SfCalendar(
+        view: CalendarView.timelineDay,
+        dataSource: EventDataSource(provider.events),
+        initialDisplayDate: provider.selecteDate,
+        appointmentBuilder: appointmentBuilder,
+        headerHeight: 0,
+        todayHighlightColor: Colors.black,
+        selectionDecoration: BoxDecoration(color: Colors.red.withOpacity(0.3)),
+        onTap: (details) {
+          /*
+          if (details.appointments == null) return;
+          final event = details.appointments!.first;
 
-        /*Navigator.of(context).push(
-            MaterialPageRoute(
-          builder: (context) => EventViewingPage(event: event),
-        )
-            );*/
-      },
+          Navigator.of(context).push(MaterialPageRoute(
+            builder: (context) => EventViewingPage(event: event),
+          ));
+        */
+        },
+      ),
     );
   }
 

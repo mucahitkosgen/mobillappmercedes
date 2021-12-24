@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:mobilappmercedes/calendar.dart';
+import 'package:mobilappmercedes/widgets/calendar_widget/calendar.dart';
 import 'package:mobilappmercedes/dashboard.dart';
 import 'package:mobilappmercedes/event_editing.dart';
 import 'package:mobilappmercedes/screens/main_screen.dart';

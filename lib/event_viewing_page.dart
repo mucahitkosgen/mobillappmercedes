@@ -1,6 +1,6 @@
 /*import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:mobilappmercedes/calendar.dart';
+import 'package:mobilappmercedes/widgets/calendar_widget/calendar.dart';
 import 'package:mobilappmercedes/event_editing.dart';
 import 'package:mobilappmercedes/provider/event_provider.dart';
 import 'package:provider/provider.dart';
@@ -43,16 +43,21 @@ class EventViewingPage extends StatelessWidget {
     );
   }
 
-  Widget buildDate(String title,DateTime date){
+ Widget buildDate(String title,DateTime date){
+    event.title=title,
 
 
   }
 
   List<Widget> buildViewingAction(BuildContext context, Event event) => [
-        IconButton(
+        /*IconButton(
           icon: Icon(Icons.edit),
-          onPressed: () {},
-        ),
+          onPressed: () => Navigator.of(context).pushReplacement(
+            MaterialPageRoute(builder:(context)=>Event_Editing(event:event),
+            
+            ),
+          ),
+        ),*/
         IconButton(
           icon: const Icon(Icons.delete),
           onPressed: () {
@@ -63,4 +68,5 @@ class EventViewingPage extends StatelessWidget {
           },
         ),
       ];
-}*/
+}
+*/

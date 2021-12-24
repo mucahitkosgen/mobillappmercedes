@@ -1,9 +1,12 @@
 import 'package:flutter/cupertino.dart';
+import 'package:mobilappmercedes/services/firestore_services.dart';
 import 'package:syncfusion_flutter_calendar/calendar.dart';
 
 import 'event.dart';
 
 class EventDataSource extends CalendarDataSource {
+  final service = FireStoreService();
+
   EventDataSource(List<Event> appointments) {
     this.appointments = appointments;
   }
@@ -19,10 +22,7 @@ class EventDataSource extends CalendarDataSource {
   String getSubject(int index) => getEvent(index).title;
 
   @override
-  bool isAllDay(int index) => getEvent(index).isAllDay;
-
-  @override
-  Color getColor(int index) => getEvent(index).backgroundColor;
+  //Color getColor(int index) => getEvent(index).backgroundColor;
 
   bool limitedParticipation(int index) => getEvent(index).limitedParticipation;
 
