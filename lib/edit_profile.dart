@@ -20,6 +20,81 @@ class editProfile extends StatefulWidget {
 }
 
 class _editProfileState extends State<editProfile> {
+
+  FirebaseAuth auth = FirebaseAuth.instance;
+  late File imageOnScreen;
+  String url = "";
+  late File _image;
+
+
+  void initState() {
+    super.initState();
+    WidgetsBinding.instance!.addPersistentFrameCallback((_) => baglantiAl());
+  }
+
+  baglantiAl() async {
+    String baglanti = await FirebaseStorage.instance
+    .ref()
+    .child("profilePictures")
+    .child(auth.currentUser!.uid)
+    .child("profilePicture.png")
+    .getDownloadURL();
+
+    setState(() {
+      url = baglanti;
+    });
+  }
+
+  Future _imgFromCamera() async{
+    var image = await ImagePicker().pickImage(source: ImageSource.camera);
+    setState(() { 
+      _image = File(image!.path);
+    });
+
+    Reference refPath = FirebaseStorage.instance
+        .ref()
+        .child("profilePictures")
+        .child(auth.currentUser!.uid)
+        .child("profilePicture.png");  
+    
+
+    UploadTask uploadTask = refPath.putFile(_image);
+
+        uploadTask.whenComplete(() {
+          url = refPath.getDownloadURL() as String;
+        });
+
+  }
+
+  Future _imgFromGallery() async {
+    var image = await  ImagePicker().pickImage(
+        source: ImageSource.gallery
+    );
+      setState(() {
+    _image = File(image!.path);
+  });
+
+    Reference refPath = FirebaseStorage.instance
+            .ref()
+            .child("profilePictures")
+            .child(auth.currentUser!.uid)
+            .child("profilePicture.png");  
+    
+    UploadTask uploadTask = refPath.putFile(_image);
+
+        uploadTask.whenComplete(() {
+          url = refPath.getDownloadURL() as String;
+        });
+
+  }
+
+
+
+
+
+
+
+
   late String kullaniciAdi, email, password;
 
   get profile => null;
@@ -85,8 +160,10 @@ class _editProfileState extends State<editProfile> {
                             shape: BoxShape.circle,
                             image: DecorationImage(
                                 fit: BoxFit.cover,
-                                image: NetworkImage(
-                                    'https://upload.wikimedia.org/wikipedia/commons/thumb/c/cd/Black_flag.svg/750px-Black_flag.svg.png'))),
+                                image: NetworkImage(url)
+                                // 'https://upload.wikimedia.org/wikipedia/commons/thumb/c/cd/Black_flag.svg/750px-Black_flag.svg.png'
+                            )
+                          ),
                       ),
                       Positioned(
                         bottom: 0,
@@ -98,9 +175,12 @@ class _editProfileState extends State<editProfile> {
                               shape: BoxShape.circle,
                               border: Border.all(width: 4, color: Colors.white),
                               color: Colors.blue),
-                          child: Icon(
-                            Icons.edit,
+                          child: IconButton(
+                            icon: const Icon(
+                              Icons.edit,
                             color: Colors.white,
+                            ),
+                            onPressed: () => _showPicker(context),
                           ),
                         ),
                       )
@@ -210,4 +290,37 @@ class _editProfileState extends State<editProfile> {
       ),
     );
   }
+
+          void _showPicker(context) async {
+          showModalBottomSheet(
+              context: context,
+              builder: (BuildContext bc) {
+                return SafeArea(
+                  child: Container(
+                    child: new Wrap(
+                      children: <Widget>[
+                        new ListTile(
+                            leading: new Icon(Icons.photo_library),
+                            title: new Text('Photo Library'),
+                            onTap: () {
+                              _imgFromGallery();
+                              Navigator.of(context).pop();
+                            }),
+                        new ListTile(
+                          leading: new Icon(Icons.photo_camera),
+                          title: new Text('Camera'),
+                          onTap: () {
+                            _imgFromCamera();
+                            Navigator.of(context).pop();
+                          },
+                        ),
+                      ],
+                    ),
+                  ),
+                );
+              }
+            );
+          }
+
+
 }
