@@ -88,13 +88,6 @@ class _editProfileState extends State<editProfile> {
 
   }
 
-
-
-
-
-
-
-
   late String kullaniciAdi, email, password;
 
   get profile => null;
@@ -162,7 +155,7 @@ class _editProfileState extends State<editProfile> {
                                 fit: BoxFit.cover,
                                 image: NetworkImage(url)
                                 // 'https://upload.wikimedia.org/wikipedia/commons/thumb/c/cd/Black_flag.svg/750px-Black_flag.svg.png'
-                            )
+                            ),
                           ),
                       ),
                       Positioned(
@@ -321,6 +314,4 @@ class _editProfileState extends State<editProfile> {
               }
             );
           }
-
-
 }
