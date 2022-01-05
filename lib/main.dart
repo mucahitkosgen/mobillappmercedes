@@ -46,7 +46,7 @@ class MyApp extends StatelessWidget {
           // is not restarted.
           primarySwatch: Colors.blue,
         ),
-        home: App(),
+        home: editProfile(),
       ),
     );
   }
