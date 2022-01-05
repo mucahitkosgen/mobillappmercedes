@@ -37,14 +37,7 @@ class FireStoreService {
   }
 
   Future<void> saveEvent(Event event) async {
-    if (event.limitedParticipation == false) {
-      return _db.collection('Events').doc(event.eventId).set(event.createMap());
-    } else {
-      return _db
-          .collection('LimitedParticiption')
-          .doc(event.eventId)
-          .set(event.createMap());
-    }
+    return _db.collection('Events').doc(event.eventId).set(event.createMap());
   }
 
   Stream<List<Event>> getEvents() {

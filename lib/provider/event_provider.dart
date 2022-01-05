@@ -13,6 +13,9 @@ class EventProvider with ChangeNotifier {
   late final String _description;
   late final DateTime _from;
   late final DateTime _to;
+  late final String _user;
+  late final String _image;
+  late final DateTime _date;
   //late final Color _backgroundColor;
 
   late final bool _limitedParticipation;
@@ -26,6 +29,10 @@ class EventProvider with ChangeNotifier {
   //Color get getBackgroundColor => _backgroundColor;
   bool get getLimitedParticipation => _limitedParticipation;
   int get getNumberOfPeople => _numberOfPeople;
+
+  String get getuser => _user;
+  String get getImage => _image;
+  DateTime get getDate => _date;
 
   DateTime _selectedDate = DateTime.now();
 
@@ -51,6 +58,11 @@ class EventProvider with ChangeNotifier {
     notifyListeners();
   }
 
+  void changedate(DateTime val) {
+    _date = val;
+    notifyListeners();
+  }
+
   void changeDescription(String val) {
     _description = val;
     notifyListeners();
@@ -66,6 +78,15 @@ class EventProvider with ChangeNotifier {
     notifyListeners();
   }
 
+  void changeuser(String val) {
+    _user = val;
+    notifyListeners();
+  }
+
+  void changeimage(String val) {
+    _image = val;
+    notifyListeners();
+  }
   /*void changeBackgroundColor(Color val) {
     _backgroundColor = val;
     notifyListeners();
@@ -89,6 +110,9 @@ class EventProvider with ChangeNotifier {
         from: getFrom,
         limitedParticipation: getLimitedParticipation,
         numberOfPeople: getNumberOfPeople,
+        user: getuser,
+        image: getImage,
+        date: getDate,
         to: getTo);
     service.saveEvent(newEvent);
   }

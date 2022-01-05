@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:mobilappmercedes/screens/feed_screen.dart';
 import 'package:mobilappmercedes/widgets/calendar_widget/calendar.dart';
 import 'package:mobilappmercedes/dashboard.dart';
 import 'package:mobilappmercedes/event_editing.dart';
@@ -126,7 +127,7 @@ class _DashboardState extends State<Dashboard> {
                         Navigator.push(
                             context,
                             MaterialPageRoute(
-                                builder: (context) => Dashboard()));
+                                builder: (context) => FeedScreen()));
                       },
                       child: Card(
                         clipBehavior: Clip.antiAliasWithSaveLayer,
