@@ -82,8 +82,8 @@ flutter:
     - assets/icons/
     - assets/images/
     - assets/dashboard/
-
-
+    - assets/privacy_policy.md
+    - assets/terms_and_conditions.md
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.
