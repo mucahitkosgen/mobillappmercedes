@@ -18,13 +18,13 @@ class PostCard extends StatelessWidget {
       child: Column(
         children: [
           Container(
-            padding: EdgeInsets.symmetric(vertical: 4, horizontal: 16)
+            padding: EdgeInsets.symmetric(vertical: 10, horizontal: 5)
                 .copyWith(right: 0),
             child: Row(
               children: [
                 CircleAvatar(
-                  radius: 16,
-                  // backgroundImage: NetworkImage(snap['image']),
+                  radius: 20,
+                  backgroundImage: NetworkImage(snap['image']),
                 ),
                 Expanded(
                   child: Padding(
@@ -35,41 +35,16 @@ class PostCard extends StatelessWidget {
                       children: [
                         Text(
                           snap['user'],
-                          style: TextStyle(fontWeight: FontWeight.bold),
+                          style: TextStyle(
+                            fontWeight: FontWeight.bold,
+                            color: Colors.white,
+                            fontSize: 15,
+                          ),
                         ),
                       ],
                     ),
                   ),
                 ),
-                IconButton(
-                  onPressed: () {
-                    showDialog(
-                        context: context,
-                        builder: (context) => Dialog(
-                              child: ListView(
-                                padding: const EdgeInsets.symmetric(
-                                  vertical: 16,
-                                ),
-                                shrinkWrap: true,
-                                children: [
-                                  'Delete',
-                                ]
-                                    .map(
-                                      (e) => InkWell(
-                                        onTap: () {},
-                                        child: Container(
-                                          padding: const EdgeInsets.symmetric(
-                                              vertical: 12, horizontal: 16),
-                                          child: Text(e),
-                                        ),
-                                      ),
-                                    )
-                                    .toList(),
-                              ),
-                            ));
-                  },
-                  icon: Icon(Icons.more_vert),
-                )
               ],
             ),
 
@@ -92,31 +67,20 @@ class PostCard extends StatelessWidget {
                   color: Colors.red,
                 ),
               ),
-              IconButton(
-                onPressed: () {},
-                icon: const Icon(
-                  Icons.comment_outlined,
+              Padding(
+                padding: const EdgeInsets.only(left: 8, right: 15),
+                child: Image.asset(
+                  "assets/icons/comment.png",
+                  color: Colors.white,
+                  width: 25,
+                  height: 25,
                 ),
               ),
-              IconButton(
-                onPressed: () {},
-                icon: const Icon(
-                  Icons.send,
-                ),
-              ),
-              Expanded(
-                  child: Align(
-                alignment: Alignment.bottomRight,
-                child: IconButton(
-                  onPressed: () {},
-                  icon: const Icon(Icons.bookmark_border),
-                ),
-              ))
             ],
           ),
           // Description and numbrer of like
           Container(
-            padding: const EdgeInsets.symmetric(horizontal: 36),
+            padding: const EdgeInsets.symmetric(horizontal: 8),
             child: Column(
               mainAxisSize: MainAxisSize.min,
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -126,31 +90,31 @@ class PostCard extends StatelessWidget {
                       .textTheme
                       .subtitle2!
                       .copyWith(fontWeight: FontWeight.w800),
-                  child: Text(
-                    //'${snap['Likes'].length} likes
-                    '1,556 Likes',
-                    style: Theme.of(context).textTheme.bodyText2,
+                  child: RichText(
+                    text: TextSpan(
+                        style: const TextStyle(color: Colors.white),
+                        children: [
+                          TextSpan(
+                              text: snap['title'],
+                              style: TextStyle(
+                                fontWeight: FontWeight.bold,
+                                fontSize: 14,
+                              ))
+                        ]),
                   ),
                 ),
                 Container(
                   width: double.infinity,
-                  padding: const EdgeInsets.only(
-                    top: 8,
-                  ),
+                  padding: const EdgeInsets.only(top: 8, left: 0),
                   child: RichText(
                     text: TextSpan(
-                        style: const TextStyle(color: Colors.amber),
+                        style: const TextStyle(color: Colors.white),
                         children: [
-                          TextSpan(
-                            text: snap['user'],
-                            style: TextStyle(
-                              fontWeight: FontWeight.bold,
-                            ),
-                          ),
                           TextSpan(
                               text: snap['description'],
                               style: TextStyle(
                                 fontWeight: FontWeight.bold,
+                                fontSize: 14,
                               ))
                         ]),
                   ),
@@ -158,23 +122,46 @@ class PostCard extends StatelessWidget {
               ],
             ),
           ),
-          InkWell(
-            onTap: () {},
-            child: (Container(
-              padding: const EdgeInsets.symmetric(vertical: 4),
-              child: const Text(
-                'View all 200 comments',
-                style: const TextStyle(fontSize: 16, color: Colors.white),
+          Container(
+            width: double.infinity,
+            padding: const EdgeInsets.only(top: 8, left: 0),
+            child: Text(
+              DateFormat('dd/MM/yyyy HH:mm').format(
+                snap['to'].toDate(),
               ),
-            )),
+              style: const TextStyle(fontSize: 15, color: Colors.white),
+            ),
           ),
           Container(
-            padding: const EdgeInsets.symmetric(vertical: 4),
+            padding: const EdgeInsets.only(top: 5, left: 0),
+            child: TextFormField(
+              style: const TextStyle(color: Colors.white),
+              decoration: const InputDecoration(
+                  hintText: 'Leave a comment',
+                  isDense: true, // important line
+                  contentPadding: EdgeInsets.fromLTRB(
+                      10, 10, 10, 0), // control your hints text size
+                  hintStyle: TextStyle(
+                    letterSpacing: 2,
+                    color: Colors.white,
+                    fontWeight: FontWeight.bold,
+                    fontStyle: FontStyle.normal,
+                    fontSize: 14,
+                  ),
+                  fillColor: Colors.black,
+                  filled: true,
+                  focusedBorder: OutlineInputBorder(
+                      borderSide: BorderSide(color: Colors.white, width: 1))),
+            ),
+          ),
+
+          Container(
+            padding: const EdgeInsets.only(top: 5, left: 300),
             child: Text(
               DateFormat.yMMMd().format(
                 snap['date'].toDate(),
               ),
-              style: const TextStyle(fontSize: 16, color: Colors.white),
+              style: const TextStyle(fontSize: 15, color: Colors.white),
             ),
           )
         ],

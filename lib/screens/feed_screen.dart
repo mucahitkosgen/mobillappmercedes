@@ -10,14 +10,6 @@ class FeedScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        backgroundColor: Colors.black,
-        centerTitle: false,
-        title: SvgPicture.asset(
-          "assets/icons/Discover theMercedesMedia.svg",
-          height: 32,
-        ),
-      ),
       body: StreamBuilder(
         stream: FirebaseFirestore.instance.collection('Events').snapshots(),
         builder: (context,

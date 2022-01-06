@@ -4,6 +4,7 @@ import 'package:mobilappmercedes/widgets/calendar_widget/calendar.dart';
 import 'package:mobilappmercedes/dashboard.dart';
 import 'package:mobilappmercedes/event_editing.dart';
 import 'package:mobilappmercedes/screens/main_screen.dart';
+import 'package:mobilappmercedes/screens/profile_screen.dart';
 
 class Dashboard extends StatefulWidget {
   @override
@@ -54,7 +55,9 @@ class _DashboardState extends State<Dashboard> {
               padding: const EdgeInsets.only(left: 15, top: 70, right: 15),
               child: GestureDetector(
                 onTap: () {
-                  FocusScope.of(context).unfocus();
+                  Navigator.push(context, MaterialPageRoute(builder: (context) {
+                    return ProfileScreen();
+                  }));
                 },
                 child: ListView(
                   children: [
