@@ -51,7 +51,8 @@ dependencies:
   easy_localization: ^3.0.0
   timeago: ^3.1.0
   image: ^3.1.0
-
+  flutter_markdown: ^0.6.9
+  animations: ^2.0.2
 
 
 dev_dependencies:
