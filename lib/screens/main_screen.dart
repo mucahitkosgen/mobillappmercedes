@@ -2,6 +2,7 @@
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:mobilappmercedes/screens/feed_screen.dart';
 import 'package:mobilappmercedes/screens/home_screen.dart';
 import 'package:mobilappmercedes/screens/likes_screen.dart';
 import 'package:mobilappmercedes/screens/profile_screen.dart';
@@ -48,17 +49,6 @@ class _MainScreenState extends State<MainScreen> {
                 width: 25,
                 height: 25),
           ),
-          InkWell(
-              onTap: () {
-                index = 1;
-                setState(() {});
-              },
-              child: Image.asset(
-                  index == 1
-                      ? "assets/icons/orta2.png"
-                      : "assets/icons/orta2.png",
-                  width: 50,
-                  height: 50)),
           Image.asset("assets/icons/add_post.png",
               color: Colors.white, width: 25, height: 25),
           InkWell(
@@ -92,13 +82,10 @@ class _MainScreenState extends State<MainScreen> {
   Widget getScreen() {
     switch (index) {
       case 0:
-        return const HomeScreen();
-
-      case 1:
-        return const SearchScreen();
+        return const FeedScreen();
 
       case 2:
-        return const HomeScreen();
+        return const FeedScreen();
 
       case 3:
         return const LikesScreen();

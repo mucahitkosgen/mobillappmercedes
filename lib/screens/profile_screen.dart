@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:mobilappmercedes/edit_profile.dart';
 import 'package:mobilappmercedes/utils/text_utils.dart';
 
 class ProfileScreen extends StatefulWidget {
@@ -25,6 +26,10 @@ class _ProfileScreenState extends State<ProfileScreen>
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        title: Text("Profil"),
+        backgroundColor: Colors.black,
+      ),
       backgroundColor: Colors.black,
       body: SingleChildScrollView(
         controller: scrollController,
@@ -66,29 +71,44 @@ class _ProfileScreenState extends State<ProfileScreen>
                 ),
               ),
               Container(
-                margin: const EdgeInsets.only(left: 10, right: 10, top: 10),
-                child: Row(
+                margin: const EdgeInsets.only(left: 10, right: 10, top: 30),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    Expanded(
-                      flex: 8,
-                      child: Container(
-                        height: 40,
-                        decoration: BoxDecoration(
-                            border: Border.all(color: Colors.grey),
-                            borderRadius: BorderRadius.circular(5)),
-                        padding: const EdgeInsets.all(9),
-                        child: Center(
-                          child:
-                              _textUtils.normal16("Edit Profile", Colors.white),
-                        ),
-                      ),
-                    ),
-                    const SizedBox(
-                      width: 10,
+                    RaisedButton(
+                      child: Text("Edit Profile"),
+                      onPressed: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => editProfile()),
+                        );
+                      },
                     ),
                   ],
                 ),
               ),
+
+              //  child: Row(
+              //  children: [
+              //  Expanded(
+              //  flex: 8,
+              //child: TextButton(
+              //onPressed: () {
+              //Navigator.push(
+              //  context,
+              //MaterialPageRoute(
+              //  builder: (context) => editProfile()));
+              //  },
+              //   child: const Text('Edit Profil'),
+              //   ),
+              //  ),
+              //  const SizedBox(
+              //    width: 10,
+              // ),
+              //  ],
+              // ),
+              // ),
               Container(
                   margin: const EdgeInsets.only(left: 10, right: 10, top: 20),
                   child: Row(
