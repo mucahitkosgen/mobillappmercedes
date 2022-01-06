@@ -82,51 +82,139 @@ class _AccountIslemleriState extends State<AccountIslemleri> {
               "assets/icons/Discover theMercedesMedia.svg",
               height: size.height * 0.25,
             ),
-            Padding(
-              padding: const EdgeInsets.all(12.0),
-              child: TextFormField(
-                style: const TextStyle(color: Colors.white),
-                onChanged: (String kullaniciAdiTutucu) {
-                  kullaniciAdiAl(kullaniciAdiTutucu);
-                },
-                decoration: const InputDecoration(
-                    labelText: "User Name",
-                    labelStyle: TextStyle(
-                      color: Colors.white,
+            Center(
+              child: Container(
+                margin: EdgeInsets.all(7.0),
+                width: size.width * 0.8,
+                height: 50,
+                decoration: BoxDecoration(
+                  color: Colors.white,
+                  boxShadow: [
+                    BoxShadow(
+                      blurRadius: 1.1,
+                      color: Colors.black45,
+                      spreadRadius: 0.5,
+                      offset: Offset(
+                        1.5,
+                        2,
+                      ),
                     ),
-                    focusedBorder: OutlineInputBorder(
-                        borderSide: BorderSide(color: Colors.white, width: 2))),
-              ),
-            ),
-            Padding(
-              padding: const EdgeInsets.all(12.0),
-              child: TextFormField(
-                style: const TextStyle(color: Colors.white),
-                onChanged: (String emailTutucu) {
-                  emailAl(emailTutucu);
-                },
-                decoration: InputDecoration(
-                    labelText: "Email",
-                    labelStyle: TextStyle(
-                      color: Colors.white,
+                  ],
+                  borderRadius: BorderRadius.circular(20),
+                ),
+                child: Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 15),
+                  child: SizedBox(
+                    height: 30,
+                    child: TextFormField(
+                      style: TextStyle(color: Colors.purple),
+                      decoration: InputDecoration(
+                        border: InputBorder.none,
+                        disabledBorder: InputBorder.none,
+                        enabledBorder: InputBorder.none,
+                        errorBorder: InputBorder.none,
+                        focusedBorder: InputBorder.none,
+                        focusedErrorBorder: InputBorder.none,
+                        hintText: 'Username',
+                        hintStyle: TextStyle(color: Colors.grey[600]),
+                        icon: Icon(Icons.account_circle, color: Colors.black),
+                      ),
+                      onChanged: (String kullaniciAdiTutucu) {
+                        kullaniciAdiAl(kullaniciAdiTutucu);
+                      },
                     ),
-                    focusedBorder: OutlineInputBorder(
-                        borderSide: BorderSide(color: Colors.white, width: 2))),
-              ),
-            ),
-            Padding(
-              padding: const EdgeInsets.all(12.0),
-              child: TextFormField(
-                style: const TextStyle(color: Colors.white),
-                onChanged: (String passwordTutucu) {
-                  passwordAl(passwordTutucu);
-                },
-                obscureText: true,
-                decoration: InputDecoration(
-                  labelStyle: TextStyle(
-                    color: Colors.white,
                   ),
-                  labelText: "Password",
+                ),
+              ),
+            ),
+            Center(
+              child: Container(
+                margin: EdgeInsets.all(7.0),
+                width: size.width * 0.8,
+                height: 50,
+                decoration: BoxDecoration(
+                  color: Colors.white,
+                  boxShadow: [
+                    BoxShadow(
+                      blurRadius: 1.1,
+                      color: Colors.black45,
+                      spreadRadius: 0.5,
+                      offset: Offset(
+                        1.5,
+                        2,
+                      ),
+                    ),
+                  ],
+                  borderRadius: BorderRadius.circular(20),
+                ),
+                child: Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 15),
+                  child: SizedBox(
+                    height: 30,
+                    child: TextFormField(
+                      style: TextStyle(color: Colors.purple),
+                      decoration: InputDecoration(
+                        border: InputBorder.none,
+                        disabledBorder: InputBorder.none,
+                        enabledBorder: InputBorder.none,
+                        errorBorder: InputBorder.none,
+                        focusedBorder: InputBorder.none,
+                        focusedErrorBorder: InputBorder.none,
+                        hintText: 'E-mail',
+                        hintStyle: TextStyle(color: Colors.grey[600]),
+                        icon: Icon(Icons.alternate_email_rounded,
+                            color: Colors.black),
+                      ),
+                      onChanged: (String emailTutucu) {
+                        emailAl(emailTutucu);
+                      },
+                    ),
+                  ),
+                ),
+              ),
+            ),
+            Center(
+              child: Container(
+                margin: EdgeInsets.all(7.0),
+                width: size.width * 0.8,
+                height: 50,
+                decoration: BoxDecoration(
+                  color: Colors.white,
+                  boxShadow: [
+                    BoxShadow(
+                      blurRadius: 1.1,
+                      color: Colors.black45,
+                      spreadRadius: 0.5,
+                      offset: Offset(
+                        1.5,
+                        2,
+                      ),
+                    ),
+                  ],
+                  borderRadius: BorderRadius.circular(20),
+                ),
+                child: Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 15),
+                  child: SizedBox(
+                    height: 30,
+                    child: TextFormField(
+                      style: TextStyle(color: Colors.purple),
+                      decoration: InputDecoration(
+                        border: InputBorder.none,
+                        disabledBorder: InputBorder.none,
+                        enabledBorder: InputBorder.none,
+                        errorBorder: InputBorder.none,
+                        focusedBorder: InputBorder.none,
+                        focusedErrorBorder: InputBorder.none,
+                        hintText: 'Password',
+                        hintStyle: TextStyle(color: Colors.grey[600]),
+                        icon: Icon(Icons.password_rounded, color: Colors.black),
+                      ),
+                      onChanged: (String passwordTutucu) {
+                        passwordAl(passwordTutucu);
+                      },
+                    ),
+                  ),
                 ),
               ),
             ),
