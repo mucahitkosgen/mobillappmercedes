@@ -132,6 +132,7 @@ class _LoginIslemleriState extends State<LoginIslemleri> {
                   child: SizedBox(
                     height: 30,
                     child: TextFormField(
+                      obscureText: true,
                       style: TextStyle(color: Colors.purple),
                       decoration: InputDecoration(
                         border: InputBorder.none,
