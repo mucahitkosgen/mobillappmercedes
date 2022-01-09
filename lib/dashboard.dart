@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:mobilappmercedes/config/palette.dart';
 import 'package:mobilappmercedes/screens/feed_screen.dart';
 import 'package:mobilappmercedes/widgets/calendar_widget/calendar.dart';
 import 'package:mobilappmercedes/dashboard.dart';
@@ -14,9 +15,19 @@ class Dashboard extends StatefulWidget {
 class _DashboardState extends State<Dashboard> {
   @override
   Widget build(BuildContext context) {
-    var size = MediaQuery.of(context).size;
+    final size = MediaQuery.of(context).size;
     return Scaffold(
       backgroundColor: Colors.black,
+      appBar: AppBar(
+        backgroundColor: Colors.transparent,
+        leading: IconButton(
+          icon: const Icon(
+            Icons.power_settings_new,
+            color: Colors.white,
+          ),
+          onPressed: () {},
+        ),
+      ),
       body: SafeArea(
         child: Stack(
           children: <Widget>[

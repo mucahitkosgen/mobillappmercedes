@@ -134,8 +134,8 @@ class _editProfileState extends State<editProfile> {
                   child: Stack(
                     children: [
                       Container(
-                        width: 180,
-                        height: 180,
+                        width: 140,
+                        height: 140,
                         decoration: BoxDecoration(
                           border: Border.all(width: 4, color: Colors.white),
                           boxShadow: [

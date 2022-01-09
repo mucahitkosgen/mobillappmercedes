@@ -10,6 +10,7 @@ import 'package:flutter_auth/constants.dart';*/
 
 import 'package:mobilappmercedes/createAccount.dart';
 import 'package:mobilappmercedes/dashboard.dart';
+import 'package:mobilappmercedes/dashboard/screens/bottom_nav_screen.dart';
 import 'package:mobilappmercedes/edit_profile.dart';
 import 'package:mobilappmercedes/login.dart';
 import 'package:mobilappmercedes/welcome/components/background.dart';
