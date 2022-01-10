@@ -79,7 +79,7 @@ class _AccountIslemleriState extends State<AccountIslemleri> {
               height: size.height * 0.0010,
             ),
             SvgPicture.asset(
-              "assets/icons/Discover theMercedesMedia.svg",
+              "assets/images/dis.svg",
               height: size.height * 0.25,
             ),
             Center(

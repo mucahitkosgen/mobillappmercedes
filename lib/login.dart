@@ -2,8 +2,12 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_svg/svg.dart';
+<<<<<<< HEAD
 import 'package:mobilappmercedes/dashboard.dart';
 import 'package:mobilappmercedes/edit_profile.dart';
+=======
+import 'package:mobilappmercedes/dashboard/screens/screens.dart';
+>>>>>>> 8e7617bf88fa3eb78c9a781e1d9fed6cfeb3f19a
 
 import 'components/rounded_button.dart';
 
@@ -59,40 +63,99 @@ class _LoginIslemleriState extends State<LoginIslemleri> {
               height: size.height * 0.0010,
             ),
             SvgPicture.asset(
-              "assets/icons/Discover theMercedesMedia.svg",
+              "assets/images/dis.svg",
               height: size.height * 0.25,
             ),
-            Padding(
-              padding: const EdgeInsets.all(12.0),
-              child: TextFormField(
-                style: const TextStyle(color: Colors.white),
-                onChanged: (String emailTutucu) {
-                  emailAl(emailTutucu);
-                },
-                decoration: const InputDecoration(
-                    labelText: "Email",
-                    labelStyle: TextStyle(
-                      color: Colors.white,
+            Center(
+              child: Container(
+                margin: EdgeInsets.all(7.0),
+                width: size.width * 0.8,
+                height: 50,
+                decoration: BoxDecoration(
+                  color: Colors.white,
+                  boxShadow: [
+                    BoxShadow(
+                      blurRadius: 1.1,
+                      color: Colors.black45,
+                      spreadRadius: 0.5,
+                      offset: Offset(
+                        1.5,
+                        2,
+                      ),
                     ),
-                    focusedBorder: OutlineInputBorder(
-                        borderSide: BorderSide(color: Colors.white, width: 2))),
+                  ],
+                  borderRadius: BorderRadius.circular(20),
+                ),
+                child: Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 15),
+                  child: SizedBox(
+                    height: 30,
+                    child: TextFormField(
+                      style: TextStyle(color: Colors.purple),
+                      decoration: InputDecoration(
+                        border: InputBorder.none,
+                        disabledBorder: InputBorder.none,
+                        enabledBorder: InputBorder.none,
+                        errorBorder: InputBorder.none,
+                        focusedBorder: InputBorder.none,
+                        focusedErrorBorder: InputBorder.none,
+                        hintText: 'E-mail',
+                        hintStyle: TextStyle(color: Colors.grey[600]),
+                        icon: Icon(Icons.alternate_email_rounded,
+                            color: Colors.black),
+                      ),
+                      onChanged: (String emailTutucu) {
+                        emailAl(emailTutucu);
+                      },
+                    ),
+                  ),
+                ),
               ),
             ),
-            Padding(
-              padding: const EdgeInsets.all(12.0),
-              child: TextFormField(
-                style: const TextStyle(color: Colors.white),
-                onChanged: (String passwordTutucu) {
-                  passwordAl(passwordTutucu);
-                },
-                obscureText: true,
-                decoration: const InputDecoration(
-                    labelText: "Password",
-                    labelStyle: TextStyle(
-                      color: Colors.white,
+            Center(
+              child: Container(
+                margin: EdgeInsets.all(7.0),
+                width: size.width * 0.8,
+                height: 50,
+                decoration: BoxDecoration(
+                  color: Colors.white,
+                  boxShadow: [
+                    BoxShadow(
+                      blurRadius: 1.1,
+                      color: Colors.black45,
+                      spreadRadius: 0.5,
+                      offset: Offset(
+                        1.5,
+                        2,
+                      ),
                     ),
-                    focusedBorder: OutlineInputBorder(
-                        borderSide: BorderSide(color: Colors.white, width: 2))),
+                  ],
+                  borderRadius: BorderRadius.circular(20),
+                ),
+                child: Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 15),
+                  child: SizedBox(
+                    height: 30,
+                    child: TextFormField(
+                      obscureText: true,
+                      style: TextStyle(color: Colors.purple),
+                      decoration: InputDecoration(
+                        border: InputBorder.none,
+                        disabledBorder: InputBorder.none,
+                        enabledBorder: InputBorder.none,
+                        errorBorder: InputBorder.none,
+                        focusedBorder: InputBorder.none,
+                        focusedErrorBorder: InputBorder.none,
+                        hintText: 'Password',
+                        hintStyle: TextStyle(color: Colors.grey[600]),
+                        icon: Icon(Icons.password_rounded, color: Colors.black),
+                      ),
+                      onChanged: (String passwordTutucu) {
+                        passwordAl(passwordTutucu);
+                      },
+                    ),
+                  ),
+                ),
               ),
             ),
             RoundedButton(
@@ -109,7 +172,7 @@ class _LoginIslemleriState extends State<LoginIslemleri> {
                         Navigator.push(
                             context,
                             MaterialPageRoute(
-                                builder: (context) => Dashboard()));
+                                builder: (context) => BottomNavScreen()));
 
                         debugPrint("Mail onaylı ana sayfaya gidilebilir");
                       } else {
