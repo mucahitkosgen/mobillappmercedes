@@ -2,12 +2,13 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_svg/svg.dart';
-<<<<<<< HEAD
+//<<<<<<< HEAD
 import 'package:mobilappmercedes/dashboard.dart';
 import 'package:mobilappmercedes/edit_profile.dart';
-=======
+
+///=======
 import 'package:mobilappmercedes/dashboard/screens/screens.dart';
->>>>>>> 8e7617bf88fa3eb78c9a781e1d9fed6cfeb3f19a
+//>>>>>>> 8e7617bf88fa3eb78c9a781e1d9fed6cfeb3f19a
 
 import 'components/rounded_button.dart';
 
