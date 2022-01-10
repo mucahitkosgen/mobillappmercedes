@@ -168,7 +168,7 @@ class Event_EditingState extends State<Event_Editing> {
         textColor: Colors.black,
         press: ,
       );*/
-  handleTakePhoto() async {
+  /*handleTakePhoto() async {
     Navigator.pop(context);
     File file = (await ImagePicker().pickImage(
       source: ImageSource.camera,
@@ -179,7 +179,7 @@ class Event_EditingState extends State<Event_Editing> {
     setState(() {
       this.file = file;
     });
-  }
+  }*/
 
   handleChooseFromGallery() async {
     Navigator.pop(context);
@@ -212,10 +212,10 @@ class Event_EditingState extends State<Event_Editing> {
           return SimpleDialog(
             title: Text('Create Event'),
             children: <Widget>[
-              SimpleDialogOption(
+              /* SimpleDialogOption(
                 child: Text('Photo with Camera'),
                 onPressed: handleTakePhoto,
-              ),
+              ),*/
               SimpleDialogOption(
                 child: Text('Image from Gallery'),
                 onPressed: handleChooseFromGallery,
