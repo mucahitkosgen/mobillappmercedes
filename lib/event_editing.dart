@@ -263,7 +263,7 @@ class Event_EditingState extends State<Event_Editing> {
       ];
 
   Widget buildTitle() => TextFormField(
-        style: const TextStyle(fontSize: 18, color: Colors.black),
+        style: const TextStyle(fontSize: 18, color: Colors.white),
         decoration: const InputDecoration(
           labelText: "Add Title",
           labelStyle: TextStyle(color: Colors.white),
@@ -284,7 +284,7 @@ class Event_EditingState extends State<Event_Editing> {
       );
 
   Widget buildDescription() => TextFormField(
-        style: const TextStyle(fontSize: 15, color: Colors.black),
+        style: const TextStyle(fontSize: 15, color: Colors.white),
         decoration: const InputDecoration(
           labelText: "Add Description",
           labelStyle: TextStyle(color: Colors.white),
