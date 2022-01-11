@@ -23,9 +23,10 @@ class PostCard extends StatelessWidget {
             child: Row(
               children: [
                 CircleAvatar(
-                  radius: 20,
-                  backgroundImage: NetworkImage(snap['image']),
-                ),
+                    radius: 20,
+                    backgroundImage:
+                        MemoryImage(base64.decode(snap!['userimage']))
+                            as ImageProvider),
                 Expanded(
                   child: Padding(
                     padding: EdgeInsets.only(left: 8),

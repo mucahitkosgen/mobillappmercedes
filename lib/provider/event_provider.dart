@@ -16,6 +16,7 @@ class EventProvider with ChangeNotifier {
   late final String _user;
   late final String _image;
   late final DateTime _date;
+  late final String _userimage;
   //late final Color _backgroundColor;
 
   late final bool _limitedParticipation;
@@ -23,6 +24,7 @@ class EventProvider with ChangeNotifier {
 //getters:
   List<Event> get events => _events;
   String get getTitle => _title;
+  String get getuserimage => _userimage;
   String get getDescription => _description;
   DateTime get getFrom => _from;
   DateTime get getTo => _to;
@@ -78,6 +80,11 @@ class EventProvider with ChangeNotifier {
     notifyListeners();
   }
 
+  void changeuserimage(String val) {
+    _userimage = val;
+    notifyListeners();
+  }
+
   void changeuser(String val) {
     _user = val;
     notifyListeners();
@@ -111,6 +118,7 @@ class EventProvider with ChangeNotifier {
         limitedParticipation: getLimitedParticipation,
         numberOfPeople: getNumberOfPeople,
         user: getuser,
+        userimage: getuserimage,
         image: getImage,
         date: getDate,
         to: getTo);

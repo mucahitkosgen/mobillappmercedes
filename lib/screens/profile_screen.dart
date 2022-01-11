@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:mobilappmercedes/edit_profile.dart';
 import 'package:mobilappmercedes/utils/text_utils.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 
 class ProfileScreen extends StatefulWidget {
   const ProfileScreen({Key? key}) : super(key: key);
@@ -15,12 +17,39 @@ class _ProfileScreenState extends State<ProfileScreen>
 
   late TabController tabController;
   ScrollController scrollController = ScrollController();
+  bool isLoading = false;
 
+  var userData = {};
   @override
   void initState() {
+    getImage();
     super.initState();
 
     tabController = TabController(length: 2, vsync: this);
+  }
+
+  getImage() async {
+    setState(() {
+      isLoading = true;
+    });
+    try {
+      var firebaseUser = FirebaseAuth.instance.currentUser;
+
+      var userSnap = await FirebaseFirestore.instance
+          .collection('users')
+          .doc(firebaseUser!.email)
+          .get();
+
+      userData = userSnap.data()!;
+
+      setState(() {});
+    } catch (e) {
+      debugPrint(e.toString());
+      print("****Burada hata var");
+    }
+    setState(() {
+      isLoading = false;
+    });
   }
 
   @override

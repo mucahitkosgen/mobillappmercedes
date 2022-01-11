@@ -7,6 +7,7 @@ class Event {
   final DateTime from;
   final DateTime to;
   final String user;
+  final String userimage;
   final String image;
   final DateTime date;
   //final Color backgroundColor;
@@ -22,6 +23,7 @@ class Event {
     required this.to,
     required this.numberOfPeople,
     required this.user,
+    required this.userimage,
     required this.image,
     required this.date,
     // this.backgroundColor = Colors.lightGreen,
@@ -38,6 +40,7 @@ class Event {
       'numberOfPeople': numberOfPeople,
       'limitedParticipation': limitedParticipation,
       'user': user,
+      'userimage': userimage,
       'image': image,
       'date': date,
       //'backgroundColor': backgroundColor
@@ -51,6 +54,7 @@ class Event {
         to = firestoreMap['to'],
         numberOfPeople = firestoreMap['numberOfPeople'],
         user = firestoreMap['user'],
+        userimage = firestoreMap['userimage'],
         image = firestoreMap['image'],
         date = firestoreMap['date'],
         //backgroundColor = firestoreMap['backgroundColor'],

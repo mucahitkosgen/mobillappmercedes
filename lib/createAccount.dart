@@ -304,7 +304,7 @@ class _AccountIslemleriState extends State<AccountIslemleri> {
     // String _email = "e160503138@stud.tau.edu.tr";
     /// String _password = "abc123";
     DocumentReference veriYolu =
-        FirebaseFirestore.instance.collection("users").doc(kullaniciAdi);
+        FirebaseFirestore.instance.collection("users").doc(email);
 
     Map<String, dynamic> users = {
       "KullaniciAdi": kullaniciAdi,

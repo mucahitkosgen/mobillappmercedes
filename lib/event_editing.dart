@@ -39,10 +39,13 @@ class Event_EditingState extends State<Event_Editing> {
   String? image;
   final FirebaseAuth auth = FirebaseAuth.instance;
   late String user;
+  late String userimage;
   late DocumentSnapshot snapshot;
   bool isChecked = false;
   final numberOfPeopleController = TextEditingController();
   final pictureController = TextEditingController();
+
+  FirebaseFirestore _db = FirebaseFirestore.instance;
 
   late File file;
 
@@ -83,6 +86,11 @@ class Event_EditingState extends State<Event_Editing> {
     // if (currentUser != null) {
     var userEmail = currentUser.email;
     print('-------' + userEmail!);
+
+    db.collection("users").doc(userEmail).get().then((value) {
+      userimage = value.data()!["Photo"];
+    });
+
     FirebaseFirestore.instance
         .collection('users')
         .where('Email', arrayContainsAny: [userEmail])
@@ -92,6 +100,7 @@ class Event_EditingState extends State<Event_Editing> {
             String user = doc["KullaniciAdi"];
           });
         });
+
     user = userEmail;
     print('*************' + user);
     //  }
@@ -193,7 +202,7 @@ class Event_EditingState extends State<Event_Editing> {
     File imageFile = File(file.path);
     var fileContent = imageFile.readAsBytesSync();
     fileContentBase64 = base64.encode(fileContent);
-    print('-----' + fileContentBase64);
+
     /*setState(() {
       if (file != null) {
         File _imageFilePicked = File(file.path);
@@ -495,6 +504,7 @@ class Event_EditingState extends State<Event_Editing> {
       eventProvider.changeTo(toDate);
       eventProvider.changeLimitedParticipation(isChecked);
       eventProvider.changeuser(user);
+      eventProvider.changeuserimage(userimage);
       eventProvider.changeimage(fileContentBase64);
       eventProvider.changedate(DateTime.now());
       eventProvider
@@ -513,36 +523,55 @@ class Event_EditingState extends State<Event_Editing> {
         limitedParticipation: isChecked,
         image: fileContentBase64,
         user: user,
+        userimage: userimage,
         date: DateTime.now(),
         numberOfPeople: int.parse(numberOfPeopleController.text.trim()),
 
         //numberOfPeople: 20, //int.parse(numberOfPeopleController.text),
         eventId: '',
       );
+      // eventProvider.deleteEvent(event);
     }
   }
 
   getuser() async {
     var currentUser = FirebaseAuth.instance.currentUser;
     final db = FirebaseFirestore.instance;
-    print('-------' + currentUser!.uid);
+    String a = 'dfdfd';
+
     if (currentUser != null) {
       var userEmail = currentUser.email;
+    }
 
-      String user = db
+    /*FirebaseFirestore.instance
+          .collection('users')
+          .where('email', isEqualTo: [userEmail]).snapshots();
+
+      String rsm = snapshot.get(['Photo']);
+      print('------------' + rsm);*/
+
+    /* db.collection("users").doc(userEmail).get().then((value){
+      print(value.data());
+    });*/
+    /* String user = db
           .collection('users')
           .where('email', arrayContainsAny: [userEmail])
           .snapshots()
           .toString();
       print('*************' + user);
-    }
+    }*/
+
+    /*List<Map<String,dynamic>>=_db.collection('users').where('email', arrayContainsAny: [userEmail]).snapshots().map((snapshot) => snapshot.docs
+        .map((document) =>document.data(
+         
+        )*/
 
     /* db.collection('users').doc(currentUser.uid).snapshots().map((snapshot) {
       String user = snapshot.data()!["KullaniciAdi"];
       print('*************' + user);
     });
     }*/
-    return user;
+    return a;
     // here you write the codes to input the data into firestore
   }
 
