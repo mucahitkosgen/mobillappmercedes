@@ -8,6 +8,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:mobilappmercedes/config/styles.dart';
 import 'package:mobilappmercedes/provider/event_provider.dart';
 import 'package:provider/provider.dart';
 import 'package:mobilappmercedes/services/firestore_services.dart';
@@ -106,13 +107,13 @@ class Event_EditingState extends State<Event_Editing> {
     //  }
 
     return Scaffold(
-      backgroundColor: Colors.white,
+      backgroundColor: Colors.black,
       appBar: AppBar(
-        backgroundColor: Colors.black,
-        leading: const CloseButton(),
-        actions: buildEditingActions(),
-        title: const Text("Create Event"),
-      ),
+          backgroundColor: Colors.black,
+          leading: const CloseButton(),
+          actions: buildEditingActions(),
+          title: const Text("Mercedes Media",
+              style: TextStyle(color: Colors.blue))),
       body: SingleChildScrollView(
         padding: EdgeInsets.all(12),
         child: Form(
@@ -160,15 +161,27 @@ class Event_EditingState extends State<Event_Editing> {
     );
   }
 
-  Widget buildSelectImage() => RaisedButton(
-        color: Colors.blueAccent,
-        child: Text(
-          "Select Image",
-          style: TextStyle(color: Colors.white),
+  Widget buildSelectImage() => FlatButton.icon(
+        padding: const EdgeInsets.symmetric(
+          vertical: 20.0,
+          horizontal: 30.0,
         ),
         onPressed: () {
           selectImage(context);
         },
+        color: Colors.blue[700],
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(30.0),
+        ),
+        icon: const Icon(
+          Icons.add,
+          color: Colors.white,
+        ),
+        label: Text(
+          'Select Image',
+          style: Styles.buttonTextStyle,
+        ),
+        textColor: Colors.white,
       );
 
 /*  RoundedButton(
@@ -177,7 +190,7 @@ class Event_EditingState extends State<Event_Editing> {
         textColor: Colors.black,
         press: ,
       );*/
-  /*handleTakePhoto() async {
+  handleTakePhoto() async {
     Navigator.pop(context);
     File file = (await ImagePicker().pickImage(
       source: ImageSource.camera,
@@ -188,7 +201,7 @@ class Event_EditingState extends State<Event_Editing> {
     setState(() {
       this.file = file;
     });
-  }*/
+  }
 
   handleChooseFromGallery() async {
     Navigator.pop(context);
@@ -219,18 +232,22 @@ class Event_EditingState extends State<Event_Editing> {
         context: parentContext,
         builder: (context) {
           return SimpleDialog(
-            title: Text('Create Event'),
+            shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.all(Radius.circular(18.0))),
+            // title: Text('Select Choose', style: TextStyle(color: Colors.blue)),
             children: <Widget>[
-              /* SimpleDialogOption(
-                child: Text('Photo with Camera'),
-                onPressed: handleTakePhoto,
-              ),*/
               SimpleDialogOption(
-                child: Text('Image from Gallery'),
+                child: Text('Photo with Camera',
+                    style: TextStyle(color: Colors.grey[900])),
+                onPressed: handleTakePhoto,
+              ),
+              SimpleDialogOption(
+                child: Text('Image from Gallery',
+                    style: TextStyle(color: Colors.grey[900])),
                 onPressed: handleChooseFromGallery,
               ),
               SimpleDialogOption(
-                child: Text('Cancel'),
+                child: Text('Cancel', style: TextStyle(color: Colors.red)),
                 onPressed: () => Navigator.pop(context),
               ),
             ],
@@ -255,9 +272,19 @@ class Event_EditingState extends State<Event_Editing> {
       ];
 
   Widget buildTitle() => TextFormField(
-        style: const TextStyle(fontSize: 24, color: Colors.black),
+        style: const TextStyle(fontSize: 18, color: Colors.white),
         decoration: const InputDecoration(
-            border: UnderlineInputBorder(), hintText: 'Add Title'),
+          labelText: "Add Title",
+          labelStyle: TextStyle(color: Colors.white),
+          enabledBorder: OutlineInputBorder(
+            borderSide: BorderSide(color: Colors.white, width: 1),
+            borderRadius: BorderRadius.all(Radius.circular(18.0)),
+          ),
+          focusedBorder: OutlineInputBorder(
+            borderSide: BorderSide(color: Colors.blue, width: 1),
+            borderRadius: BorderRadius.all(Radius.circular(18.0)),
+          ),
+        ),
         onFieldSubmitted: (_) => saveForm(),
         validator: (title) =>
             title != null && title.isEmpty ? 'Title cannot be empty' : null,
@@ -266,9 +293,19 @@ class Event_EditingState extends State<Event_Editing> {
       );
 
   Widget buildDescription() => TextFormField(
-        style: const TextStyle(fontSize: 15, color: Colors.black),
+        style: const TextStyle(fontSize: 15, color: Colors.white),
         decoration: const InputDecoration(
-            border: UnderlineInputBorder(), hintText: 'Add Description'),
+          labelText: "Add Description",
+          labelStyle: TextStyle(color: Colors.white),
+          enabledBorder: OutlineInputBorder(
+            borderSide: BorderSide(color: Colors.white, width: 1),
+            borderRadius: BorderRadius.all(Radius.circular(18.0)),
+          ),
+          focusedBorder: OutlineInputBorder(
+            borderSide: BorderSide(color: Colors.blue, width: 1),
+            borderRadius: BorderRadius.all(Radius.circular(18.0)),
+          ),
+        ),
         onFieldSubmitted: (_) => saveForm(),
         validator: (description) => description != null && description.isEmpty
             ? 'Description cannot be empty'
@@ -279,18 +316,29 @@ class Event_EditingState extends State<Event_Editing> {
 
   Widget buildLP() => Row(
         children: [
-          const Expanded(
-            flex: 2,
-            child: Text(
-              'Limited Participation',
-              style: TextStyle(fontSize: 17.0),
-            ),
-          ),
+          // const Expanded(
+          //   flex: 2,
+          //   child: Text(
+          //     '',
+          //     style: TextStyle(fontSize: 17.0, color: Colors.white),
+          //   ),
+          // ),
           Expanded(
-            child: Checkbox(
+            child: CheckboxListTile(
               checkColor: Colors.white,
-              fillColor: MaterialStateProperty.resolveWith(getColor),
+              activeColor: Colors.purple,
+              title: Text("Limited Participation",
+                  style: TextStyle(color: Colors.white)),
+              tileColor: Colors.purple,
+              shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.all(Radius.circular(18.0))),
+              selectedTileColor: Colors.white,
+              secondary: Icon(
+                Icons.access_alarms_outlined,
+                color: Colors.white,
+              ),
               value: isChecked,
+              controlAffinity: ListTileControlAffinity.platform,
               onChanged: (bool? value) {
                 setState(() {
                   isChecked = value!;
@@ -311,35 +359,48 @@ class Event_EditingState extends State<Event_Editing> {
         context: context,
         builder: (context) {
           return AlertDialog(
-            title: const Text('What is the maximum number of participants?'),
+            elevation: 22.0,
+            backgroundColor: Colors.white,
+            shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.all(Radius.circular(18.0))),
+            title: const Text(
+              'What is the maximum number of participants?',
+              style: TextStyle(color: Colors.black),
+            ),
             content: TextFormField(
               keyboardType: TextInputType.number,
-              style: const TextStyle(fontSize: 15, color: Colors.black),
+              style: const TextStyle(fontSize: 15, color: Colors.blue),
               onFieldSubmitted: (_) => saveForm(),
               validator: (nop) => nop != null && nop.isEmpty
                   ? 'Number of People cannot be empty'
                   : null,
               controller: numberOfPeopleController,
               decoration: const InputDecoration(
-                  border: UnderlineInputBorder(), hintText: 'Give Number'),
+                labelText: "Give me a Number",
+                labelStyle: TextStyle(color: Colors.grey),
+                enabledBorder: OutlineInputBorder(
+                  borderSide: BorderSide(color: Colors.grey, width: 1),
+                  borderRadius: BorderRadius.all(Radius.circular(12.0)),
+                ),
+              ),
             ),
             actions: <Widget>[
-              FlatButton(
+              RoundedButton(
                 color: Colors.red,
                 textColor: Colors.white,
-                child: Text('CANCEL'),
-                onPressed: () {
+                text: 'No',
+                press: () {
                   setState(() {
                     isChecked = false;
                     Navigator.pop(context);
                   });
                 },
               ),
-              FlatButton(
+              RoundedButton(
                 color: Colors.green,
                 textColor: Colors.white,
-                child: Text('OK'),
-                onPressed: () {
+                text: 'Yes',
+                press: () {
                   setState(() {
                     onFieldSubmitted:
                     (_) => saveForm();
@@ -466,8 +527,15 @@ class Event_EditingState extends State<Event_Editing> {
     required VoidCallback onClicked,
   }) =>
       ListTile(
-        title: Text(text),
-        trailing: const Icon(Icons.arrow_drop_down),
+        title: Text(text, style: TextStyle(color: Colors.white)),
+        trailing: const Icon(
+          Icons.navigate_next_rounded,
+          color: Colors.white,
+        ),
+        focusColor: Colors.blue,
+        tileColor: Colors.grey[900],
+        shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.all(Radius.circular(18.0))),
         onTap: onClicked,
       );
 
@@ -584,7 +652,7 @@ class Event_EditingState extends State<Event_Editing> {
     if (states.any(interactiveStates.contains)) {
       return Colors.blue;
     }
-    return Colors.red;
+    return Colors.blue;
   }
 }
 
