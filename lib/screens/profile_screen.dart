@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:mobilappmercedes/dashboard/screens/screens.dart';
 import 'package:mobilappmercedes/edit_profile.dart';
 import 'package:mobilappmercedes/utils/text_utils.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -56,6 +57,17 @@ class _ProfileScreenState extends State<ProfileScreen>
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        leading: IconButton(
+          icon: const Icon(
+            Icons.arrow_back,
+            color: Colors.white,
+          ),
+          onPressed: () {
+            Navigator.push(context, MaterialPageRoute(builder: (context) {
+              return BottomNavScreen();
+            }));
+          },
+        ),
         title: Text("Profil"),
         backgroundColor: Colors.black,
       ),

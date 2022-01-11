@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:mobilappmercedes/dashboard/screens/screens.dart';
 import 'package:mobilappmercedes/dashboard/screens/home_screen.dart';
 import 'package:mobilappmercedes/edit_profile.dart';
+import 'package:mobilappmercedes/screens/profile_screen.dart';
 
 class BottomNavScreen extends StatefulWidget {
   @override
@@ -11,7 +12,7 @@ class BottomNavScreen extends StatefulWidget {
 class _BottomNavScreenState extends State<BottomNavScreen> {
   final List _screens = [
     HomeScreen(),
-    editProfile(),
+    ProfileScreen(),
     Scaffold(),
   ];
   int _currentIndex = 0;

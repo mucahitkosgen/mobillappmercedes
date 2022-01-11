@@ -46,6 +46,8 @@ class _LoginIslemleriState extends State<LoginIslemleri> {
       if (user == null) {
         print('Kullanıcı Oturumu Kapattı');
       } else {
+        Navigator.push(context,
+            MaterialPageRoute(builder: (context) => BottomNavScreen()));
         print('Kullaıcı oturumu Açtı');
       }
     });
@@ -190,10 +192,10 @@ class _LoginIslemleriState extends State<LoginIslemleri> {
                   }
                 }),
             RoundedButton(
-              text: "LOG OUT",
+              text: "FORGOT PASSWORD",
               color: Colors.blue,
               textColor: Colors.black,
-              press: _cikisYap,
+              press: _resetPassword,
             ),
           ],
         ),

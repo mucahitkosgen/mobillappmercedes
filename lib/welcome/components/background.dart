@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:mobilappmercedes/dashboard/screens/bottom_nav_screen.dart';
 
 class Background extends StatelessWidget {
   final Widget child;
@@ -9,8 +11,20 @@ class Background extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    FirebaseAuth _auth = FirebaseAuth.instance;
+    _auth.authStateChanges().listen((User? user) {
+      if (user == null) {
+        print('Kullanıcı Oturumu Kapattı');
+      } else {
+        Navigator.push(context,
+            MaterialPageRoute(builder: (context) => BottomNavScreen()));
+        print('Kullaıcı oturumu Açtı');
+      }
+    });
+
     Size size = MediaQuery.of(context).size;
     return Container(
+      color: Colors.black,
       height: size.height,
       width: double.infinity,
       child: Stack(

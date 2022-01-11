@@ -223,11 +223,11 @@ class _AccountIslemleriState extends State<AccountIslemleri> {
               color: Colors.purple,
               press: _emailSifreKullaniciolustur,
             ),
-            RoundedButton(
+            /*RoundedButton(
               text: "Forgot Password",
               color: Colors.blueAccent,
               press: _resetPassword,
-            ),
+            ),*/
             Padding(
               padding: const EdgeInsets.only(left: 20), //
               child: Row(
