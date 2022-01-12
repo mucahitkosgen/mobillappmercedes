@@ -25,7 +25,7 @@ class PostCard extends StatelessWidget {
                 CircleAvatar(
                     radius: 20,
                     backgroundImage:
-                        MemoryImage(base64.decode(snap!['userimage']))
+                        MemoryImage(base64.decode(snap['userimage']))
                             as ImageProvider),
                 Expanded(
                   child: Padding(
