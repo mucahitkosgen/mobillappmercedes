@@ -14,6 +14,9 @@ import 'package:mobilappmercedes/dashboard/screens/bottom_nav_screen.dart';
 import 'package:mobilappmercedes/edit_profile.dart';
 import 'package:mobilappmercedes/login.dart';
 import 'package:mobilappmercedes/welcome/components/background.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+
+FirebaseAuth _auth = FirebaseAuth.instance;
 
 class Body extends StatelessWidget {
   @override
@@ -45,8 +48,12 @@ class Body extends StatelessWidget {
                   context,
                   MaterialPageRoute(
                     builder: (context) {
-                      // return LoginIslemleri();
-                      return LoginIslemleri();
+                      if (_auth.currentUser != null) {
+                        return BottomNavScreen();
+                      } else {
+                        // return LoginIslemleri();
+                        return LoginIslemleri();
+                      }
                     },
                   ),
                 );

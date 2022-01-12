@@ -57,13 +57,13 @@ class _AccountIslemleriState extends State<AccountIslemleri> {
   void initState() {
     // TODO: implement initState
     super.initState();
-    _auth.authStateChanges().listen((User? user) {
+    /*  _auth.authStateChanges().listen((User? user) {
       if (user == null) {
         print('Kullanıcı Oturumu Kapattı');
       } else {
         print('Kullaıcı oturumu Açtı');
       }
-    });
+    });*/
   }
 
   @override

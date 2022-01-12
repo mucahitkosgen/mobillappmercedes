@@ -40,22 +40,13 @@ class _LoginIslemleriState extends State<LoginIslemleri> {
 
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
-    _auth.authStateChanges().listen((User? user) {
-      if (user == null) {
-        print('Kullanıcı Oturumu Kapattı');
-      } else {
-        Navigator.push(context,
-            MaterialPageRoute(builder: (context) => BottomNavScreen()));
-        print('Kullaıcı oturumu Açtı');
-      }
-    });
   }
 
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
+
     return Scaffold(
       backgroundColor: Colors.black,
       body: Center(
@@ -166,23 +157,17 @@ class _LoginIslemleriState extends State<LoginIslemleri> {
                 color: Colors.purple,
                 press: () async {
                   try {
-                    if (_auth.currentUser == null) {
-                      User? _oturumAcanUser =
-                          (await _auth.signInWithEmailAndPassword(
-                                  email: email, password: password))
-                              .user;
-                      if (_oturumAcanUser!.emailVerified) {
-                        Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => BottomNavScreen()));
+                    User? _oturumAcanUser =
+                        (await _auth.signInWithEmailAndPassword(
+                                email: email, password: password))
+                            .user;
+                    if (_oturumAcanUser!.emailVerified) {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => BottomNavScreen()));
 
-                        debugPrint("Mail onaylı ana sayfaya gidilebilir");
-                      } else {
-                        debugPrint(
-                            "Lütfen mailinizi onaylayıp tekrar giriş yapınız");
-                        _auth.signOut();
-                      }
+                      debugPrint("Mail onaylı ana sayfaya gidilebilir");
                     } else {
                       debugPrint("Oturum açmış kullanıcı zaten var");
                     }

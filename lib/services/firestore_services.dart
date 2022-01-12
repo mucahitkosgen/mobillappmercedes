@@ -37,11 +37,15 @@ class FireStoreService {
   }
 
   Future<void> saveEvent(Event event) async {
-    _db
-        .collection('users')
-        .doc('posts')
-        .collection(event.eventId)
-        .add(event.createMap());
+    try {
+      _db
+          .collection('users')
+          .doc('posts')
+          .collection(event.eventId)
+          .add(event.createMap());
+    } catch (e) {
+      debugPrint(e.toString());
+    }
     return _db.collection('Events').doc(event.eventId).set(event.createMap());
   }
 
