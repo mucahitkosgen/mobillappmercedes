@@ -40,9 +40,10 @@ class FireStoreService {
     try {
       _db
           .collection('users')
-          .doc('posts')
-          .collection(event.eventId)
-          .add(event.createMap());
+          .doc(event.user)
+          .collection('posts')
+          .doc(event.eventId)
+          .set(event.createMap());
     } catch (e) {
       debugPrint(e.toString());
     }
