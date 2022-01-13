@@ -209,6 +209,21 @@ class _LoginIslemleriState extends State<LoginIslemleri> {
       User? _yeniUser = _credential.user;
       await _yeniUser!.sendEmailVerification();
       if (_auth.currentUser != null) {
+        showDialog(
+            context: context,
+            builder: (BuildContext context) {
+              return AlertDialog(
+                title: Text("Size mail attık"),
+                actions: [
+                  FlatButton(
+                    child: Text("Ok"),
+                    onPressed: () {
+                      Navigator.of(context).pop();
+                    },
+                  )
+                ],
+              );
+            });
         debugPrint("Size bir mail attık lütfen onaylayın");
         await _auth.signOut();
         debugPrint("Kullanıcıyı sistemden attık");
@@ -216,6 +231,22 @@ class _LoginIslemleriState extends State<LoginIslemleri> {
 
       debugPrint(_yeniUser.toString());
     } catch (e) {
+      showDialog(
+          context: context,
+          builder: (BuildContext context) {
+            return AlertDialog(
+              title: Text("Error"),
+              content: Text(e.toString()),
+              actions: [
+                FlatButton(
+                  child: Text("Ok"),
+                  onPressed: () {
+                    Navigator.of(context).pop();
+                  },
+                )
+              ],
+            );
+          });
       debugPrint("*******HATA VAR***");
       debugPrint(e.toString());
     }

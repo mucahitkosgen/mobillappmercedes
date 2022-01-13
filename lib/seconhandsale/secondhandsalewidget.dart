@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
+import 'package:mobilappmercedes/config/styles.dart';
 import 'package:flutter/src/widgets/basic.dart';
 import 'package:intl/intl.dart';
 
@@ -96,6 +97,13 @@ class SaleWidget extends StatelessWidget {
                         style: const TextStyle(color: Colors.white),
                         children: [
                           TextSpan(
+                              text: 'Ürün Açıklaması:' + ' ',
+                              style: TextStyle(
+                                fontWeight: FontWeight.w900,
+                                fontSize: 16,
+                                color: Color(0xFF2979FF),
+                              )),
+                          TextSpan(
                               text: snap['title'],
                               style: TextStyle(
                                 fontWeight: FontWeight.bold,
@@ -111,6 +119,13 @@ class SaleWidget extends StatelessWidget {
                     text: TextSpan(
                         style: const TextStyle(color: Colors.white),
                         children: [
+                          TextSpan(
+                              text: 'FİYAT:' + ' ',
+                              style: TextStyle(
+                                fontWeight: FontWeight.w900,
+                                fontSize: 16,
+                                color: Color(0xFF2979FF),
+                              )),
                           TextSpan(
                               text: snap['description'],
                               style: TextStyle(
