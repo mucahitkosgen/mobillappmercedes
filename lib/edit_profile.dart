@@ -8,7 +8,10 @@ import 'package:image_picker/image_picker.dart';
 import 'package:firebase_storage/firebase_storage.dart'; // For File Upload To Firestore
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart'; // For Image Picker
+import 'package:mobilappmercedes/dashboard/screens/bottom_nav_screen.dart';
+import 'package:mobilappmercedes/screens/feed_screen.dart';
 import 'package:mobilappmercedes/screens/profile_screen.dart';
+import 'package:mobilappmercedes/screens/profile_screen2.dart';
 import 'package:path/path.dart' as Path;
 import 'package:uuid/uuid.dart';
 
@@ -173,7 +176,7 @@ class _editProfileState extends State<editProfile> {
                 ),
                 onPressed: () {
                   Navigator.push(context, MaterialPageRoute(builder: (context) {
-                    return ProfileScreen();
+                    return ProfileScreen2();
                   }));
                 },
               ),

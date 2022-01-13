@@ -1,12 +1,13 @@
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
+import 'package:mobilappmercedes/config/styles.dart';
 import 'package:flutter/src/widgets/basic.dart';
 import 'package:intl/intl.dart';
 
-class PostCard extends StatelessWidget {
+class SaleWidget extends StatelessWidget {
   final snap;
-  const PostCard({Key? key, required this.snap}) : super(key: key);
+  const SaleWidget({Key? key, required this.snap}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -60,18 +61,13 @@ class PostCard extends StatelessWidget {
 
           //Like Coomand section
           Row(
-            children: <Widget>[
-              Row(
-                children: <Widget>[
-                  IconButton(
-                    icon: Icon(
-                      Icons.favorite_outline,
-                      color: Colors.white,
-                    ),
-                    iconSize: 30.0,
-                    onPressed: () => print('Like post'),
-                  ),
-                ],
+            children: [
+              IconButton(
+                onPressed: () {},
+                icon: const Icon(
+                  Icons.favorite,
+                  color: Colors.red,
+                ),
               ),
               Padding(
                 padding: const EdgeInsets.only(left: 8, right: 15),
@@ -101,6 +97,13 @@ class PostCard extends StatelessWidget {
                         style: const TextStyle(color: Colors.white),
                         children: [
                           TextSpan(
+                              text: 'Ürün Açıklaması:' + ' ',
+                              style: TextStyle(
+                                fontWeight: FontWeight.w900,
+                                fontSize: 16,
+                                color: Color(0xFF2979FF),
+                              )),
+                          TextSpan(
                               text: snap['title'],
                               style: TextStyle(
                                 fontWeight: FontWeight.bold,
@@ -117,7 +120,7 @@ class PostCard extends StatelessWidget {
                         style: const TextStyle(color: Colors.white),
                         children: [
                           TextSpan(
-                              text: 'Etkinlik Açıklaması:' + ' ',
+                              text: 'FİYAT:' + ' ',
                               style: TextStyle(
                                 fontWeight: FontWeight.w900,
                                 fontSize: 16,
@@ -133,30 +136,6 @@ class PostCard extends StatelessWidget {
                   ),
                 ),
               ],
-            ),
-          ),
-
-          Container(
-            width: double.infinity,
-            padding: const EdgeInsets.only(top: 8, left: 8),
-            child: RichText(
-              text: TextSpan(
-                  style: const TextStyle(color: Colors.white),
-                  children: [
-                    TextSpan(
-                        text: 'Etkinlik Tarihi:' + ' ',
-                        style: TextStyle(
-                          fontWeight: FontWeight.w900,
-                          fontSize: 16,
-                          color: Color(0xFF2979FF),
-                        )),
-                    TextSpan(
-                      text: DateFormat('dd/MM/yyyy HH:mm').format(
-                        snap['to'].toDate(),
-                      ),
-                      style: const TextStyle(fontSize: 15, color: Colors.white),
-                    ),
-                  ]),
             ),
           ),
 
