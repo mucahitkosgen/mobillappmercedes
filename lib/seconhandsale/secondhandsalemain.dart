@@ -1,29 +1,29 @@
-// ignore_for_file: unused_field
-
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:mobilappmercedes/event_editing.dart';
+import 'package:flutter_svg/flutter_svg.dart';
+import 'package:mobilappmercedes/seconhandsale/secondhandsalescreen.dart';
+import 'package:mobilappmercedes/seconhandsale/secondhandsaleedit.dart';
+import 'package:mobilappmercedes/widgets/post_card.dart';
 import 'package:mobilappmercedes/screens/feed_screen.dart';
 import 'package:mobilappmercedes/screens/profile_screen.dart';
 import 'package:mobilappmercedes/screens/profile_screen2.dart';
 import 'package:mobilappmercedes/utils/text_utils.dart';
 import 'package:mobilappmercedes/dashboard/screens/screens.dart';
-import 'package:mobilappmercedes/dashboard/screens/home_screen.dart';
-import 'package:mobilappmercedes/widgets/post_card.dart';
 
-class MainScreen extends StatefulWidget {
-  const MainScreen({Key? key}) : super(key: key);
+class SecondHandSaleMain extends StatefulWidget {
+  const SecondHandSaleMain({Key? key}) : super(key: key);
 
   @override
-  _MainScreenState createState() => _MainScreenState();
+  _SecondHandSaleMainState createState() => _SecondHandSaleMainState();
 }
 
-class _MainScreenState extends State<MainScreen> {
+class _SecondHandSaleMainState extends State<SecondHandSaleMain> {
   int index = 0;
   final List _screens = [
-    FeedScreen(),
+    SecondHandSaleScreen(),
     ProfileScreen2(),
-    Event_Editing(),
+    SecondHandSaleEdit(),
     Scaffold(),
   ];
   int _currentIndex = 0;

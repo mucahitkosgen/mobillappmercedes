@@ -6,6 +6,7 @@ import 'package:mobilappmercedes/dashboard/widgets/custom_app_bar.dart';
 //import 'package:mobilappmercedes/dashboard/widgets/widgets.dart';
 import 'package:mobilappmercedes/event_editing.dart';
 import 'package:mobilappmercedes/screens/main_screen.dart';
+import 'package:mobilappmercedes/seconhandsale/secondhandsalemain.dart';
 import 'package:mobilappmercedes/seconhandsale/secondhandsalescreen.dart';
 import 'package:mobilappmercedes/widgets/calendar_widget/calendar.dart';
 
@@ -210,7 +211,7 @@ class _HomeScreenState extends State<HomeScreen> {
                       Navigator.push(
                           context,
                           MaterialPageRoute(
-                              builder: (context) => SecondHandSaleScreen()));
+                              builder: (context) => SecondHandSaleMain()));
                     },
                     color: Colors.blue[700],
                     shape: RoundedRectangleBorder(
