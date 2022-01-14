@@ -27,6 +27,7 @@ class AccountIslemleri extends StatefulWidget {
 }
 
 class _AccountIslemleriState extends State<AccountIslemleri> {
+  bool showErrorMessage = false;
   late String kullaniciAdi, email, password;
   late bool _checkbox = true;
 
@@ -218,6 +219,16 @@ class _AccountIslemleriState extends State<AccountIslemleri> {
                 ),
               ),
             ),
+            showErrorMessage
+                ? Container(
+                    decoration: BoxDecoration(
+                        color: Colors.red,
+                        borderRadius: BorderRadius.circular(80.0)),
+                    child: Padding(
+                        padding: EdgeInsets.all(10.0),
+                        child: Text(
+                            'Please accept the terms and conditions to proceed...')))
+                : Container(),
             RoundedButton(
               text: "Create Account",
               color: Colors.purple,
@@ -330,12 +341,15 @@ class _AccountIslemleriState extends State<AccountIslemleri> {
 
       debugPrint(_yeniUser.toString());
     } catch (e) {
-      debugPrint("*******HATA VAR***");
+      debugPrint("**HATA VAR**");
       debugPrint(e.toString());
     }
-
-    Navigator.push(
-        context, MaterialPageRoute(builder: (context) => LoginIslemleri()));
+    if (_checkbox != false) {
+      Navigator.push(
+          context, MaterialPageRoute(builder: (context) => LoginIslemleri()));
+    } else {
+      setState(() => showErrorMessage = true);
+    }
   }
 
   void _resetPassword() async {
