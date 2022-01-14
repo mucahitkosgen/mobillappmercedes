@@ -2,6 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:mobilappmercedes/aboutpage/about_page.dart';
 import 'package:mobilappmercedes/seconhandsale/secondhandsalescreen.dart';
 import 'package:mobilappmercedes/seconhandsale/secondhandsaleedit.dart';
 import 'package:mobilappmercedes/widgets/post_card.dart';
@@ -24,7 +25,7 @@ class _SecondHandSaleMainState extends State<SecondHandSaleMain> {
     SecondHandSaleScreen(),
     ProfileScreen2(),
     SecondHandSaleEdit(),
-    Scaffold(),
+    AboutPage(),
   ];
   int _currentIndex = 0;
 

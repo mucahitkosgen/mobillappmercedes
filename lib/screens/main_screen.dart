@@ -2,6 +2,7 @@
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:mobilappmercedes/aboutpage/about_page.dart';
 import 'package:mobilappmercedes/event_editing.dart';
 import 'package:mobilappmercedes/screens/feed_screen.dart';
 import 'package:mobilappmercedes/screens/profile_screen.dart';
@@ -24,7 +25,7 @@ class _MainScreenState extends State<MainScreen> {
     FeedScreen(),
     ProfileScreen2(),
     Event_Editing(),
-    Scaffold(),
+    AboutPage(),
   ];
   int _currentIndex = 0;
 

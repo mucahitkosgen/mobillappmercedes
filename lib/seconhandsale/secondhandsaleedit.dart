@@ -241,11 +241,11 @@ class SecondHandSaleEditState extends State<SecondHandSaleEdit> {
                 borderRadius: BorderRadius.all(Radius.circular(18.0))),
             // title: Text('Select Choose', style: TextStyle(color: Colors.blue)),
             children: <Widget>[
-              SimpleDialogOption(
+              /*SimpleDialogOption(
                 child: Text('Photo with Camera',
                     style: TextStyle(color: Colors.grey[900])),
                 onPressed: handleTakePhoto,
-              ),
+              ),*/
               SimpleDialogOption(
                 child: Text('Image from Gallery',
                     style: TextStyle(color: Colors.grey[900])),

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:mobilappmercedes/aboutpage/about_page.dart';
 import 'package:mobilappmercedes/dashboard/screens/screens.dart';
 import 'package:mobilappmercedes/dashboard/screens/home_screen.dart';
 import 'package:mobilappmercedes/edit_profile.dart';
@@ -14,7 +15,7 @@ class _BottomNavScreenState extends State<BottomNavScreen> {
   final List _screens = [
     HomeScreen(),
     ProfileScreen2(),
-    Scaffold(),
+    AboutPage(),
   ];
   int _currentIndex = 0;
 
