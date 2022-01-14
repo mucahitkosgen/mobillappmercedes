@@ -6,7 +6,6 @@ import 'package:mobilappmercedes/event_editing.dart';
 import 'package:mobilappmercedes/screens/feed_screen.dart';
 import 'package:mobilappmercedes/screens/profile_screen.dart';
 import 'package:mobilappmercedes/screens/profile_screen2.dart';
-import 'package:mobilappmercedes/screens/search_screen.dart';
 import 'package:mobilappmercedes/utils/text_utils.dart';
 import 'package:mobilappmercedes/dashboard/screens/screens.dart';
 import 'package:mobilappmercedes/dashboard/screens/home_screen.dart';

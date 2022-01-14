@@ -2,14 +2,11 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:mobilappmercedes/seconhandsale/secondhandsaleedit.dart';
 import 'package:mobilappmercedes/seconhandsale/secondhandsalescreen.dart';
-import 'package:mobilappmercedes/seconhandsale/secondhandsalewidget.dart';
 import 'package:mobilappmercedes/widgets/post_card.dart';
 import 'package:mobilappmercedes/screens/feed_screen.dart';
 import 'package:mobilappmercedes/screens/profile_screen.dart';
 import 'package:mobilappmercedes/screens/profile_screen2.dart';
-import 'package:mobilappmercedes/screens/search_screen.dart';
 import 'package:mobilappmercedes/utils/text_utils.dart';
 import 'package:mobilappmercedes/dashboard/screens/screens.dart';
 
