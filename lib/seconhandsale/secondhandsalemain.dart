@@ -3,6 +3,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:mobilappmercedes/seconhandsale/secondhandsalescreen.dart';
+import 'package:mobilappmercedes/seconhandsale/secondhandsaleedit.dart';
 import 'package:mobilappmercedes/widgets/post_card.dart';
 import 'package:mobilappmercedes/screens/feed_screen.dart';
 import 'package:mobilappmercedes/screens/profile_screen.dart';
