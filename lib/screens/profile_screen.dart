@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:mobilappmercedes/aboutpage/about_page.dart';
 import 'package:mobilappmercedes/dashboard/screens/screens.dart';
 import 'package:mobilappmercedes/edit_profile.dart';
 import 'package:mobilappmercedes/utils/text_utils.dart';
@@ -46,7 +47,7 @@ class _ProfileScreenState extends State<ProfileScreen>
       setState(() {});
     } catch (e) {
       debugPrint(e.toString());
-      print("****Burada hata var");
+      print("**Burada hata var");
     }
     setState(() {
       isLoading = false;
@@ -57,20 +58,32 @@ class _ProfileScreenState extends State<ProfileScreen>
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        leading: IconButton(
-          icon: const Icon(
-            Icons.arrow_back,
-            color: Colors.white,
+          leading: IconButton(
+            icon: const Icon(
+              Icons.arrow_back,
+              color: Colors.white,
+            ),
+            onPressed: () {
+              Navigator.push(context, MaterialPageRoute(builder: (context) {
+                return BottomNavScreen();
+              }));
+            },
           ),
-          onPressed: () {
-            Navigator.push(context, MaterialPageRoute(builder: (context) {
-              return BottomNavScreen();
-            }));
-          },
-        ),
-        title: Text("Profil"),
-        backgroundColor: Colors.black,
-      ),
+          title: Text("Profil"),
+          backgroundColor: Colors.black,
+          actions: [
+            Padding(
+              padding: EdgeInsets.only(right: 20.0, bottom: 10),
+              child: GestureDetector(
+                onTap: () {
+                  Navigator.push(context, MaterialPageRoute(builder: (context) {
+                    return AboutPage();
+                  }));
+                },
+                child: Icon(Icons.info_outline_rounded),
+              ),
+            )
+          ]),
       backgroundColor: Colors.black,
       body: SingleChildScrollView(
         controller: scrollController,

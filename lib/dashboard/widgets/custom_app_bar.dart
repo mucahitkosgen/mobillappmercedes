@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:mobilappmercedes/aboutpage/about_page.dart';
 import 'package:mobilappmercedes/config/palette.dart';
 import 'package:mobilappmercedes/config/palette.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -21,15 +22,26 @@ class CustomAppBar extends StatelessWidget with PreferredSizeWidget {
     }
 
     return AppBar(
-      backgroundColor: Palette.bprimaryColor,
-      elevation: 0.0,
-      leading: IconButton(
-        icon: const Icon(Icons.power_settings_new),
-        iconSize: 28.0,
-        onPressed: _cikisYap,
-      ),
-      actions: <Widget>[],
-    );
+        backgroundColor: Palette.bprimaryColor,
+        elevation: 0.0,
+        leading: IconButton(
+          icon: const Icon(Icons.power_settings_new),
+          iconSize: 28.0,
+          onPressed: _cikisYap,
+        ),
+        actions: [
+          Padding(
+            padding: EdgeInsets.only(right: 20.0),
+            child: GestureDetector(
+              onTap: () {
+                Navigator.push(context, MaterialPageRoute(builder: (context) {
+                  return AboutPage();
+                }));
+              },
+              child: Icon(Icons.info_outline_rounded),
+            ),
+          )
+        ]);
   }
 
   @override

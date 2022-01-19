@@ -8,6 +8,7 @@ import 'package:image_picker/image_picker.dart';
 import 'package:firebase_storage/firebase_storage.dart'; // For File Upload To Firestore
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart'; // For Image Picker
+import 'package:mobilappmercedes/aboutpage/about_page.dart';
 import 'package:mobilappmercedes/dashboard/screens/bottom_nav_screen.dart';
 import 'package:mobilappmercedes/screens/feed_screen.dart';
 import 'package:mobilappmercedes/screens/profile_screen.dart';
@@ -71,7 +72,7 @@ class _editProfileState extends State<editProfile> {
       setState(() {});
     } catch (e) {
       debugPrint(e.toString());
-      print("****Burada hata var");
+      print("**Burada hata var");
     }
     setState(() {
       isLoading = false;
@@ -167,20 +168,35 @@ class _editProfileState extends State<editProfile> {
         : Scaffold(
             backgroundColor: Colors.black,
             appBar: AppBar(
-              // title: const Text("Edit Profile"),
-              backgroundColor: Colors.transparent,
-              leading: IconButton(
-                icon: const Icon(
-                  Icons.arrow_back,
-                  color: Colors.white,
+
+                // title: const Text("Edit Profile"),
+                backgroundColor: Colors.transparent,
+                leading: IconButton(
+                  icon: const Icon(
+                    Icons.arrow_back,
+                    color: Colors.white,
+                  ),
+                  onPressed: () {
+                    Navigator.push(context,
+                        MaterialPageRoute(builder: (context) {
+                      return ProfileScreen2();
+                    }));
+                  },
                 ),
-                onPressed: () {
-                  Navigator.push(context, MaterialPageRoute(builder: (context) {
-                    return ProfileScreen2();
-                  }));
-                },
-              ),
-            ),
+                actions: [
+                  Padding(
+                    padding: EdgeInsets.only(right: 20.0),
+                    child: GestureDetector(
+                      onTap: () {
+                        Navigator.push(context,
+                            MaterialPageRoute(builder: (context) {
+                          return AboutPage();
+                        }));
+                      },
+                      child: Icon(Icons.info_outline_rounded),
+                    ),
+                  )
+                ]),
             body: Container(
               padding: EdgeInsets.only(left: 15, top: 20, right: 15),
               child: GestureDetector(
@@ -381,7 +397,7 @@ class _editProfileState extends State<editProfile> {
 
       debugPrint(_yeniUser.toString());
     } catch (e) {
-      debugPrint("**HATA VAR**");
+      debugPrint("*HATA VAR*");
       debugPrint(e.toString());
     }
   }

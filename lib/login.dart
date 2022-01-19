@@ -10,6 +10,7 @@ import 'package:mobilappmercedes/edit_profile.dart';
 import 'package:mobilappmercedes/dashboard/screens/screens.dart';
 //>>>>>>> 8e7617bf88fa3eb78c9a781e1d9fed6cfeb3f19a
 
+import 'aboutpage/about_page.dart';
 import 'components/rounded_button.dart';
 
 FirebaseAuth _auth = FirebaseAuth.instance;
@@ -48,6 +49,24 @@ class _LoginIslemleriState extends State<LoginIslemleri> {
     Size size = MediaQuery.of(context).size;
 
     return Scaffold(
+      appBar: AppBar(
+          iconTheme: IconThemeData(color: Color(0xFF2979FF)),
+          automaticallyImplyLeading: true,
+          elevation: 4,
+          backgroundColor: Colors.black,
+          actions: [
+            Padding(
+              padding: EdgeInsets.only(right: 20.0),
+              child: GestureDetector(
+                onTap: () {
+                  Navigator.push(context, MaterialPageRoute(builder: (context) {
+                    return AboutPage();
+                  }));
+                },
+                child: Icon(Icons.info_outline_rounded),
+              ),
+            )
+          ]),
       backgroundColor: Colors.black,
       body: Center(
         child: Column(
@@ -172,7 +191,7 @@ class _LoginIslemleriState extends State<LoginIslemleri> {
                       debugPrint("Oturum açmış kullanıcı zaten var");
                     }
                   } catch (e) {
-                    debugPrint("*******HATA VAR***");
+                    debugPrint("**HATA VAR**");
                     debugPrint(e.toString());
                   }
                 }),
@@ -247,7 +266,7 @@ class _LoginIslemleriState extends State<LoginIslemleri> {
               ],
             );
           });
-      debugPrint("*******HATA VAR***");
+      debugPrint("**HATA VAR**");
       debugPrint(e.toString());
     }
   }

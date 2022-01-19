@@ -4,6 +4,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:mobilappmercedes/aboutpage/about_page.dart';
 import 'package:mobilappmercedes/dashboard/screens/bottom_nav_screen.dart';
 import 'package:mobilappmercedes/screens/profilpostflow.dart';
 import 'package:mobilappmercedes/widgets/post_card.dart';
@@ -59,7 +60,7 @@ class _ProfileScreen2 extends State<ProfileScreen2> {
       setState(() {});
     } catch (e) {
       debugPrint(e.toString());
-      print("****Burada hata var");
+      print("**Burada hata var");
     }
     setState(() {
       isLoading = false;
@@ -72,135 +73,158 @@ class _ProfileScreen2 extends State<ProfileScreen2> {
         ? const Center(
             child: CircularProgressIndicator(),
           )
-        : Scaffold(
-            appBar: AppBar(
-              leading: IconButton(
-                icon: const Icon(
-                  Icons.arrow_back,
-                  color: Colors.white,
+        : SafeArea(
+            child: Scaffold(
+              appBar: AppBar(
+                toolbarHeight: 70,
+                leading: IconButton(
+                  icon: const Icon(
+                    Icons.arrow_back,
+                    color: Colors.white,
+                  ),
+                  onPressed: () {
+                    Navigator.push(context,
+                        MaterialPageRoute(builder: (context) {
+                      return BottomNavScreen();
+                    }));
+                  },
                 ),
-                onPressed: () {
-                  Navigator.push(context, MaterialPageRoute(builder: (context) {
-                    return BottomNavScreen();
-                  }));
-                },
+                title: Text("Profile"),
+                backgroundColor: Colors.black,
+
+                /* actions:[
+                Padding(padding: EdgeInsets.only(right: 20.0, top: 20),
+                child: GestureDetector(
+                  onTap: () {
+                    Navigator.push(context,
+                    MaterialPageRoute(builder: (context) {
+                      return AboutPage();
+                    }));
+
+                  },
+                  child: Icon(
+                    Icons.info_outline_rounded
+                  ),
+                ),)
+              ] */
               ),
-              title: Text("Profil"),
               backgroundColor: Colors.black,
-            ),
-            backgroundColor: Colors.black,
-            body: SingleChildScrollView(
-              //controller: scrollController,
-              child: SizedBox(
-                width: MediaQuery.of(context).size.width,
-                height: MediaQuery.of(context).size.height,
-                child: Column(
-                  children: [
-                    Container(
-                      margin:
-                          const EdgeInsets.only(left: 10, right: 10, top: 10),
-                      child: Row(
-                        children: [
-                          Expanded(
-                            flex: 1,
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                CircleAvatar(
-                                    radius: 43,
-                                    backgroundImage: MemoryImage(
-                                            base64.decode(userData['Photo']))
-                                        as ImageProvider),
-                                const SizedBox(
-                                  width: 50,
-                                ),
-                                Container(
-                                  child: RichText(
-                                    text: TextSpan(
-                                        style: const TextStyle(
-                                            color: Colors.white),
-                                        children: [
-                                          TextSpan(
-                                              text: userData['KullaniciAdi'],
-                                              style: TextStyle(
-                                                fontWeight: FontWeight.bold,
-                                                fontSize: 14,
-                                              ))
-                                        ]),
+              body: SingleChildScrollView(
+                //controller: scrollController,
+                child: SizedBox(
+                  width: MediaQuery.of(context).size.width,
+                  height: MediaQuery.of(context).size.height,
+                  child: Column(
+                    children: [
+                      Container(
+                        margin:
+                            const EdgeInsets.only(left: 10, right: 10, top: 10),
+                        child: Row(
+                          children: [
+                            Expanded(
+                              flex: 1,
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  CircleAvatar(
+                                      radius: 43,
+                                      backgroundImage: MemoryImage(
+                                              base64.decode(userData['Photo']))
+                                          as ImageProvider),
+                                  const SizedBox(
+                                    width: 50,
                                   ),
-                                ),
-                              ],
+                                  Container(
+                                    child: RichText(
+                                      text: TextSpan(
+                                          style: const TextStyle(
+                                              color: Colors.white),
+                                          children: [
+                                            TextSpan(
+                                                text: userData['KullaniciAdi'],
+                                                style: TextStyle(
+                                                  fontWeight: FontWeight.bold,
+                                                  fontSize: 14,
+                                                ))
+                                          ]),
+                                    ),
+                                  ),
+                                ],
+                              ),
                             ),
-                          ),
-                          Expanded(
-                            flex: 2,
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceAround,
-                            ),
-                          )
-                        ],
+                            Expanded(
+                              flex: 2,
+                              child: Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceAround,
+                              ),
+                            )
+                          ],
+                        ),
                       ),
-                    ),
-                    Container(
-                      margin:
-                          const EdgeInsets.only(left: 10, right: 10, top: 30),
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          RaisedButton(
-                            child: Text("Edit Profile"),
-                            onPressed: () {
-                              Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) => editProfile()),
-                              );
-                            },
-                          ),
-                        ],
-                      ),
-                    ),
-                    StreamBuilder(
-                      stream: FirebaseFirestore.instance
-                          .collection('users')
-                          .doc(firebaseUser!.email)
-                          .collection('posts')
-                          .snapshots(),
-                      builder: (context,
-                          AsyncSnapshot<QuerySnapshot<Map<String, dynamic>>>
-                              snapshot) {
-                        if (snapshot.connectionState ==
-                            ConnectionState.waiting) {
-                          return const Center(
-                            child: CircularProgressIndicator(),
-                          );
-                        }
-                        return InkWell(
-                            onDoubleTap: () {
-                              Navigator.push(
+                      Container(
+                        margin:
+                            const EdgeInsets.only(left: 10, right: 10, top: 30),
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            RaisedButton(
+                              child: Text("Edit Profile"),
+                              onPressed: () {
+                                Navigator.push(
                                   context,
                                   MaterialPageRoute(
-                                      builder: (context) => ProfilePostFlow()));
-                            },
-                            child: Container(
-                                height: 600,
-                                width: 600,
-                                child: GridView.builder(
-                                  itemCount: snapshot.data!.docs.length,
-                                  itemBuilder: (context, index) => ProfileCard(
-                                    snap: snapshot.data!.docs[index].data(),
-                                  ),
-                                  gridDelegate:
-                                      const SliverGridDelegateWithFixedCrossAxisCount(
-                                    crossAxisCount: 3,
-                                    crossAxisSpacing: 5,
-                                    mainAxisSpacing: 1.5,
-                                    childAspectRatio: 1,
-                                  ),
-                                )));
-                      },
-                    ),
-                  ],
+                                      builder: (context) => editProfile()),
+                                );
+                              },
+                            ),
+                          ],
+                        ),
+                      ),
+                      StreamBuilder(
+                        stream: FirebaseFirestore.instance
+                            .collection('users')
+                            .doc(firebaseUser!.email)
+                            .collection('posts')
+                            .snapshots(),
+                        builder: (context,
+                            AsyncSnapshot<QuerySnapshot<Map<String, dynamic>>>
+                                snapshot) {
+                          if (snapshot.connectionState ==
+                              ConnectionState.waiting) {
+                            return const Center(
+                              child: CircularProgressIndicator(),
+                            );
+                          }
+                          return InkWell(
+                              onDoubleTap: () {
+                                Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) =>
+                                            ProfilePostFlow()));
+                              },
+                              child: Container(
+                                  height: 600,
+                                  width: 600,
+                                  child: GridView.builder(
+                                    itemCount: snapshot.data!.docs.length,
+                                    itemBuilder: (context, index) =>
+                                        ProfileCard(
+                                      snap: snapshot.data!.docs[index].data(),
+                                    ),
+                                    gridDelegate:
+                                        const SliverGridDelegateWithFixedCrossAxisCount(
+                                      crossAxisCount: 3,
+                                      crossAxisSpacing: 5,
+                                      mainAxisSpacing: 1.5,
+                                      childAspectRatio: 1,
+                                    ),
+                                  )));
+                        },
+                      ),
+                    ],
+                  ),
                 ),
               ),
             ),

@@ -78,7 +78,7 @@ class Event_EditingState extends State<Event_Editing> {
     if (currentUser != null) {
       db.collection('users').doc(currentUser.uid).snapshots().map((snapshot) {
         String user = snapshot.data()!["KullaniciAdi"];
-        print('*************' + user);
+        print('*****' + user);
       });
     }*/
     var currentUser = FirebaseAuth.instance.currentUser;
@@ -103,7 +103,7 @@ class Event_EditingState extends State<Event_Editing> {
         });
 
     user = userEmail;
-    print('*************' + user);
+    print('*****' + user);
     //  }
 
     return Scaffold(
@@ -502,7 +502,7 @@ class Event_EditingState extends State<Event_Editing> {
     }
   }
 
-// *******************************************************************************************************************
+// ***************************************
   Widget buildTo() => buildHeader(
         header: 'To',
         child: Row(
@@ -627,7 +627,7 @@ class Event_EditingState extends State<Event_Editing> {
           .where('email', arrayContainsAny: [userEmail])
           .snapshots()
           .toString();
-      print('*************' + user);
+      print('*****' + user);
     }*/
 
     /*List<Map<String,dynamic>>=_db.collection('users').where('email', arrayContainsAny: [userEmail]).snapshots().map((snapshot) => snapshot.docs
@@ -637,7 +637,7 @@ class Event_EditingState extends State<Event_Editing> {
 
     /* db.collection('users').doc(currentUser.uid).snapshots().map((snapshot) {
       String user = snapshot.data()!["KullaniciAdi"];
-      print('*************' + user);
+      print('*****' + user);
     });
     }*/
     return a;
@@ -686,4 +686,4 @@ class Event_EditingState extends State<Event_Editing> {
     }
     if (isChecked == true) {
       FirebaseStorage.instance.collection("limitedparticiption").add({});
-    } else {}*/ 
+    } else {}*/

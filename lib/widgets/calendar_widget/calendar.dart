@@ -4,6 +4,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:intl/intl.dart';
+import 'package:mobilappmercedes/aboutpage/about_page.dart';
 import 'package:mobilappmercedes/event_editing.dart';
 import 'package:mobilappmercedes/model/event_data_source.dart';
 import 'package:mobilappmercedes/model/meeting.dart';
@@ -42,11 +43,23 @@ class Calendar extends StatelessWidget {
     return Scaffold(
       backgroundColor: Colors.black,
       appBar: AppBar(
-        title: const Text(
-          "Calendar",
-        ),
-        backgroundColor: Colors.black,
-      ),
+          title: const Text(
+            "Calendar",
+          ),
+          backgroundColor: Colors.black,
+          actions: [
+            Padding(
+              padding: EdgeInsets.only(right: 20.0),
+              child: GestureDetector(
+                onTap: () {
+                  Navigator.push(context, MaterialPageRoute(builder: (context) {
+                    return AboutPage();
+                  }));
+                },
+                child: Icon(Icons.info_outline_rounded),
+              ),
+            )
+          ]),
       body: SfCalendar(
         view: CalendarView.week,
         monthViewSettings: MonthViewSettings(showAgenda: true),

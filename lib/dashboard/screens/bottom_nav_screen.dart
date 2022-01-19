@@ -5,6 +5,7 @@ import 'package:mobilappmercedes/dashboard/screens/home_screen.dart';
 import 'package:mobilappmercedes/edit_profile.dart';
 import 'package:mobilappmercedes/screens/profile_screen.dart';
 import 'package:mobilappmercedes/screens/profile_screen2.dart';
+import '../../event_editing.dart';
 
 class BottomNavScreen extends StatefulWidget {
   @override
