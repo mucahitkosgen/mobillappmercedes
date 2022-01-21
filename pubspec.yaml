@@ -54,7 +54,7 @@ dependencies:
   flutter_markdown: ^0.6.9
   animations: ^2.0.2
   local_image_provider: ^4.0.1
-
+  like_button: ^2.0.4
 
 dev_dependencies:
   flutter_test:

@@ -41,7 +41,15 @@ class _SecondHandSaleMainState extends State<SecondHandSaleMain> {
 
   Widget bottomBarWidget() {
     return Scaffold(
-      body: _screens[_currentIndex],
+      backgroundColor: Colors.black,
+      body: Column(children: [
+        const SizedBox(
+          height: 30,
+        ),
+        Expanded(
+          child: _screens[_currentIndex],
+        )
+      ]),
       bottomNavigationBar: BottomNavigationBar(
         currentIndex: _currentIndex,
         onTap: (index) => setState(() => _currentIndex = index),

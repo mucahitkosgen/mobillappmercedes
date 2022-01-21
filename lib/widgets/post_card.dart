@@ -1,12 +1,15 @@
 import 'dart:convert';
-
+import 'package:like_button/like_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/basic.dart';
 import 'package:intl/intl.dart';
 
 class PostCard extends StatelessWidget {
   final snap;
-  const PostCard({Key? key, required this.snap}) : super(key: key);
+  const PostCard({
+    Key? key,
+    required this.snap,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -63,13 +66,16 @@ class PostCard extends StatelessWidget {
             children: <Widget>[
               Row(
                 children: <Widget>[
-                  IconButton(
-                    icon: Icon(
-                      Icons.favorite_outline,
-                      color: Colors.white,
-                    ),
-                    iconSize: 30.0,
-                    onPressed: () => print('Like post'),
+                  LikeButton(
+                    circleColor: CircleColor(
+                        start: Color(0xFFF44336), end: Color(0xFFF44336)),
+                    likeBuilder: (bool isLiked) {
+                      return Icon(
+                        Icons.favorite,
+                        size: 30,
+                        color: isLiked ? Colors.red : Colors.white,
+                      );
+                    },
                   ),
                 ],
               ),

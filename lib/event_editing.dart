@@ -106,33 +106,34 @@ class Event_EditingState extends State<Event_Editing> {
     print('*****' + user);
     //  }
 
-    return Scaffold(
-      backgroundColor: Colors.black,
-      appBar: AppBar(
-          backgroundColor: Colors.black,
-          leading: const CloseButton(),
-          actions: buildEditingActions(),
-          title: const Text("Mercedes Media",
-              style: TextStyle(color: Colors.blue))),
-      body: SingleChildScrollView(
-        padding: EdgeInsets.all(12),
-        child: Form(
-          key: _formKey,
-          child: Column(
-            mainAxisSize: MainAxisSize.min,
-            children: <Widget>[
-              buildTitle(),
-              const SizedBox(height: 30),
-              buildDateTimePickers(),
-              const SizedBox(height: 30),
-              buildDescription(),
-              const SizedBox(height: 30),
-              buildLP(),
-              const SizedBox(height: 30),
-              buildSelectImage(),
-              const SizedBox(height: 30),
+    return SafeArea(
+      child: Scaffold(
+        backgroundColor: Colors.black,
+        appBar: AppBar(
+            backgroundColor: Colors.black,
+            leading: const CloseButton(),
+            actions: buildEditingActions(),
+            title: const Text("Mercedes Media",
+                style: TextStyle(color: Colors.blue))),
+        body: SingleChildScrollView(
+          padding: EdgeInsets.all(12),
+          child: Form(
+            key: _formKey,
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: <Widget>[
+                buildTitle(),
+                const SizedBox(height: 30),
+                buildDateTimePickers(),
+                const SizedBox(height: 30),
+                buildDescription(),
+                const SizedBox(height: 30),
+                buildLP(),
+                const SizedBox(height: 30),
+                buildSelectImage(),
+                const SizedBox(height: 30),
 
-              /*Column(
+                /*Column(
                 children: [
                   SizedBox(
                     width: 15,
@@ -154,7 +155,8 @@ class Event_EditingState extends State<Event_Editing> {
                   ),
                 ],
               ),*/
-            ],
+              ],
+            ),
           ),
         ),
       ),
@@ -456,7 +458,17 @@ class Event_EditingState extends State<Event_Editing> {
           DateTime(date.year, date.month, date.day, toDate.hour, toDate.minute);
     }
     //EventProvider().changeFrom(date);
-    setState(() => fromDate = date);
+    //setState(() => fromDate = date);
+    setState(() {
+      if (toDate.day == date.day && toDate.hour > date.hour) {
+        fromDate = DateTime(
+                date.year, date.month, date.day, toDate.hour, toDate.minute)
+            .add(Duration(hours: 2));
+        //fromDate = date.add(Duration(hours: 3));
+      } else {
+        fromDate = date;
+      }
+    });
   }
 
   Future pickToDateTime({required bool pickDate}) async {
@@ -469,7 +481,7 @@ class Event_EditingState extends State<Event_Editing> {
           DateTime(date.year, date.month, date.day, toDate.hour, toDate.minute);
     }
     // EventProvider().changeTo(date);
-    setState(() => toDate = date);
+    setState(() => toDate = date); //fromDate.add(Duration(hours: 3));
   }
 
   Future<DateTime?> pickDateTime(
@@ -478,6 +490,7 @@ class Event_EditingState extends State<Event_Editing> {
     DateTime? firstDate,
   }) async {
     if (pickDate) {
+      //gun
       final date = await showDatePicker(
         context: context,
         initialDate: initialDate,
@@ -486,15 +499,18 @@ class Event_EditingState extends State<Event_Editing> {
       );
 
       if (date == null) return null;
+      if (date.isBefore(initialDate)) return null;
       final time =
           Duration(hours: initialDate.hour, minutes: initialDate.minute);
       return date.add(time);
     } else {
+      //saat
       final timeOfDay = await showTimePicker(
         context: context,
         initialTime: TimeOfDay.fromDateTime(initialDate),
       );
       if (timeOfDay == null) return null;
+
       final date =
           DateTime(initialDate.year, initialDate.month, initialDate.day);
       final time = Duration(hours: timeOfDay.hour, minutes: timeOfDay.minute);
@@ -598,7 +614,7 @@ class Event_EditingState extends State<Event_Editing> {
         //numberOfPeople: 20, //int.parse(numberOfPeopleController.text),
         eventId: '',
       );
-      eventProvider.deleteEvent(event);
+
       // eventProvider.deleteEvent(event);
     }
   }

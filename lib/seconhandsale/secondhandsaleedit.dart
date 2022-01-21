@@ -110,34 +110,35 @@ class SecondHandSaleEditState extends State<SecondHandSaleEdit> {
     print('*************' + user);
     //  }
 
-    return Scaffold(
-      backgroundColor: Colors.black,
-      appBar: AppBar(
-          backgroundColor: Colors.black,
-          leading: const CloseButton(),
-          actions: buildEditingActions(),
-          title: const Text("Mercedes Media",
-              style: TextStyle(color: Colors.blue))),
-      body: SingleChildScrollView(
-        padding: EdgeInsets.all(12),
-        child: Form(
-          key: _formKey,
-          child: Column(
-            mainAxisSize: MainAxisSize.min,
-            children: <Widget>[
-              const SizedBox(height: 60),
-              buildTitle(),
-              const SizedBox(height: 30),
-              // buildDateTimePickers(),
-              const SizedBox(height: 30),
-              buildDescription(),
-              const SizedBox(height: 30),
-              // buildLP(),
-              const SizedBox(height: 30),
-              buildSelectImage(),
-              const SizedBox(height: 30),
+    return SafeArea(
+      child: Scaffold(
+        backgroundColor: Colors.black,
+        appBar: AppBar(
+            backgroundColor: Colors.black,
+            leading: const CloseButton(),
+            actions: buildEditingActions(),
+            title: const Text("Mercedes Media",
+                style: TextStyle(color: Colors.blue))),
+        body: SingleChildScrollView(
+          padding: EdgeInsets.all(12),
+          child: Form(
+            key: _formKey,
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: <Widget>[
+                const SizedBox(height: 60),
+                buildTitle(),
+                const SizedBox(height: 30),
+                // buildDateTimePickers(),
+                const SizedBox(height: 30),
+                buildDescription(),
+                const SizedBox(height: 30),
+                // buildLP(),
+                const SizedBox(height: 30),
+                buildSelectImage(),
+                const SizedBox(height: 30),
 
-              /*Column(
+                /*Column(
                 children: [
                   SizedBox(
                     width: 15,
@@ -159,7 +160,8 @@ class SecondHandSaleEditState extends State<SecondHandSaleEdit> {
                   ),
                 ],
               ),*/
-            ],
+              ],
+            ),
           ),
         ),
       ),

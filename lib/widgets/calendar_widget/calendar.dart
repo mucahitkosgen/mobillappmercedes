@@ -61,7 +61,7 @@ class Calendar extends StatelessWidget {
             )
           ]),
       body: SfCalendar(
-        view: CalendarView.week,
+        view: CalendarView.month,
         monthViewSettings: MonthViewSettings(showAgenda: true),
         //dataSource: EventDaTaSource(events),
         todayHighlightColor: Colors.white,

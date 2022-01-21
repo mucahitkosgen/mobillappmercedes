@@ -40,46 +40,56 @@ class _MainScreenState extends State<MainScreen> {
   }
 
   Widget bottomBarWidget() {
-    return Scaffold(
-      body: _screens[_currentIndex],
-      bottomNavigationBar: BottomNavigationBar(
-        currentIndex: _currentIndex,
-        onTap: (index) => setState(() => _currentIndex = index),
-        type: BottomNavigationBarType.fixed,
+    return SafeArea(
+      child: Scaffold(
         backgroundColor: Colors.black,
-        showSelectedLabels: false,
-        showUnselectedLabels: false,
-        selectedItemColor: Colors.white,
-        unselectedItemColor: Colors.grey,
-        elevation: 0.0,
-        items: [
-          Icons.home,
-          Icons.supervisor_account_rounded,
-          Icons.add_box,
-          Icons.info
-        ]
-            .asMap()
-            .map((key, value) => MapEntry(
-                  key,
-                  BottomNavigationBarItem(
-                    title: Text(''),
-                    icon: Container(
-                      padding: const EdgeInsets.symmetric(
-                        vertical: 6.0,
-                        horizontal: 16.0,
+        body: Column(children: [
+          const SizedBox(
+            height: 30,
+          ),
+          Expanded(
+            child: _screens[_currentIndex],
+          )
+        ]),
+        bottomNavigationBar: BottomNavigationBar(
+          currentIndex: _currentIndex,
+          onTap: (index) => setState(() => _currentIndex = index),
+          type: BottomNavigationBarType.fixed,
+          backgroundColor: Colors.black,
+          showSelectedLabels: false,
+          showUnselectedLabels: false,
+          selectedItemColor: Colors.white,
+          unselectedItemColor: Colors.grey,
+          elevation: 0.0,
+          items: [
+            Icons.home,
+            Icons.supervisor_account_rounded,
+            Icons.add_box,
+            Icons.info
+          ]
+              .asMap()
+              .map((key, value) => MapEntry(
+                    key,
+                    BottomNavigationBarItem(
+                      title: Text(''),
+                      icon: Container(
+                        padding: const EdgeInsets.symmetric(
+                          vertical: 6.0,
+                          horizontal: 16.0,
+                        ),
+                        decoration: BoxDecoration(
+                          color: _currentIndex == key
+                              ? Colors.blue[600]
+                              : Colors.transparent,
+                          borderRadius: BorderRadius.circular(20.0),
+                        ),
+                        child: Icon(value),
                       ),
-                      decoration: BoxDecoration(
-                        color: _currentIndex == key
-                            ? Colors.blue[600]
-                            : Colors.transparent,
-                        borderRadius: BorderRadius.circular(20.0),
-                      ),
-                      child: Icon(value),
                     ),
-                  ),
-                ))
-            .values
-            .toList(),
+                  ))
+              .values
+              .toList(),
+        ),
       ),
     );
   }
