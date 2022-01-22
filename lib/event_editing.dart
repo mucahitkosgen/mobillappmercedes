@@ -53,9 +53,10 @@ class Event_EditingState extends State<Event_Editing> {
   final FirebaseAuth auth = FirebaseAuth.instance;
   late String user;
   late String userimage;
+  late int numberofpeople = 30;
   late DocumentSnapshot snapshot;
   bool isChecked = false;
-  final numberOfPeopleController = TextEditingController();
+  //final numberOfPeopleController = TextEditingController();
   final pictureController = TextEditingController();
 
   FirebaseFirestore _db = FirebaseFirestore.instance;
@@ -382,13 +383,6 @@ class Event_EditingState extends State<Event_Editing> {
 
   Widget buildLP() => Row(
         children: [
-          // const Expanded(
-          //   flex: 2,
-          //   child: Text(
-          //     '',
-          //     style: TextStyle(fontSize: 17.0, color: Colors.white),
-          //   ),
-          // ),
           Expanded(
             child: CheckboxListTile(
               checkColor: Colors.white,
@@ -440,7 +434,7 @@ class Event_EditingState extends State<Event_Editing> {
               validator: (nop) => nop != null && nop.isEmpty
                   ? 'Number of People cannot be empty'
                   : null,
-              controller: numberOfPeopleController,
+              //controller: numberOfPeopleController,
               decoration: const InputDecoration(
                 labelText: "Give me a Number",
                 labelStyle: TextStyle(color: Colors.grey),
@@ -471,12 +465,16 @@ class Event_EditingState extends State<Event_Editing> {
                     onFieldSubmitted:
                     (_) => saveForm();
                     validator:
-                    (numberOfPeople) =>
-                        numberOfPeople != null && numberOfPeople.isEmpty
+                    (numberofpeople) {
+                      if (numberofpeople == null) {
+                        numberofpeople = 30;
+                      }
+                    };
+                    /*numberOfPeople != null && numberOfPeople.isEmpty
                             ? 'numberOfPeople cannot be empty'
-                            : null;
+                            : null;*/
                     controller:
-                    numberOfPeopleController;
+                    // numberOfPeopleController;
                     Navigator.pop(context);
                   });
                 },
@@ -645,7 +643,7 @@ class Event_EditingState extends State<Event_Editing> {
   Future saveForm() async {
     if (_formKey.currentState!.validate()) {
       final eventProvider = Provider.of<EventProvider>(context, listen: false);
-      int val = int.parse(numberOfPeopleController.text.trim());
+      // int val = int.parse(numberOfPeopleController.text.trim());
       int value= 0;
       eventProvider.changeTitle(titleController.text);
       eventProvider.changeDescription(descriptionController.text);
@@ -658,7 +656,7 @@ class Event_EditingState extends State<Event_Editing> {
       eventProvider.changedate(DateTime.now());
       eventProvider
           //.changeNumberOfPeople(int.parse(numberOfPeopleController.text));
-          .changeNumberOfPeople(val);
+          .changeNumberOfPeople(numberofpeople);
       eventProvider.changeParticipants(value);
       eventProvider.saveData();
 
@@ -675,7 +673,8 @@ class Event_EditingState extends State<Event_Editing> {
         user: user,
         userimage: userimage,
         date: DateTime.now(),
-        numberOfPeople: int.parse(numberOfPeopleController.text.trim()),
+        numberOfPeople: numberofpeople,
+        // int.parse(numberOfPeopleController.text.trim()),
         participants: 0,
         //numberOfPeople: 20, //int.parse(numberOfPeopleController.text),
         eventId: '',

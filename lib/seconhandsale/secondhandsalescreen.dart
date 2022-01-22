@@ -31,7 +31,11 @@ class SecondHandSaleScreen extends StatelessWidget {
       ),
       backgroundColor: Colors.black,
       body: StreamBuilder(
-        stream: FirebaseFirestore.instance.collection('salePost').snapshots(),
+        stream: FirebaseFirestore.instance
+            .collection('salePost')
+            .orderBy('date', descending: true)
+            .limitToLast(15)
+            .snapshots(),
         builder: (context,
             AsyncSnapshot<QuerySnapshot<Map<String, dynamic>>> snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting) {

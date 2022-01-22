@@ -30,7 +30,12 @@ class FeedScreen extends StatelessWidget {
         backgroundColor: Colors.black,
       ),
       body: StreamBuilder(
-        stream: FirebaseFirestore.instance.collection('Events').snapshots(),
+        stream: FirebaseFirestore.instance
+            .collection('Events')
+            .orderBy('date',descending: true)
+            .limitToLast(15)
+            
+            .snapshots(),
         builder: (context,
             AsyncSnapshot<QuerySnapshot<Map<String, dynamic>>> snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting) {
