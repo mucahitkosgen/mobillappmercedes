@@ -1,5 +1,4 @@
 import 'dart:convert';
-
 import 'dart:io';
 import 'package:image_picker/image_picker.dart';
 import 'dart:io';
@@ -10,8 +9,12 @@ import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:mobilappmercedes/config/styles.dart';
 import 'package:mobilappmercedes/provider/event_provider.dart';
+import 'package:mobilappmercedes/screens/feed_screen.dart';
+import 'package:mobilappmercedes/screens/main_screen.dart';
+import 'package:mobilappmercedes/screens/profile_screen2.dart';
 import 'package:provider/provider.dart';
 import 'package:mobilappmercedes/services/firestore_services.dart';
+import 'aboutpage/about_page.dart';
 import 'model/event.dart';
 import 'utils.dart';
 import 'components/rounded_button.dart';
@@ -31,6 +34,15 @@ class Event_Editing extends StatefulWidget {
 }
 
 class Event_EditingState extends State<Event_Editing> {
+  int index = 0;
+  final List _screens = [
+    Event_Editing(),
+    FeedScreen(),
+    ProfileScreen2(),
+    AboutPage(),
+  ];
+  int _currentIndex = 0;
+
   final _formKey = GlobalKey<FormState>();
   final titleController = TextEditingController();
   final descriptionController = TextEditingController();
@@ -158,6 +170,61 @@ class Event_EditingState extends State<Event_Editing> {
               ],
             ),
           ),
+        ),
+      ),
+    );
+  }
+
+  Widget bottomBarWidget() {
+    return SafeArea(
+      child: Scaffold(
+        backgroundColor: Colors.black,
+        body: Column(children: [
+          const SizedBox(
+            height: 30,
+          ),
+          Expanded(
+            child: _screens[_currentIndex],
+          )
+        ]),
+        bottomNavigationBar: BottomNavigationBar(
+          currentIndex: _currentIndex,
+          onTap: (index) => setState(() => _currentIndex = index),
+          type: BottomNavigationBarType.fixed,
+          backgroundColor: Colors.black,
+          showSelectedLabels: false,
+          showUnselectedLabels: false,
+          selectedItemColor: Colors.white,
+          unselectedItemColor: Colors.grey,
+          elevation: 0.0,
+          items: [
+            Icons.home,
+            Icons.supervisor_account_rounded,
+            Icons.add_box,
+            Icons.info
+          ]
+              .asMap()
+              .map((key, value) => MapEntry(
+                    key,
+                    BottomNavigationBarItem(
+                      title: Text(''),
+                      icon: Container(
+                        padding: const EdgeInsets.symmetric(
+                          vertical: 6.0,
+                          horizontal: 16.0,
+                        ),
+                        decoration: BoxDecoration(
+                          color: _currentIndex == key
+                              ? Colors.blue[600]
+                              : Colors.transparent,
+                          borderRadius: BorderRadius.circular(20.0),
+                        ),
+                        child: Icon(value),
+                      ),
+                    ),
+                  ))
+              .values
+              .toList(),
         ),
       ),
     );
@@ -597,7 +664,8 @@ class Event_EditingState extends State<Event_Editing> {
 
       eventProvider.saveData();
 
-      Navigator.of(context).pop();
+      Navigator.push(
+          context, MaterialPageRoute(builder: (context) => MainScreen()));
 
       final event = Event(
         title: titleController.text,

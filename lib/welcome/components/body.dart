@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:mobilappmercedes/Components/rounded_button.dart';
+import 'package:mobilappmercedes/aboutpage/about_page.dart';
 /*import 'package:flutter_auth/Screens/Login/login_screen.dart';
 import 'package:flutter_auth/Screens/Signup/signup_screen.dart';
 import 'package:flutter_auth/Screens/Welcome/components/background.dart';
@@ -28,6 +29,21 @@ class Body extends StatelessWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
+            
+                        Padding(
+                          
+                          padding: EdgeInsets.only(left: 300.0, bottom: 130),
+                          child: GestureDetector(
+                            onTap: () {
+                              Navigator.push(context,
+                                  MaterialPageRoute(builder: (context) {
+                                return AboutPage();
+                              }));
+                            },
+                            child: Icon(Icons.info_outline_rounded),
+                          ),
+                        ),
+                      
             Text(
               "",
               style: TextStyle(fontWeight: FontWeight.bold),

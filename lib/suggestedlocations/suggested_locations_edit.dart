@@ -11,8 +11,10 @@ import 'package:image_picker/image_picker.dart';
 import 'package:mobilappmercedes/config/styles.dart';
 import 'package:mobilappmercedes/dashboard/screens/bottom_nav_screen.dart';
 import 'package:mobilappmercedes/provider/event_provider.dart';
-import 'package:mobilappmercedes/seconhandsale/secondhandsalemain.dart';
 import 'package:mobilappmercedes/seconhandsale/secondhandsalescreen.dart';
+import 'package:mobilappmercedes/suggestedlocations/suggested_locations.dart';
+import 'package:mobilappmercedes/suggestedlocations/suggested_locations_main.dart';
+import 'package:mobilappmercedes/suggestedlocations/suggested_locations_post.dart';
 import 'package:provider/provider.dart';
 import 'package:mobilappmercedes/seconhandsale/salepost.dart';
 import 'package:mobilappmercedes/services/firestore_services.dart';
@@ -24,18 +26,18 @@ import 'package:uuid/uuid.dart';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 
-class SecondHandSaleEdit extends StatefulWidget {
-  final SecondHandSaleEdit? salePost;
-  const SecondHandSaleEdit({
+class SuggestedLocationsEdit extends StatefulWidget {
+  final SuggestedLocationsEdit? salePost;
+  const SuggestedLocationsEdit({
     Key? key,
     this.salePost,
   }) : super(key: key);
 
   @override
-  SecondHandSaleEditState createState() => SecondHandSaleEditState();
+  SuggestedLocationsEditState createState() => SuggestedLocationsEditState();
 }
 
-class SecondHandSaleEditState extends State<SecondHandSaleEdit> {
+class SuggestedLocationsEditState extends State<SuggestedLocationsEdit> {
   final _formKey = GlobalKey<FormState>();
   final titleController = TextEditingController();
   final descriptionController = TextEditingController();
@@ -132,6 +134,7 @@ class SecondHandSaleEditState extends State<SecondHandSaleEdit> {
                 const SizedBox(height: 30),
                 // buildDateTimePickers(),
                 const SizedBox(height: 30),
+                //konum
                 buildDescription(),
                 const SizedBox(height: 30),
                 // buildLP(),
@@ -282,7 +285,7 @@ class SecondHandSaleEditState extends State<SecondHandSaleEdit> {
   Widget buildTitle() => TextFormField(
         style: const TextStyle(fontSize: 18, color: Colors.white),
         decoration: const InputDecoration(
-          labelText: "Add Title",
+          labelText: "Your Suggestion ...",
           labelStyle: TextStyle(color: Colors.white),
           enabledBorder: OutlineInputBorder(
             borderSide: BorderSide(color: Colors.white, width: 1),
@@ -303,7 +306,7 @@ class SecondHandSaleEditState extends State<SecondHandSaleEdit> {
   Widget buildDescription() => TextFormField(
         style: const TextStyle(fontSize: 15, color: Colors.white),
         decoration: const InputDecoration(
-          labelText: "Description/Price",
+          labelText: "Location",
           labelStyle: TextStyle(color: Colors.white),
           enabledBorder: OutlineInputBorder(
             borderSide: BorderSide(color: Colors.white, width: 1),
@@ -316,7 +319,7 @@ class SecondHandSaleEditState extends State<SecondHandSaleEdit> {
         ),
         onFieldSubmitted: (_) => saveForm(),
         validator: (description) => description != null && description.isEmpty
-            ? 'Description cannot be empty'
+            ? 'Location cannot be empty'
             : null,
         controller: descriptionController,
         //onChanged: (description) => EventProvider().changeTitle(description),
@@ -576,7 +579,7 @@ class SecondHandSaleEditState extends State<SecondHandSaleEdit> {
 
       Navigator.of(context).pop();
 
-      salePost salepost = salePost(
+      LocationsPost locationpost = LocationsPost(
         title: titleController.text,
         description: descriptionController.text,
 
@@ -590,22 +593,22 @@ class SecondHandSaleEditState extends State<SecondHandSaleEdit> {
         eventId: uuid.v4(),
       );
       _db
-          .collection('salePost')
-          .doc(salepost.eventId)
-          .set(salepost.createMap());
+          .collection('SuggestedLocationsPost')
+          .doc(locationpost.eventId)
+          .set(locationpost.createMap());
       try {
         _db
             .collection('users')
-            .doc(salepost.user)
+            .doc(locationpost.user)
             .collection('posts')
-            .doc(salepost.eventId)
-            .set(salepost.createMap());
+            .doc(locationpost.eventId)
+            .set(locationpost.createMap());
       } catch (e) {
         debugPrint(e.toString());
       }
       //service.saveEvent(newEvent);
       Navigator.push(context,
-          MaterialPageRoute(builder: (context) => SecondHandSaleMain()));
+          MaterialPageRoute(builder: (context) => SuggestedLocationsMain()));
       // eventProvider.deleteEvent(event);
     }
   }

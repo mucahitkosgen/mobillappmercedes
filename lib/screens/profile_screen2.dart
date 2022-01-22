@@ -92,7 +92,7 @@ class _ProfileScreen2 extends State<ProfileScreen2> {
                 title: Text("Profile"),
                 backgroundColor: Colors.black,
 
-                /* actions:[
+                 actions:[
                 Padding(padding: EdgeInsets.only(right: 20.0, top: 20),
                 child: GestureDetector(
                   onTap: () {
@@ -106,7 +106,7 @@ class _ProfileScreen2 extends State<ProfileScreen2> {
                     Icons.info_outline_rounded
                   ),
                 ),)
-              ] */
+              ] 
               ),
               backgroundColor: Colors.black,
               body: SingleChildScrollView(

@@ -13,6 +13,7 @@ import 'package:mobilappmercedes/screens/main_screen.dart';
 import 'package:mobilappmercedes/seconhandsale/secondhandsalemain.dart';
 import 'package:mobilappmercedes/seconhandsale/secondhandsalescreen.dart';
 import 'package:mobilappmercedes/suggestedlocations/suggested_locations.dart';
+import 'package:mobilappmercedes/suggestedlocations/suggested_locations_main.dart';
 import 'package:mobilappmercedes/widgets/calendar_widget/calendar.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -142,6 +143,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     color: Colors.white70,
                     fontSize: 15.0,
                   ),
+                  
                 ),
                 SizedBox(height: screenHeight * 0.03),
                 Row(
@@ -304,7 +306,7 @@ class _HomeScreenState extends State<HomeScreen> {
                       Navigator.push(
                           context,
                           MaterialPageRoute(
-                              builder: (context) => SuggestedLocationsPage()));
+                              builder: (context) => SuggestedLocationsMain()));
                     },
                     color: Colors.blue[700],
                     shape: RoundedRectangleBorder(

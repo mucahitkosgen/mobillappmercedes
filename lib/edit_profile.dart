@@ -13,6 +13,7 @@ import 'package:mobilappmercedes/dashboard/screens/bottom_nav_screen.dart';
 import 'package:mobilappmercedes/screens/feed_screen.dart';
 import 'package:mobilappmercedes/screens/profile_screen.dart';
 import 'package:mobilappmercedes/screens/profile_screen2.dart';
+import 'package:mobilappmercedes/welcome/welcome_screen.dart';
 import 'package:path/path.dart' as Path;
 import 'package:uuid/uuid.dart';
 
@@ -363,12 +364,31 @@ class _editProfileState extends State<editProfile> {
                             onPressed: _Save,
                           ),
                         ),
-                      )
+                      ),
+                      Padding(padding: EdgeInsets.only(top: 20)),
+                      Container(
+                        
+                        child: IconButton(
+          icon: const Icon(Icons.power_settings_new, color: Colors.white),
+          iconSize: 35.0,
+          onPressed: _cikisYap,
+        ),
+                      ) 
                     ],
                   )),
             ),
           );
   }
+
+  void _cikisYap() async {
+      if (_auth.currentUser != null) {
+        await _auth.signOut();
+        Navigator.push(context, MaterialPageRoute(builder: (context) {
+          return WelcomeScreen();
+        }));
+      } else {
+        debugPrint("Zaten oturum açmış bir kullanıcı yok");
+      } }
 
   void _Save() async {
     DocumentReference veriYoluu =

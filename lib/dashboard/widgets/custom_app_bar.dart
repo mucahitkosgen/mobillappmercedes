@@ -22,13 +22,14 @@ class CustomAppBar extends StatelessWidget with PreferredSizeWidget {
     }
 
     return AppBar(
+      automaticallyImplyLeading: false,
         backgroundColor: Palette.bprimaryColor,
         elevation: 0.0,
-        leading: IconButton(
+       /* leading: IconButton(
           icon: const Icon(Icons.power_settings_new),
           iconSize: 28.0,
           onPressed: _cikisYap,
-        ),
+        ), */
         actions: [
           Padding(
             padding: EdgeInsets.only(right: 20.0),
