@@ -9,6 +9,7 @@ import 'package:mobilappmercedes/dashboard/widgets/custom_app_bar.dart';
 
 //import 'package:mobilappmercedes/dashboard/widgets/widgets.dart';
 import 'package:mobilappmercedes/event_editing.dart';
+import 'package:mobilappmercedes/event_editing_main.dart';
 import 'package:mobilappmercedes/screens/main_screen.dart';
 import 'package:mobilappmercedes/seconhandsale/secondhandsalemain.dart';
 import 'package:mobilappmercedes/seconhandsale/secondhandsalescreen.dart';
@@ -143,7 +144,6 @@ class _HomeScreenState extends State<HomeScreen> {
                     color: Colors.white70,
                     fontSize: 15.0,
                   ),
-                  
                 ),
                 SizedBox(height: screenHeight * 0.03),
                 Row(
@@ -158,7 +158,7 @@ class _HomeScreenState extends State<HomeScreen> {
                         Navigator.push(
                             context,
                             MaterialPageRoute(
-                                builder: (context) => const Event_Editing()));
+                                builder: (context) => const EventMainScreen()));
                       },
                       color: Colors.purple,
                       shape: RoundedRectangleBorder(
