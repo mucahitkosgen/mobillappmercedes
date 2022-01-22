@@ -646,6 +646,7 @@ class Event_EditingState extends State<Event_Editing> {
     if (_formKey.currentState!.validate()) {
       final eventProvider = Provider.of<EventProvider>(context, listen: false);
       int val = int.parse(numberOfPeopleController.text.trim());
+      int value= 0;
       eventProvider.changeTitle(titleController.text);
       eventProvider.changeDescription(descriptionController.text);
       eventProvider.changeFrom(fromDate);
@@ -658,7 +659,7 @@ class Event_EditingState extends State<Event_Editing> {
       eventProvider
           //.changeNumberOfPeople(int.parse(numberOfPeopleController.text));
           .changeNumberOfPeople(val);
-
+      eventProvider.changeParticipants(value);
       eventProvider.saveData();
 
       Navigator.push(
@@ -675,7 +676,7 @@ class Event_EditingState extends State<Event_Editing> {
         userimage: userimage,
         date: DateTime.now(),
         numberOfPeople: int.parse(numberOfPeopleController.text.trim()),
-
+        participants: 0,
         //numberOfPeople: 20, //int.parse(numberOfPeopleController.text),
         eventId: '',
       );

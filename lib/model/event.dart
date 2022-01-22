@@ -14,6 +14,7 @@ class Event {
 
   final bool limitedParticipation;
   final int numberOfPeople;
+  final int participants;
 
   const Event({
     required this.eventId,
@@ -22,6 +23,7 @@ class Event {
     required this.from,
     required this.to,
     required this.numberOfPeople,
+    required this.participants,
     required this.user,
     required this.userimage,
     required this.image,
@@ -38,6 +40,7 @@ class Event {
       'from': from,
       'to': to,
       'numberOfPeople': numberOfPeople,
+      'participants': participants,
       'limitedParticipation': limitedParticipation,
       'user': user,
       'userimage': userimage,
@@ -53,6 +56,7 @@ class Event {
         from = firestoreMap['from'],
         to = firestoreMap['to'],
         numberOfPeople = firestoreMap['numberOfPeople'],
+        participants = firestoreMap['participants'],
         user = firestoreMap['user'],
         userimage = firestoreMap['userimage'],
         image = firestoreMap['image'],

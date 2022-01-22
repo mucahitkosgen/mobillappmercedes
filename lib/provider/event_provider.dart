@@ -21,6 +21,7 @@ class EventProvider with ChangeNotifier {
 
   late final bool _limitedParticipation;
   late final int _numberOfPeople;
+  late final int _participants;
 //getters:
   List<Event> get events => _events;
   String get getTitle => _title;
@@ -31,7 +32,7 @@ class EventProvider with ChangeNotifier {
   //Color get getBackgroundColor => _backgroundColor;
   bool get getLimitedParticipation => _limitedParticipation;
   int get getNumberOfPeople => _numberOfPeople;
-
+  int get getParticipants => _participants;
   String get getuser => _user;
   String get getImage => _image;
   DateTime get getDate => _date;
@@ -109,6 +110,11 @@ class EventProvider with ChangeNotifier {
     notifyListeners();
   }
 
+  void changeParticipants(int val) {
+    _participants = val;
+    notifyListeners();
+  }
+
   void saveData() {
     var newEvent = Event(
         title: getTitle,
@@ -117,6 +123,7 @@ class EventProvider with ChangeNotifier {
         from: getFrom,
         limitedParticipation: getLimitedParticipation,
         numberOfPeople: getNumberOfPeople,
+        participants: getParticipants,
         user: getuser,
         userimage: getuserimage,
         image: getImage,

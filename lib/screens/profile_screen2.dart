@@ -135,6 +135,7 @@ class _ProfileScreen2 extends State<ProfileScreen2> {
                                     width: 50,
                                   ),
                                   Container(
+                                    margin: const EdgeInsets.only(left:20,top: 12),
                                     child: RichText(
                                       text: TextSpan(
                                           style: const TextStyle(
@@ -164,12 +165,13 @@ class _ProfileScreen2 extends State<ProfileScreen2> {
                       ),
                       Container(
                         margin:
-                            const EdgeInsets.only(left: 10, right: 10, top: 30),
+                            const EdgeInsets.only(left: 10, right: 10, top: 20, bottom:10),
                         child: Column(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
                             RaisedButton(
                               child: Text("Edit Profile"),
+                              color: Colors.white70,
                               onPressed: () {
                                 Navigator.push(
                                   context,

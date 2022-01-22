@@ -13,6 +13,7 @@ class PostCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    int _participants = 0;
     return Container(
       color: Colors.black,
       padding: const EdgeInsets.symmetric(
@@ -88,10 +89,23 @@ class PostCard extends StatelessWidget {
                   height: 25,
                 ),
               ),
+              Row(
+                children: <Widget>[
+                IconButton(
+          icon: const Icon(Icons.add),
+          color: Colors.white,
+          onPressed: () {
+            showAlertDialog(context);
+          },
+        ),
+        // Text("Join this event")
+                ]
+              ),
             ],
           ),
           // Description and numbrer of like
           Container(
+            margin: const EdgeInsets.only(top: 5),
             padding: const EdgeInsets.symmetric(horizontal: 8),
             child: Column(
               mainAxisSize: MainAxisSize.min,
@@ -123,7 +137,7 @@ class PostCard extends StatelessWidget {
                         style: const TextStyle(color: Colors.white),
                         children: [
                           TextSpan(
-                              text: 'Etkinlik Açıklaması:' + ' ',
+                              text: 'Event Description:' + ' ',
                               style: TextStyle(
                                 fontWeight: FontWeight.w900,
                                 fontSize: 16,
@@ -150,7 +164,7 @@ class PostCard extends StatelessWidget {
                   style: const TextStyle(color: Colors.white),
                   children: [
                     TextSpan(
-                        text: 'Etkinlik Tarihi:' + ' ',
+                        text: 'Date:' + ' ',
                         style: TextStyle(
                           fontWeight: FontWeight.w900,
                           fontSize: 16,
@@ -202,4 +216,65 @@ class PostCard extends StatelessWidget {
       ),
     );
   }
+  showAlertDialog(BuildContext context) {
+    // int _participants = 0;
+  // set up the buttons
+  Widget cancelButton = TextButton(
+    child: Text("No"),
+    onPressed:  () {
+      Navigator.of(context).pop();
+    },
+  );
+  Widget continueButton = TextButton(
+    child: Text("Yes"),
+    onPressed:  () {
+      if (snap["participants"] < snap["numberOfPeople"]) {
+      snap["participants"] += 1;
+      print(snap["participants"]);
+      }else {
+        showEventFullDialog(context);
+      }
+    },
+  );
+
+  // set up the AlertDialog
+  AlertDialog alert = AlertDialog(
+    title: Text("Attend"),
+    content: Text("Would you like to attend this event?"),
+    actions: [
+      cancelButton,
+      continueButton,
+    ],
+  );
+
+  // show the dialog
+  showDialog(
+    context: context,
+    builder: (BuildContext context) {
+      return alert;
+    },
+  );
+}
+showEventFullDialog(BuildContext context){
+    Widget exitButton = TextButton(
+    child: Text("Ok"),
+    onPressed:  () {
+      int count = 0;
+Navigator.of(context).popUntil((_) => count++ >= 2);
+    },
+  );
+    AlertDialog alert = AlertDialog(
+    title: Text("Sorry"),
+    content: Text("This event is full."),
+    actions: [
+      exitButton,
+    ],
+  );
+    showDialog(
+    context: context,
+    builder: (BuildContext context) {
+      return alert;
+    },
+  );
+}
 }
