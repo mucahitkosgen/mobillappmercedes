@@ -55,12 +55,7 @@ dependencies:
   animations: ^2.0.2
   local_image_provider: ^4.0.1
   like_button: ^2.0.4
-<<<<<<< HEAD
   url_launcher: ^6.0.18
-=======
-  flutter_linkify: ^5.0.2
- 
->>>>>>> e112ef9e2f6ff813df018294a7bc0c24cf7f8f24
 
 dev_dependencies:
   flutter_test:
