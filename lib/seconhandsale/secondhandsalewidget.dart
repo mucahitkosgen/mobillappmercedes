@@ -1,9 +1,14 @@
 import 'dart:convert';
 
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:mobilappmercedes/config/styles.dart';
 import 'package:flutter/src/widgets/basic.dart';
 import 'package:intl/intl.dart';
+<<<<<<< HEAD
+=======
+import 'package:mobilappmercedes/seconhandsale/sendmailscreen.dart';
+>>>>>>> a96d9cd0e0f321e5be97d761380d8e359df2b687
 
 class SaleWidget extends StatelessWidget {
   final snap;
@@ -34,7 +39,17 @@ class SaleWidget extends StatelessWidget {
                     child: Column(
                       mainAxisSize: MainAxisSize.min,
                       crossAxisAlignment: CrossAxisAlignment.start,
+
+                      // Text(
+                      //   snap['user'],
+                      //   style: TextStyle(
+                      //     fontWeight: FontWeight.bold,
+                      //     color: Colors.white,
+                      //     fontSize: 15,
+                      //   ),
+                      // ),
                       children: [
+<<<<<<< HEAD
                         Text(
                           snap['user'],
                           style: TextStyle(
@@ -42,6 +57,26 @@ class SaleWidget extends StatelessWidget {
                             color: Colors.white,
                             fontSize: 15,
                           ),
+=======
+                        RichText(
+                          text: TextSpan(children: [
+                            TextSpan(
+                                text: snap['user'],
+                                style: TextStyle(
+                                  fontWeight: FontWeight.bold,
+                                  color: Colors.white,
+                                  fontSize: 15,
+                                ),
+                                recognizer: TapGestureRecognizer()
+                                  ..onTap = () {
+                                    print('Mail Text Clicked');
+                                                        Navigator.push(context,
+                        MaterialPageRoute(builder: (context) {
+                      return SendEmail();
+                    }));
+                                  }),
+                          ]),
+>>>>>>> a96d9cd0e0f321e5be97d761380d8e359df2b687
                         ),
                       ],
                     ),

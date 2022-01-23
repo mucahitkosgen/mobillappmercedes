@@ -1,13 +1,17 @@
 import 'dart:convert';
 
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:like_button/like_button.dart';
 import 'package:mobilappmercedes/config/styles.dart';
 import 'package:flutter/src/widgets/basic.dart';
 import 'package:intl/intl.dart';
 
 class SuggestedLocationsWidget extends StatelessWidget {
   final snap;
-  const SuggestedLocationsWidget({Key? key, required this.snap}) : super(key: key);
+  const SuggestedLocationsWidget({Key? key, required this.snap})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -59,26 +63,36 @@ class SuggestedLocationsWidget extends StatelessWidget {
                 fit: BoxFit.cover),
           ),
 
-          //Like Coomand section
+          // Like Coomand section
           Row(
-            children: [
-              IconButton(
-                onPressed: () {},
-                icon: const Icon(
-                  Icons.favorite,
-                  color: Colors.red,
-                ),
-              ),
-              Padding(
-                padding: const EdgeInsets.only(left: 8, right: 15),
-                child: Image.asset(
-                  "assets/icons/comment.png",
-                  color: Colors.white,
-                  width: 25,
-                  height: 25,
-                ),
-              ),
+            children: <Widget>[
+              Row(
+                children: <Widget>[
+                  LikeButton(
+                    onTap: onLikeButtonTapped,
+                    circleColor: CircleColor(
+                        start: Color(0xFFF44336), end: Color(0xFFF44336)),
+                    likeBuilder: (isLiked) {
+                      return Icon(
+                        Icons.favorite,
+                        size: 27,
+                        color: isLiked ? Colors.red : Colors.white,
+                      );
+                    },
+                  ),
+                ],
+              )
             ],
+            //   // Padding(
+            //   //   padding: const EdgeInsets.only(left: 8, right: 15),
+            //   //   child: Image.asset(
+            //   //     "assets/icons/comment.png",
+            //   //     color: Colors.white,
+            //   //     width: 25,
+            //   //     height: 25,
+            //   //   ),
+            //   // ),
+            // ],
           ),
           // Description and numbrer of like
           Container(
@@ -139,28 +153,28 @@ class SuggestedLocationsWidget extends StatelessWidget {
             ),
           ),
 
-          Container(
-            padding: const EdgeInsets.only(top: 5, left: 0),
-            child: TextFormField(
-              style: const TextStyle(color: Colors.white),
-              decoration: const InputDecoration(
-                  hintText: 'Leave a comment',
-                  isDense: true, // important line
-                  contentPadding: EdgeInsets.fromLTRB(
-                      10, 10, 10, 0), // control your hints text size
-                  hintStyle: TextStyle(
-                    letterSpacing: 2,
-                    color: Colors.white,
-                    fontWeight: FontWeight.bold,
-                    fontStyle: FontStyle.normal,
-                    fontSize: 14,
-                  ),
-                  fillColor: Colors.black,
-                  filled: true,
-                  focusedBorder: OutlineInputBorder(
-                      borderSide: BorderSide(color: Colors.white, width: 1))),
-            ),
-          ),
+          // Container(
+          //   padding: const EdgeInsets.only(top: 5, left: 0),
+          //   child: TextFormField(
+          //     style: const TextStyle(color: Colors.white),
+          //     decoration: const InputDecoration(
+          //         hintText: 'Leave a comment',
+          //         isDense: true, // important line
+          //         contentPadding: EdgeInsets.fromLTRB(
+          //             10, 10, 10, 0), // control your hints text size
+          //         hintStyle: TextStyle(
+          //           letterSpacing: 2,
+          //           color: Colors.white,
+          //           fontWeight: FontWeight.bold,
+          //           fontStyle: FontStyle.normal,
+          //           fontSize: 14,
+          //         ),
+          //         fillColor: Colors.black,
+          //         filled: true,
+          //         focusedBorder: OutlineInputBorder(
+          //             borderSide: BorderSide(color: Colors.white, width: 1))),
+          //   ),
+          // ),
 
           Container(
             padding: const EdgeInsets.only(top: 5, left: 300),
@@ -175,4 +189,74 @@ class SuggestedLocationsWidget extends StatelessWidget {
       ),
     );
   }
+
+  Future<bool> onLikeButtonTapped(bool isLiked) async {
+    /// send your request here
+    // final bool success= await sendRequest();
+
+    var firebaseUser = FirebaseAuth.instance.currentUser;
+
+    if (isLiked = true) {
+      FirebaseFirestore.instance
+          .collection('SuggestedLocationsPost')
+          .doc(snap['eventId'])
+          .collection('Likes')
+          .doc(firebaseUser!.email)
+          .set({});
+      return true;
+    } else {
+            var userDocRef = FirebaseFirestore.instance
+          .collection('SuggestedLocationsPost')
+          .doc(snap['eventId'])
+          .collection('Likes')
+          .doc(firebaseUser!.email);
+        var doc = await userDocRef.get();
+   if (!doc.exists) {
+        FirebaseFirestore.instance
+        .collection("Events")
+        .doc(snap["eventId"])
+        .collection('Likes')
+        .doc(firebaseUser!.email)
+        .delete();
+    }
+    isLiked = false;
+    }
+    // else if (isLiked = false) {
+    //   return false;
+  //     var userDocRef = FirebaseFirestore.instance
+  //         .collection('SuggestedLocationsPost')
+  //         .doc(snap['eventId'])
+  //         .collection('Likes')
+  //         .doc(firebaseUser!.email);
+  //       var doc = await userDocRef.get();
+  //  if (!doc.exists) {
+  //       FirebaseFirestore.instance
+  //       .collection("Events")
+  //       .doc(snap["eventId"])
+  //       .collection('Likes')
+  //       .doc(firebaseUser!.email)
+  //       .delete();
+        // return true;
+        return !isLiked;
+    }
+  //   else{
+  //          var userDocRef = FirebaseFirestore.instance
+  //         .collection('SuggestedLocationsPost')
+  //         .doc(snap['eventId'])
+  //         .collection('Likes')
+  //         .doc(firebaseUser!.email);
+  //       var doc = await userDocRef.get();
+  //  if (!doc.exists) {
+  //       FirebaseFirestore.instance
+  //       .collection("Events")
+  //       .doc(snap["eventId"])
+  //       .collection('Likes')
+  //       .doc(firebaseUser!.email)
+  //       .delete();
+  //       return false;
+  //   } 
+  //   }
+    // return true;
+  
+
 }
