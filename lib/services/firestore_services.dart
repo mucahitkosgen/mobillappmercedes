@@ -47,7 +47,12 @@ class FireStoreService {
     } catch (e) {
       debugPrint(e.toString());
     }
-    return _db.collection('Events').doc(event.eventId).set(event.createMap());
+    _db.collection('Events').doc(event.eventId).set(event.createMap());
+        FirebaseFirestore.instance
+          .collection('Events')
+          .doc(event.eventId)
+          .collection('katilimci')
+          .add({});
   }
 
   Stream<List<Event>> getEvents() {

@@ -104,7 +104,7 @@ class _LoginIslemleriState extends State<LoginIslemleri> {
                   child: SizedBox(
                     height: 30,
                     child: TextFormField(
-                      style: TextStyle(color: Colors.purple),
+                      style: TextStyle(color: Colors.black),
                       decoration: InputDecoration(
                         border: InputBorder.none,
                         disabledBorder: InputBorder.none,
@@ -151,7 +151,7 @@ class _LoginIslemleriState extends State<LoginIslemleri> {
                     height: 30,
                     child: TextFormField(
                       obscureText: true,
-                      style: TextStyle(color: Colors.purple),
+                      style: TextStyle(color: Colors.black),
                       decoration: InputDecoration(
                         border: InputBorder.none,
                         disabledBorder: InputBorder.none,

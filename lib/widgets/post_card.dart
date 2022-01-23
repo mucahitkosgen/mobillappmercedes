@@ -1,9 +1,11 @@
 import 'dart:convert';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:like_button/like_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/basic.dart';
 import 'package:intl/intl.dart';
-
+var userData = {};
 class PostCard extends StatelessWidget {
   final snap;
   const PostCard({
@@ -14,6 +16,7 @@ class PostCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     int _participants = 0;
+    
     return Container(
       color: Colors.black,
       padding: const EdgeInsets.symmetric(
@@ -80,15 +83,15 @@ class PostCard extends StatelessWidget {
                   ),
                 ],
               ),
-              Padding(
-                padding: const EdgeInsets.only(left: 8, right: 15),
-                child: Image.asset(
-                  "assets/icons/comment.png",
-                  color: Colors.white,
-                  width: 25,
-                  height: 25,
-                ),
-              ),
+              // Padding(
+              //   padding: const EdgeInsets.only(left: 8, right: 15),
+              //   child: Image.asset(
+              //     "assets/icons/comment.png",
+              //     color: Colors.white,
+              //     width: 25,
+              //     height: 25,
+              //   ),
+              // ),
               Row(
                 children: <Widget>[
                 IconButton(
@@ -181,27 +184,49 @@ class PostCard extends StatelessWidget {
           ),
 
           Container(
-            padding: const EdgeInsets.only(top: 5, left: 0),
-            child: TextFormField(
-              style: const TextStyle(color: Colors.white),
-              decoration: const InputDecoration(
-                  hintText: 'Leave a comment',
-                  isDense: true, // important line
-                  contentPadding: EdgeInsets.fromLTRB(
-                      10, 10, 10, 0), // control your hints text size
-                  hintStyle: TextStyle(
-                    letterSpacing: 2,
-                    color: Colors.white,
-                    fontWeight: FontWeight.bold,
-                    fontStyle: FontStyle.normal,
-                    fontSize: 14,
-                  ),
-                  fillColor: Colors.black,
-                  filled: true,
-                  focusedBorder: OutlineInputBorder(
-                      borderSide: BorderSide(color: Colors.white, width: 1))),
+            width: double.infinity,
+            padding: const EdgeInsets.only(top: 8, left: 8),
+            child: RichText(
+              text: TextSpan(
+                  style: const TextStyle(color: Colors.white),
+                  children: [
+                    TextSpan(
+                        text: 'Capacity:' + ' ',
+                        style: TextStyle(
+                          fontWeight: FontWeight.w900,
+                          fontSize: 16,
+                          color: Color(0xFF2979FF),
+                        )),
+                    TextSpan(
+                      text:  snap['participants'].toString() + "/" + snap['numberOfPeople'].toString(),
+                      
+                      style: const TextStyle(fontSize: 15, color: Colors.white),
+                    ),
+                  ]),
             ),
           ),
+          // Container(
+          //   padding: const EdgeInsets.only(top: 5, left: 0),
+          //   child: TextFormField(
+          //     style: const TextStyle(color: Colors.white),
+          //     decoration: const InputDecoration(
+          //         hintText: 'Leave a comment',
+          //         isDense: true, // important line
+          //         contentPadding: EdgeInsets.fromLTRB(
+          //             10, 10, 10, 0), // control your hints text size
+          //         hintStyle: TextStyle(
+          //           letterSpacing: 2,
+          //           color: Colors.white,
+          //           fontWeight: FontWeight.bold,
+          //           fontStyle: FontStyle.normal,
+          //           fontSize: 14,
+          //         ),
+          //         fillColor: Colors.black,
+          //         filled: true,
+          //         focusedBorder: OutlineInputBorder(
+          //             borderSide: BorderSide(color: Colors.white, width: 1))),
+          //   ),
+          // ),
 
           Container(
             padding: const EdgeInsets.only(top: 5, left: 300),
@@ -227,10 +252,36 @@ class PostCard extends StatelessWidget {
   );
   Widget continueButton = TextButton(
     child: Text("Yes"),
-    onPressed:  () {
+    onPressed:  () async {
       if (snap["participants"] < snap["numberOfPeople"]) {
-      snap["participants"] += 1;
-      print(snap["participants"]);
+        var firebaseUser = FirebaseAuth.instance.currentUser;
+
+    var userDocRef = FirebaseFirestore.instance
+.collection('Events')
+    .doc(snap['eventId'])
+    .collection('katilimci')
+    .doc(firebaseUser!.email);
+
+  var doc = await userDocRef.get();
+   if (!doc.exists) {
+        FirebaseFirestore.instance
+        .collection("Events")
+        .doc(snap["eventId"])
+        .update({
+      "participants": snap["participants"] += 1 
+        });
+        FirebaseFirestore.instance
+          .collection('Events')
+          .doc(snap['eventId'])
+          .collection('katilimci')
+          .doc(firebaseUser!.email)
+          .set({}
+          );
+          Navigator.of(context).pop();
+   } else {
+     alreadyAttending(context);
+   }
+      
       }else {
         showEventFullDialog(context);
       }
@@ -266,6 +317,28 @@ Navigator.of(context).popUntil((_) => count++ >= 2);
     AlertDialog alert = AlertDialog(
     title: Text("Sorry"),
     content: Text("This event is full."),
+    actions: [
+      exitButton,
+    ],
+  );
+    showDialog(
+    context: context,
+    builder: (BuildContext context) {
+      return alert;
+    },
+  );
+}
+alreadyAttending(BuildContext context){
+    Widget exitButton = TextButton(
+    child: Text("Ok"),
+    onPressed:  () {
+      int count = 0;
+Navigator.of(context).popUntil((_) => count++ >= 2);
+    },
+  );
+    AlertDialog alert = AlertDialog(
+    title: Text("Error"),
+    content: Text("You already attending this event."),
     actions: [
       exitButton,
     ],
