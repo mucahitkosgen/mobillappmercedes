@@ -1,9 +1,11 @@
 import 'dart:convert';
 
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:mobilappmercedes/config/styles.dart';
 import 'package:flutter/src/widgets/basic.dart';
 import 'package:intl/intl.dart';
+import 'package:mobilappmercedes/seconhandsale/sendmailscreen.dart';
 
 class SaleWidget extends StatelessWidget {
   final snap;
@@ -34,14 +36,34 @@ class SaleWidget extends StatelessWidget {
                     child: Column(
                       mainAxisSize: MainAxisSize.min,
                       crossAxisAlignment: CrossAxisAlignment.start,
+
+                      // Text(
+                      //   snap['user'],
+                      //   style: TextStyle(
+                      //     fontWeight: FontWeight.bold,
+                      //     color: Colors.white,
+                      //     fontSize: 15,
+                      //   ),
+                      // ),
                       children: [
-                        Text(
-                          snap['user'],
-                          style: TextStyle(
-                            fontWeight: FontWeight.bold,
-                            color: Colors.white,
-                            fontSize: 15,
-                          ),
+                        RichText(
+                          text: TextSpan(children: [
+                            TextSpan(
+                                text: snap['user'],
+                                style: TextStyle(
+                                  fontWeight: FontWeight.bold,
+                                  color: Colors.white,
+                                  fontSize: 15,
+                                ),
+                                recognizer: TapGestureRecognizer()
+                                  ..onTap = () {
+                                    print('Mail Text Clicked');
+                                                        Navigator.push(context,
+                        MaterialPageRoute(builder: (context) {
+                      return SendEmail();
+                    }));
+                                  }),
+                          ]),
                         ),
                       ],
                     ),
