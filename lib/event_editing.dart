@@ -46,6 +46,7 @@ class Event_EditingState extends State<Event_Editing> {
   final _formKey = GlobalKey<FormState>();
   final titleController = TextEditingController();
   final descriptionController = TextEditingController();
+  final nopController = TextEditingController();
   late DateTime fromDate;
   late DateTime toDate;
   late String fileContentBase64;
@@ -53,7 +54,7 @@ class Event_EditingState extends State<Event_Editing> {
   final FirebaseAuth auth = FirebaseAuth.instance;
   late String user;
   late String userimage;
-  late int numberofpeople = 30;
+  final numberOfPeopleController = TextEditingController();
   late DocumentSnapshot snapshot;
   bool isChecked = false;
   //final numberOfPeopleController = TextEditingController();
@@ -381,7 +382,30 @@ class Event_EditingState extends State<Event_Editing> {
         //onChanged: (description) => EventProvider().changeTitle(description),
       );
 
-  Widget buildLP() => Row(
+  Widget buildLP() => TextFormField(
+        style: const TextStyle(fontSize: 15, color: Colors.white),
+        decoration: const InputDecoration(
+          labelText: "What is the maximum number of participants?",
+          labelStyle: TextStyle(color: Colors.white),
+          enabledBorder: OutlineInputBorder(
+            borderSide: BorderSide(color: Colors.white, width: 1),
+            borderRadius: BorderRadius.all(Radius.circular(18.0)),
+          ),
+          focusedBorder: OutlineInputBorder(
+            borderSide: BorderSide(color: Colors.blue, width: 1),
+            borderRadius: BorderRadius.all(Radius.circular(18.0)),
+          ),
+        ),
+        keyboardType: TextInputType.number,
+        onFieldSubmitted: (_) => saveForm(),
+        validator: (description) => description != null && description.isEmpty
+            ? 'Number of People cannot be empty'
+            : null,
+        controller: numberOfPeopleController,
+        //onChanged: (description) => EventProvider().changeTitle(description),
+      );
+
+  /* Widget buildLP() => Row(
         children: [
           Expanded(
             child: CheckboxListTile(
@@ -412,7 +436,7 @@ class Event_EditingState extends State<Event_Editing> {
             ),
           ),
         ],
-      ); //'What is the maximum number of participants?'
+      ); */ //'What is the maximum number of participants?'
 
   Future<void> _displayTextInputDialog(BuildContext context) async {
     return showDialog(
@@ -434,7 +458,11 @@ class Event_EditingState extends State<Event_Editing> {
               validator: (nop) => nop != null && nop.isEmpty
                   ? 'Number of People cannot be empty'
                   : null,
-              //controller: numberOfPeopleController,
+
+              //=> nop != null && nop.isEmpty
+              //  ? 'Number of People cannot be empty'
+              //: null,
+              controller: numberOfPeopleController,
               decoration: const InputDecoration(
                 labelText: "Give me a Number",
                 labelStyle: TextStyle(color: Colors.grey),
@@ -465,16 +493,10 @@ class Event_EditingState extends State<Event_Editing> {
                     onFieldSubmitted:
                     (_) => saveForm();
                     validator:
-                    (numberofpeople) {
-                      if (numberofpeople == null) {
-                        numberofpeople = 30;
-                      }
-                    };
-                    /*numberOfPeople != null && numberOfPeople.isEmpty
-                            ? 'numberOfPeople cannot be empty'
-                            : null;*/
+                    (numberOfPeople) =>
+                        numberOfPeople != null && numberOfPeople.isEmpty;
                     controller:
-                    // numberOfPeopleController;
+                    numberOfPeopleController;
                     Navigator.pop(context);
                   });
                 },
@@ -641,10 +663,19 @@ class Event_EditingState extends State<Event_Editing> {
   }
 
   Future saveForm() async {
+    /*if (numberofpeople.toString() == null) {
+      numberofpeople = 30;
+    }*/
+
     if (_formKey.currentState!.validate()) {
       final eventProvider = Provider.of<EventProvider>(context, listen: false);
-      // int val = int.parse(numberOfPeopleController.text.trim());
-      int value= 0;
+      if (numberOfPeopleController.text.isEmpty) {
+        int val = 99;
+      } else {
+        int val = int.parse(numberOfPeopleController.text.trim());
+      }
+      int val = int.parse(numberOfPeopleController.text.trim());
+      int value = 0;
       eventProvider.changeTitle(titleController.text);
       eventProvider.changeDescription(descriptionController.text);
       eventProvider.changeFrom(fromDate);
@@ -656,7 +687,7 @@ class Event_EditingState extends State<Event_Editing> {
       eventProvider.changedate(DateTime.now());
       eventProvider
           //.changeNumberOfPeople(int.parse(numberOfPeopleController.text));
-          .changeNumberOfPeople(numberofpeople);
+          .changeNumberOfPeople(val);
       eventProvider.changeParticipants(value);
       eventProvider.saveData();
 
@@ -673,8 +704,7 @@ class Event_EditingState extends State<Event_Editing> {
         user: user,
         userimage: userimage,
         date: DateTime.now(),
-        numberOfPeople: numberofpeople,
-        // int.parse(numberOfPeopleController.text.trim()),
+        numberOfPeople: val, //int.parse(numberOfPeopleController.text.trim()),
         participants: 0,
         //numberOfPeople: 20, //int.parse(numberOfPeopleController.text),
         eventId: '',

@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:mobilappmercedes/config/styles.dart';
 import 'package:flutter/src/widgets/basic.dart';
 import 'package:intl/intl.dart';
+import "package:flutter_linkify/flutter_linkify.dart";
 
 class SaleWidget extends StatelessWidget {
   final snap;
@@ -35,6 +36,10 @@ class SaleWidget extends StatelessWidget {
                       mainAxisSize: MainAxisSize.min,
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
+                        /*Linkify(
+                          onOpen: (link) => print("Clicked ${snap['user']}!"),
+                          text: '',
+                        ),*/
                         Text(
                           snap['user'],
                           style: TextStyle(
