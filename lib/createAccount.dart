@@ -30,7 +30,9 @@ class _AccountIslemleriState extends State<AccountIslemleri> {
   bool showErrorMessage = false;
   late String kullaniciAdi, email, password;
   late bool _checkbox = true;
-
+  // final usernameController = TextEditingController();
+  // final emailController = TextEditingController();
+  // final passwordController = TextEditingController();
   // ignore: unnecessary_getters_setters
   bool get checkbox => _checkbox;
 
@@ -120,6 +122,11 @@ class _AccountIslemleriState extends State<AccountIslemleri> {
                         hintStyle: TextStyle(color: Colors.grey[600]),
                         icon: Icon(Icons.account_circle, color: Colors.black),
                       ),
+                      // validator: (kullaniciAdi) =>
+                      //     kullaniciAdi != null && kullaniciAdi.isEmpty
+                      //         ? 'Username cannot be empty'
+                      //         : null,
+                      // controller: usernameController,
                       onChanged: (String kullaniciAdiTutucu) {
                         kullaniciAdiAl(kullaniciAdiTutucu);
                       },
@@ -166,6 +173,10 @@ class _AccountIslemleriState extends State<AccountIslemleri> {
                         icon: Icon(Icons.alternate_email_rounded,
                             color: Colors.black),
                       ),
+                      // validator: (email) => email != null && email.isEmpty
+                      //     ? 'Email cannot be empty'
+                      //     : null,
+                      // controller: emailController,
                       onChanged: (String emailTutucu) {
                         emailAl(emailTutucu);
                       },
@@ -212,6 +223,11 @@ class _AccountIslemleriState extends State<AccountIslemleri> {
                         hintStyle: TextStyle(color: Colors.grey[600]),
                         icon: Icon(Icons.password_rounded, color: Colors.black),
                       ),
+                      // validator: (password) =>
+                      //     password != null && password.isEmpty
+                      //         ? 'Password cannot be empty'
+                      //         : null,
+                      // controller: passwordController,
                       onChanged: (String passwordTutucu) {
                         passwordAl(passwordTutucu);
                       },

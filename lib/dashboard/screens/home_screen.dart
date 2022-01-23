@@ -139,7 +139,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 ),
                 SizedBox(height: screenHeight * 0.01),
                 Text(
-                  'Now, You will start discover..',
+                  'Now you will start to discover...',
                   style: const TextStyle(
                     color: Colors.white70,
                     fontSize: 15.0,
@@ -217,7 +217,7 @@ class _HomeScreenState extends State<HomeScreen> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
             Text(
-              'More Fun, More Yourself..',
+              'More Fun, More Yourself...',
               style: const TextStyle(
                 fontSize: 22.0,
                 fontWeight: FontWeight.w600,

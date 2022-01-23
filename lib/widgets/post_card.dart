@@ -336,11 +336,33 @@ alreadyAttending(BuildContext context){
 Navigator.of(context).popUntil((_) => count++ >= 2);
     },
   );
+      Widget deleteEvent = TextButton(
+    child: Text("Remove me from this event"),
+    onPressed:  () {
+      var firebaseUser = FirebaseAuth.instance.currentUser;
+          FirebaseFirestore.instance
+          .collection('Events')
+          .doc(snap['eventId'])
+          .collection('katilimci')
+          .doc(firebaseUser!.email)
+          .delete(
+          );
+        FirebaseFirestore.instance
+        .collection("Events")
+        .doc(snap["eventId"])
+        .update({
+      "participants": snap["participants"] -= 1 
+        });
+      int count = 0;
+Navigator.of(context).popUntil((_) => count++ >= 2);
+    },
+  );
     AlertDialog alert = AlertDialog(
     title: Text("Error"),
     content: Text("You already attending this event."),
     actions: [
       exitButton,
+      deleteEvent,
     ],
   );
     showDialog(

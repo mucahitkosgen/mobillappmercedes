@@ -97,7 +97,7 @@ class SaleWidget extends StatelessWidget {
                         style: const TextStyle(color: Colors.white),
                         children: [
                           TextSpan(
-                              text: 'Ürün Açıklaması:' + ' ',
+                              text: 'Product:' + ' ',
                               style: TextStyle(
                                 fontWeight: FontWeight.w900,
                                 fontSize: 16,
@@ -120,7 +120,7 @@ class SaleWidget extends StatelessWidget {
                         style: const TextStyle(color: Colors.white),
                         children: [
                           TextSpan(
-                              text: 'FİYAT:' + ' ',
+                              text: 'Price:' + ' ',
                               style: TextStyle(
                                 fontWeight: FontWeight.w900,
                                 fontSize: 16,
