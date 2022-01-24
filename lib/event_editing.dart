@@ -676,6 +676,7 @@ class Event_EditingState extends State<Event_Editing> {
       }
       int val = int.parse(numberOfPeopleController.text.trim());
       int value = 0;
+      int value2 = 0;
       eventProvider.changeTitle(titleController.text);
       eventProvider.changeDescription(descriptionController.text);
       eventProvider.changeFrom(fromDate);
@@ -689,6 +690,7 @@ class Event_EditingState extends State<Event_Editing> {
           //.changeNumberOfPeople(int.parse(numberOfPeopleController.text));
           .changeNumberOfPeople(val);
       eventProvider.changeParticipants(value);
+      eventProvider.changeLikes(value2);
       eventProvider.saveData();
 
       Navigator.push(
@@ -706,6 +708,7 @@ class Event_EditingState extends State<Event_Editing> {
         date: DateTime.now(),
         numberOfPeople: val, //int.parse(numberOfPeopleController.text.trim()),
         participants: 0,
+        likes: 0,
         //numberOfPeople: 20, //int.parse(numberOfPeopleController.text),
         eventId: '',
       );

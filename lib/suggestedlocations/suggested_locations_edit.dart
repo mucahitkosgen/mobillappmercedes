@@ -584,6 +584,7 @@ class SuggestedLocationsEditState extends State<SuggestedLocationsEdit> {
         user: user,
         userimage: userimage,
         date: DateTime.now(),
+        likes: 0,
         //price: priceController.text,
 
         //numberOfPeople: 20, //int.parse(numberOfPeopleController.text),

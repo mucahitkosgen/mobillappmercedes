@@ -581,6 +581,7 @@ class SecondHandSaleEditState extends State<SecondHandSaleEdit> {
         user: user,
         userimage: userimage,
         date: DateTime.now(),
+        likes: 0,
         //price: priceController.text,
 
         //numberOfPeople: 20, //int.parse(numberOfPeopleController.text),

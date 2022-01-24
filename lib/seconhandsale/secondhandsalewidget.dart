@@ -1,14 +1,14 @@
 import 'dart:convert';
 
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:like_button/like_button.dart';
 import 'package:mobilappmercedes/config/styles.dart';
 import 'package:flutter/src/widgets/basic.dart';
 import 'package:intl/intl.dart';
-<<<<<<< HEAD
-=======
 import 'package:mobilappmercedes/seconhandsale/sendmailscreen.dart';
->>>>>>> a96d9cd0e0f321e5be97d761380d8e359df2b687
 
 class SaleWidget extends StatelessWidget {
   final snap;
@@ -49,15 +49,6 @@ class SaleWidget extends StatelessWidget {
                       //   ),
                       // ),
                       children: [
-<<<<<<< HEAD
-                        Text(
-                          snap['user'],
-                          style: TextStyle(
-                            fontWeight: FontWeight.bold,
-                            color: Colors.white,
-                            fontSize: 15,
-                          ),
-=======
                         RichText(
                           text: TextSpan(children: [
                             TextSpan(
@@ -69,14 +60,16 @@ class SaleWidget extends StatelessWidget {
                                 ),
                                 recognizer: TapGestureRecognizer()
                                   ..onTap = () {
-                                    print('Mail Text Clicked');
-                                                        Navigator.push(context,
-                        MaterialPageRoute(builder: (context) {
-                      return SendEmail();
-                    }));
+                                           var mail = snap['user'];
+                                    Navigator.push(context,
+                                        MaterialPageRoute(builder: (context) {
+                                      return SendEmail(
+                                        mail: mail,
+                                      );
+                                    }));
+                
                                   }),
                           ]),
->>>>>>> a96d9cd0e0f321e5be97d761380d8e359df2b687
                         ),
                       ],
                     ),
@@ -96,23 +89,43 @@ class SaleWidget extends StatelessWidget {
 
           //Like Coomand section
           Row(
-            children: [
-              IconButton(
-                onPressed: () {},
-                icon: const Icon(
-                  Icons.favorite,
-                  color: Colors.red,
-                ),
-              ),
-              Padding(
-                padding: const EdgeInsets.only(left: 8, right: 15),
-                child: Image.asset(
-                  "assets/icons/comment.png",
-                  color: Colors.white,
-                  width: 25,
-                  height: 25,
-                ),
-              ),
+            children: <Widget>[
+              Row(
+                children: <Widget>[
+                  LikeButton(
+                    onTap: onLikeButtonTapped,
+                    circleColor: CircleColor(
+                        start: Colors.redAccent, end: Colors.redAccent),
+                    likeBuilder: (isLiked) {
+                      return Icon(
+                        Icons.favorite,
+                        size: 27,
+                        color: isLiked? Colors.redAccent : Colors.redAccent,
+                      );
+                    },
+                  ),
+                                         RichText(
+                    text: TextSpan(
+                        style: const TextStyle(color: Colors.white),
+                        children: [
+                          TextSpan(
+                            text: snap['likes'].toString(),
+                              style: TextStyle(
+                                fontWeight: FontWeight.w900,
+                                fontSize: 16,
+                                color: Color(0xFF2979FF),
+                              )),
+                          TextSpan(
+                              text: ' likes',
+                              style: TextStyle(
+                                fontWeight: FontWeight.bold,
+                                fontSize: 16,
+                                color: Color(0xFF2979FF),
+                              ))
+                        ]),
+                  ),
+                ],
+              )
             ],
           ),
           // Description and numbrer of like
@@ -170,32 +183,55 @@ class SaleWidget extends StatelessWidget {
                         ]),
                   ),
                 ),
+              //  Container(
+              //     width: double.infinity,
+              //     padding: const EdgeInsets.only(top: 8, left: 0),
+              //     child: RichText(
+              //       text: TextSpan(
+              //           style: const TextStyle(color: Colors.white),
+              //           children: [
+              //             TextSpan(
+              //                 text: 'Likes:' + ' ',
+              //                 style: TextStyle(
+              //                   fontWeight: FontWeight.w900,
+              //                   fontSize: 16,
+              //                   color: Color(0xFF2979FF),
+              //                 )),
+              //             TextSpan(
+              //                 text: snap['likes'].toString(),
+              //                 style: TextStyle(
+              //                   fontWeight: FontWeight.bold,
+              //                   fontSize: 14,
+              //                 ))
+              //           ]),
+              //     ),
+              //   ),                
               ],
             ),
           ),
 
-          Container(
-            padding: const EdgeInsets.only(top: 5, left: 0),
-            child: TextFormField(
-              style: const TextStyle(color: Colors.white),
-              decoration: const InputDecoration(
-                  hintText: 'Leave a comment',
-                  isDense: true, // important line
-                  contentPadding: EdgeInsets.fromLTRB(
-                      10, 10, 10, 0), // control your hints text size
-                  hintStyle: TextStyle(
-                    letterSpacing: 2,
-                    color: Colors.white,
-                    fontWeight: FontWeight.bold,
-                    fontStyle: FontStyle.normal,
-                    fontSize: 14,
-                  ),
-                  fillColor: Colors.black,
-                  filled: true,
-                  focusedBorder: OutlineInputBorder(
-                      borderSide: BorderSide(color: Colors.white, width: 1))),
-            ),
-          ),
+          // Container(
+          //   padding: const EdgeInsets.only(top: 5, left: 0),
+          //   child: TextFormField(
+          //     style: const TextStyle(color: Colors.white),
+          //     decoration: const InputDecoration(
+          //         hintText: 'Leave a comment',
+          //         isDense: true, // important line
+          //         contentPadding: EdgeInsets.fromLTRB(
+          //             10, 10, 10, 0), // control your hints text size
+          //         hintStyle: TextStyle(
+          //           letterSpacing: 2,
+          //           color: Colors.white,
+          //           fontWeight: FontWeight.bold,
+          //           fontStyle: FontStyle.normal,
+          //           fontSize: 14,
+          //         ),
+          //         fillColor: Colors.black,
+          //         filled: true,
+          //         focusedBorder: OutlineInputBorder(
+          //             borderSide: BorderSide(color: Colors.white, width: 1))),
+          //   ),
+          // ),
 
           Container(
             padding: const EdgeInsets.only(top: 5, left: 300),
@@ -209,5 +245,41 @@ class SaleWidget extends StatelessWidget {
         ],
       ),
     );
+  }
+  Future<bool> onLikeButtonTapped(bool isLiked) async {
+    /// send your request here
+    // final bool success= await sendRequest();
+
+    // var firebaseUser = FirebaseAuth.instance.currentUser;
+
+    if (isLiked = true) {
+        var firebaseUser = FirebaseAuth.instance.currentUser;
+
+    var userDocRef = FirebaseFirestore.instance
+.collection('salePost')
+    .doc(snap['eventId'])
+    .collection('liked_users')
+    .doc(firebaseUser!.email);
+
+  var doc = await userDocRef.get();
+   if (!doc.exists) {
+        FirebaseFirestore.instance
+        .collection("salePost")
+        .doc(snap["eventId"])
+        .update({
+      "likes": snap["likes"] += 1 
+        });
+        FirebaseFirestore.instance
+          .collection('salePost')
+          .doc(snap['eventId'])
+          .collection('liked_users')
+          .doc(firebaseUser!.email)
+          .set({}
+          );
+          return true;
+   }else{
+     return false;
+   }
+    } return true;
   }
 }

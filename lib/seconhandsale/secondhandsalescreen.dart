@@ -34,7 +34,7 @@ class SecondHandSaleScreen extends StatelessWidget {
         stream: FirebaseFirestore.instance
             .collection('salePost')
             .orderBy('date', descending: true)
-            .limitToLast(15)
+            // .limitToLast(15)
             .snapshots(),
         builder: (context,
             AsyncSnapshot<QuerySnapshot<Map<String, dynamic>>> snapshot) {

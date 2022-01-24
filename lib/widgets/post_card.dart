@@ -1,10 +1,12 @@
 import 'dart:convert';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/gestures.dart';
 import 'package:like_button/like_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/basic.dart';
 import 'package:intl/intl.dart';
+import 'package:mobilappmercedes/seconhandsale/sendmailscreen.dart';
 var userData = {};
 class PostCard extends StatelessWidget {
   final snap;
@@ -41,13 +43,26 @@ class PostCard extends StatelessWidget {
                       mainAxisSize: MainAxisSize.min,
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Text(
-                          snap['user'],
-                          style: TextStyle(
-                            fontWeight: FontWeight.bold,
-                            color: Colors.white,
-                            fontSize: 15,
-                          ),
+                        RichText(
+                          text: TextSpan(children: [
+                            TextSpan(
+                                text: snap['user'],
+                                style: TextStyle(
+                                  fontWeight: FontWeight.bold,
+                                  color: Colors.white,
+                                  fontSize: 15,
+                                ),
+                                recognizer: TapGestureRecognizer()
+                                  ..onTap = () {
+                                var mail = snap['user'];
+                                    Navigator.push(context,
+                                        MaterialPageRoute(builder: (context) {
+                                      return SendEmail(
+                                        mail: mail,
+                                      );
+                                    }));
+                                  }),
+                          ]),
                         ),
                       ],
                     ),
@@ -71,15 +86,36 @@ class PostCard extends StatelessWidget {
               Row(
                 children: <Widget>[
                   LikeButton(
+                    onTap: onLikeButtonTapped,
                     circleColor: CircleColor(
-                        start: Color(0xFFF44336), end: Color(0xFFF44336)),
+                        start: Colors.redAccent, end: Colors.redAccent),
                     likeBuilder: (bool isLiked) {
                       return Icon(
                         Icons.favorite,
                         size: 30,
-                        color: isLiked ? Colors.red : Colors.white,
+                        color: isLiked ? Colors.redAccent : Colors.redAccent,
                       );
                     },
+                  ),
+                                          RichText(
+                    text: TextSpan(
+                        style: const TextStyle(color: Colors.white),
+                        children: [
+                          TextSpan(
+                            text: snap['likes'].toString(),
+                              style: TextStyle(
+                                fontWeight: FontWeight.w900,
+                                fontSize: 16,
+                                color: Color(0xFF2979FF),
+                              )),
+                          TextSpan(
+                              text: ' likes',
+                              style: TextStyle(
+                                fontWeight: FontWeight.bold,
+                                fontSize: 16,
+                                color: Color(0xFF2979FF),
+                              ))
+                        ]),
                   ),
                 ],
               ),
@@ -190,13 +226,22 @@ class PostCard extends StatelessWidget {
               text: TextSpan(
                   style: const TextStyle(color: Colors.white),
                   children: [
-                    TextSpan(
-                        text: 'Capacity:' + ' ',
-                        style: TextStyle(
-                          fontWeight: FontWeight.w900,
-                          fontSize: 16,
-                          color: Color(0xFF2979FF),
-                        )),
+                     
+                          TextSpan(children: [
+                            TextSpan(
+                                text: "Capacity:" " ",
+                                style: const TextStyle(fontSize: 16,fontWeight: FontWeight.w900, color: Color(0xFF2979FF)),
+                                recognizer: TapGestureRecognizer()
+                                  ..onTap = () {
+                                    // katilimcilar(context);
+                    //                                     Navigator.push(context,
+                    //     MaterialPageRoute(builder: (context) {
+                    //   return SendEmail();
+                    // }));
+                                  }),
+                          ]),
+                        
+                    
                     TextSpan(
                       text:  snap['participants'].toString() + "/" + snap['numberOfPeople'].toString(),
                       
@@ -330,7 +375,7 @@ Navigator.of(context).popUntil((_) => count++ >= 2);
 }
 alreadyAttending(BuildContext context){
     Widget exitButton = TextButton(
-    child: Text("Ok"),
+    child: Text("Close"),
     onPressed:  () {
       int count = 0;
 Navigator.of(context).popUntil((_) => count++ >= 2);
@@ -372,4 +417,75 @@ Navigator.of(context).popUntil((_) => count++ >= 2);
     },
   );
 }
+
+katilimcilar(BuildContext context) async {
+     Widget exitButton = TextButton(
+    child: Text("Close"),
+    onPressed:  () {
+Navigator.of(context).pop();
+    },
+  );
+      var firebaseUser = FirebaseAuth.instance.currentUser;
+
+ var userDocRef = FirebaseFirestore.instance
+.collection('Events')
+    .doc(snap['eventId'])
+    .collection('katilimci');
+    
+
+ String mail = userDocRef.path.split("/")[3];
+//     userData = userSnap.data()!;
+    
+
+      AlertDialog alert = AlertDialog(
+    title: Text("Katilimcilar"),
+    content: Text(mail),
+    actions: [
+      exitButton,
+    ],
+  );
+    showDialog(
+    context: context,
+    builder: (BuildContext context) {
+      return alert;
+    },
+  );
+}
+
+Future<bool> onLikeButtonTapped(bool isLiked) async {
+    /// send your request here
+    // final bool success= await sendRequest();
+
+    // var firebaseUser = FirebaseAuth.instance.currentUser;
+
+    if (isLiked = true) {
+        var firebaseUser = FirebaseAuth.instance.currentUser;
+
+    var userDocRef = FirebaseFirestore.instance
+.collection('Events')
+    .doc(snap['eventId'])
+    .collection('liked_users')
+    .doc(firebaseUser!.email);
+
+  var doc = await userDocRef.get();
+   if (!doc.exists) {
+        FirebaseFirestore.instance
+        .collection("Events")
+        .doc(snap["eventId"])
+        .update({
+      "likes": snap["likes"] += 1 
+        });
+        FirebaseFirestore.instance
+          .collection('Events')
+          .doc(snap['eventId'])
+          .collection('liked_users')
+          .doc(firebaseUser!.email)
+          .set({}
+          );
+          return true;
+   }else{
+     return true;
+   }
+    } return true;
+  }
 }
