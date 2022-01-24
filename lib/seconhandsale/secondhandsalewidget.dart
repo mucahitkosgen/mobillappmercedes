@@ -8,7 +8,10 @@ import 'package:like_button/like_button.dart';
 import 'package:mobilappmercedes/config/styles.dart';
 import 'package:flutter/src/widgets/basic.dart';
 import 'package:intl/intl.dart';
+<<<<<<< HEAD
+=======
 import 'package:mobilappmercedes/seconhandsale/sendmailscreen.dart';
+>>>>>>> a96d9cd0e0f321e5be97d761380d8e359df2b687
 
 class SaleWidget extends StatelessWidget {
   final snap;
@@ -49,6 +52,15 @@ class SaleWidget extends StatelessWidget {
                       //   ),
                       // ),
                       children: [
+<<<<<<< HEAD
+                        Text(
+                          snap['user'],
+                          style: TextStyle(
+                            fontWeight: FontWeight.bold,
+                            color: Colors.white,
+                            fontSize: 15,
+                          ),
+=======
                         RichText(
                           text: TextSpan(children: [
                             TextSpan(
@@ -70,6 +82,7 @@ class SaleWidget extends StatelessWidget {
                 
                                   }),
                           ]),
+>>>>>>> a96d9cd0e0f321e5be97d761380d8e359df2b687
                         ),
                       ],
                     ),
