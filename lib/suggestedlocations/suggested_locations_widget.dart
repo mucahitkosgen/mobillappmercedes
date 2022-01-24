@@ -2,11 +2,13 @@ import 'dart:convert';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:like_button/like_button.dart';
 import 'package:mobilappmercedes/config/styles.dart';
 import 'package:flutter/src/widgets/basic.dart';
 import 'package:intl/intl.dart';
+import 'package:mobilappmercedes/seconhandsale/sendmailscreen.dart';
 
 class SuggestedLocationsWidget extends StatelessWidget {
   final snap;
@@ -39,13 +41,26 @@ class SuggestedLocationsWidget extends StatelessWidget {
                       mainAxisSize: MainAxisSize.min,
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Text(
-                          snap['user'],
-                          style: TextStyle(
-                            fontWeight: FontWeight.bold,
-                            color: Colors.white,
-                            fontSize: 15,
-                          ),
+                        RichText(
+                          text: TextSpan(children: [
+                            TextSpan(
+                                text: snap['user'],
+                                style: TextStyle(
+                                  fontWeight: FontWeight.bold,
+                                  color: Colors.white,
+                                  fontSize: 15,
+                                ),
+                                recognizer: TapGestureRecognizer()
+                                  ..onTap = () {
+                               var mail = snap['user'];
+                                    Navigator.push(context,
+                                        MaterialPageRoute(builder: (context) {
+                                      return SendEmail(
+                                        mail: mail,
+                                      );
+                                    }));
+                                  }),
+                          ]),
                         ),
                       ],
                     ),
@@ -71,16 +86,37 @@ class SuggestedLocationsWidget extends StatelessWidget {
                   LikeButton(
                     onTap: onLikeButtonTapped,
                     circleColor: CircleColor(
-                        start: Color(0xFFF44336), end: Color(0xFFF44336)),
+                        start: Colors.redAccent, end: Colors.redAccent),
                     likeBuilder: (isLiked) {
                       return Icon(
                         Icons.favorite,
                         size: 27,
-                        color: isLiked ? Colors.red : Colors.white,
+                        color: isLiked ? Colors.redAccent : Colors.redAccent,
                       );
                     },
                   ),
-                ],
+                
+                        RichText(
+                    text: TextSpan(
+                        style: const TextStyle(color: Colors.white),
+                        children: [
+                          TextSpan(
+                            text: snap['likes'].toString(),
+                              style: TextStyle(
+                                fontWeight: FontWeight.w900,
+                                fontSize: 16,
+                                color: Color(0xFF2979FF),
+                              )),
+                          TextSpan(
+                              text: ' likes',
+                              style: TextStyle(
+                                fontWeight: FontWeight.bold,
+                                fontSize: 16,
+                                color: Color(0xFF2979FF),
+                              ))
+                        ]),
+                  ),
+                  ],
               )
             ],
             //   // Padding(
@@ -190,55 +226,54 @@ class SuggestedLocationsWidget extends StatelessWidget {
     );
   }
 
-  Future<bool> onLikeButtonTapped(bool isLiked) async {
-    /// send your request here
-    // final bool success= await sendRequest();
-
+  alreadyLiked(BuildContext context) async {
     var firebaseUser = FirebaseAuth.instance.currentUser;
-
-    if (isLiked = true) {
-      FirebaseFirestore.instance
-          .collection('SuggestedLocationsPost')
-          .doc(snap['eventId'])
-          .collection('Likes')
-          .doc(firebaseUser!.email)
-          .set({});
-      return true;
-    } else {
-            var userDocRef = FirebaseFirestore.instance
+      var userDocRef = FirebaseFirestore.instance
           .collection('SuggestedLocationsPost')
           .doc(snap['eventId'])
           .collection('Likes')
           .doc(firebaseUser!.email);
         var doc = await userDocRef.get();
    if (!doc.exists) {
+          
+  }
+  }
+Future<bool> onLikeButtonTapped(bool isLiked) async {
+    /// send your request here
+    // final bool success= await sendRequest();
+
+    // var firebaseUser = FirebaseAuth.instance.currentUser;
+
+    if (isLiked = true) {
+        var firebaseUser = FirebaseAuth.instance.currentUser;
+
+    var userDocRef = FirebaseFirestore.instance
+.collection('SuggestedLocationsPost')
+    .doc(snap['eventId'])
+    .collection('liked_users')
+    .doc(firebaseUser!.email);
+
+  var doc = await userDocRef.get();
+   if (!doc.exists) {
         FirebaseFirestore.instance
-        .collection("Events")
+        .collection("SuggestedLocationsPost")
         .doc(snap["eventId"])
-        .collection('Likes')
-        .doc(firebaseUser!.email)
-        .delete();
-    }
-    isLiked = false;
-    }
-    // else if (isLiked = false) {
-    //   return false;
-  //     var userDocRef = FirebaseFirestore.instance
-  //         .collection('SuggestedLocationsPost')
-  //         .doc(snap['eventId'])
-  //         .collection('Likes')
-  //         .doc(firebaseUser!.email);
-  //       var doc = await userDocRef.get();
-  //  if (!doc.exists) {
-  //       FirebaseFirestore.instance
-  //       .collection("Events")
-  //       .doc(snap["eventId"])
-  //       .collection('Likes')
-  //       .doc(firebaseUser!.email)
-  //       .delete();
-        // return true;
-        return !isLiked;
-    }
+        .update({
+      "likes": snap["likes"] += 1 
+        });
+        FirebaseFirestore.instance
+          .collection('SuggestedLocationsPost')
+          .doc(snap['eventId'])
+          .collection('liked_users')
+          .doc(firebaseUser!.email)
+          .set({}
+          );
+          return true;
+   }else{
+     return true;
+   }
+    } return true;
+  }
   //   else{
   //          var userDocRef = FirebaseFirestore.instance
   //         .collection('SuggestedLocationsPost')
@@ -257,6 +292,6 @@ class SuggestedLocationsWidget extends StatelessWidget {
   //   } 
   //   }
     // return true;
-  
 
+  
 }

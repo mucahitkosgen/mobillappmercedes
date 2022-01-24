@@ -15,6 +15,7 @@ class Event {
   final bool limitedParticipation;
   final int numberOfPeople;
   final int participants;
+  final int likes;
 
   const Event({
     required this.eventId,
@@ -28,6 +29,7 @@ class Event {
     required this.userimage,
     required this.image,
     required this.date,
+    required this.likes,
     // this.backgroundColor = Colors.lightGreen,
     required this.limitedParticipation,
   });
@@ -46,6 +48,7 @@ class Event {
       'userimage': userimage,
       'image': image,
       'date': date,
+      'likes': likes,
       //'backgroundColor': backgroundColor
     };
   }
@@ -61,6 +64,7 @@ class Event {
         userimage = firestoreMap['userimage'],
         image = firestoreMap['image'],
         date = firestoreMap['date'],
+        likes = firestoreMap['likes'],
         //backgroundColor = firestoreMap['backgroundColor'],
         limitedParticipation = firestoreMap['limitedParticipation'],
         description = firestoreMap['description'];

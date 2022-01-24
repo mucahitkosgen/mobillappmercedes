@@ -109,7 +109,7 @@ class _SuggestedLocationsScreenState extends State<SuggestedLocationsScreen> {
               stream: FirebaseFirestore.instance
                   .collection('SuggestedLocationsPost')
                   .orderBy('date', descending: true)
-                  .limitToLast(15)
+                  // .limitToLast(15)
                   .snapshots(),
               builder: (context,
                   AsyncSnapshot<QuerySnapshot<Map<String, dynamic>>> snapshot) {

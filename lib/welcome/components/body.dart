@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:mobilappmercedes/Components/rounded_button.dart';
 import 'package:mobilappmercedes/aboutpage/about_page.dart';
+import 'package:mobilappmercedes/config/palette.dart';
 /*import 'package:flutter_auth/Screens/Login/login_screen.dart';
 import 'package:flutter_auth/Screens/Signup/signup_screen.dart';
 import 'package:flutter_auth/Screens/Welcome/components/background.dart';
@@ -40,7 +41,7 @@ class Body extends StatelessWidget {
                                 return AboutPage();
                               }));
                             },
-                            child: Icon(Icons.info_outline_rounded),
+                            child: Icon(Icons.info_outline_rounded, color: Colors.white),
                           ),
                         ),
                       
@@ -55,10 +56,10 @@ class Body extends StatelessWidget {
               "assets/icons/Discover theMercedesMedia.svg",
               height: size.height * 0.25,
             ),
-            SizedBox(height: size.height * 0.1),
+            SizedBox(height: size.height * 0.06),
             RoundedButton(
               text: "LOGIN",
-              color: Colors.blue,
+              color: Palette.bprimaryColor,
               press: () {
                 Navigator.push(
                   context,
@@ -78,7 +79,7 @@ class Body extends StatelessWidget {
             RoundedButton(
               text: "SIGN UP",
               color: Colors.purple,
-              textColor: Colors.black,
+              textColor: Colors.white,
               press: () {
                 Navigator.push(
                   context,

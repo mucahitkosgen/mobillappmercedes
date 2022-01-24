@@ -397,13 +397,20 @@ class _editProfileState extends State<editProfile> {
                       ),
                       Padding(padding: EdgeInsets.only(top: 20)),
                       Container(
-                        child: IconButton(
-                          icon: const Icon(Icons.power_settings_new,
-                              color: Colors.white),
-                          iconSize: 35.0,
-                          onPressed: _cikisYap,
+                        margin: const EdgeInsets.only(top: 0, bottom: 0),
+                        child: Center(
+                          child: ElevatedButton(
+                            style: ElevatedButton.styleFrom(
+                                shape: StadiumBorder(),
+                                primary: Colors.purple,
+                                onPrimary: Colors.white,
+                                padding: EdgeInsets.symmetric(
+                                    horizontal: 75, vertical: 20)),
+                            child: Text("Log out"),
+                            onPressed: _cikisYap,
+                          ),
                         ),
-                      )
+                      ),
                     ],
                   )),
             ),

@@ -9,6 +9,7 @@ class salePost {
   final String userimage;
   final String image;
   final DateTime date;
+  final int likes;
   //final Color backgroundColor;
 
   //final String price;
@@ -22,6 +23,7 @@ class salePost {
     required this.userimage,
     required this.image,
     required this.date,
+    required this.likes,
     // this.backgroundColor = Colors.lightGreen,
   });
 
@@ -37,6 +39,7 @@ class salePost {
       'userimage': userimage,
       'image': image,
       'date': date,
+      'likes': likes,
       //'backgroundColor': backgroundColor
     };
   }
@@ -50,6 +53,6 @@ class salePost {
         image = firestoreMap['image'],
         date = firestoreMap['date'],
         //backgroundColor = firestoreMap['backgroundColor'],
-
+        likes = firestoreMap['likes'],
         description = firestoreMap['description'];
 }

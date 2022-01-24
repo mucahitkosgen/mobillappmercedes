@@ -33,7 +33,7 @@ class FeedScreen extends StatelessWidget {
         stream: FirebaseFirestore.instance
             .collection('Events')
             .orderBy('date',descending: true)
-            .limitToLast(15)
+            // .limitToLast(15)
             
             .snapshots(),
         builder: (context,

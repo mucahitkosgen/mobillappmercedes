@@ -5,6 +5,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:mobilappmercedes/aboutpage/about_page.dart';
+import 'package:mobilappmercedes/config/styles.dart';
 import 'package:mobilappmercedes/dashboard/screens/bottom_nav_screen.dart';
 import 'package:mobilappmercedes/screens/profilpostflow.dart';
 import 'package:mobilappmercedes/widgets/post_card.dart';
@@ -127,7 +128,7 @@ class _ProfileScreen2 extends State<ProfileScreen2> {
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
                                   CircleAvatar(
-                                      radius: 43,
+                                      radius: 50,
                                       backgroundImage: MemoryImage(
                                               base64.decode(userData['Photo']))
                                           as ImageProvider),
@@ -135,7 +136,7 @@ class _ProfileScreen2 extends State<ProfileScreen2> {
                                     width: 50,
                                   ),
                                   Container(
-                                    margin: const EdgeInsets.only(left:20,top: 12),
+                                    margin: const EdgeInsets.only(left:25,top: 12),
                                     child: RichText(
                                       text: TextSpan(
                                           style: const TextStyle(
@@ -145,7 +146,7 @@ class _ProfileScreen2 extends State<ProfileScreen2> {
                                                 text: userData['KullaniciAdi'],
                                                 style: TextStyle(
                                                   fontWeight: FontWeight.bold,
-                                                  fontSize: 14,
+                                                  fontSize: 16,
                                                 ))
                                           ]),
                                     ),
@@ -169,9 +170,11 @@ class _ProfileScreen2 extends State<ProfileScreen2> {
                         child: Column(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
-                            RaisedButton(
-                              child: Text("Edit Profile"),
-                              color: Colors.white70,
+   FlatButton.icon(
+                              padding: const EdgeInsets.symmetric(
+                                vertical: 14.0,
+                                horizontal: 30.0,
+                              ),
                               onPressed: () {
                                 Navigator.push(
                                   context,
@@ -179,6 +182,19 @@ class _ProfileScreen2 extends State<ProfileScreen2> {
                                       builder: (context) => editProfile()),
                                 );
                               },
+                              color: Colors.purple,
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(30.0),
+                              ),
+                              icon: const Icon(
+                                Icons.supervised_user_circle_sharp,
+                                color: Colors.white,
+                              ),
+                              label: Text(
+                                'Edit Profile',
+                                style: Styles.buttonTextStyle,
+                              ),
+                              textColor: Colors.white,
                             ),
                           ],
                         ),

@@ -20,8 +20,8 @@ class Background extends StatelessWidget {
         alignment: Alignment.center,
         children: <Widget>[
           Positioned(
-            bottom: 310,
-            right: -350,
+            bottom: 375,
+            right: -360,
             //height: 100,
             //width: 100,
             child: Image.asset(
@@ -30,7 +30,7 @@ class Background extends StatelessWidget {
             ),
           ),
           Positioned(
-            top: 350,
+            top: 450,
             left: -400,
             //height: 1000,
             //width: 1000,
